@@ -14,6 +14,7 @@ export default function Home() {
     return (
         <>
             <Button sx={{color : isPhone ? "green" : "yellow" }}> Hello </Button>
+            <h1>Zaid say helloooooo</h1>
         </>
     )
 }
