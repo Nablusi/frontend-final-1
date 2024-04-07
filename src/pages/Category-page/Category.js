@@ -1,9 +1,12 @@
 import React from "react";
+import { Container } from "@mui/material"; 
+import Hero from "./Hero/Hero";
 
 export default function Category(){
     return (
-        <>
-            this is category page 
-        </>
+        <Container>
+             <Hero />
+        </Container>
+
     )
 }
