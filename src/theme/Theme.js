@@ -11,7 +11,8 @@ const theme = createTheme({
         sale:'#E21D1D', 
         star:'#FF8C4B', 
         inputBackground: "#F1F1F1", 
-        sectionTitle: '#13101E', 
+        sectionTitle: '#13101E',
+        greyColor: '#B6B6B6', 
       },
     },
     components:{
