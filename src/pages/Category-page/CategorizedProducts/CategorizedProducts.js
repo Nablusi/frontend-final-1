@@ -30,6 +30,8 @@ export default function CategorizedProducts() {
       <Typography variant="h6" sx={{color:theme.palette.primary.main,fontWeight:'bold',padding:'15px 0'}}>Handbags</Typography>
       </Box>
       <Box sx={{...styles.ProductsGrid}}>
+
+        {/* Loop over one Ahmad */}
         <ProductCard/>
         <ProductCard/>
         <ProductCard/>
