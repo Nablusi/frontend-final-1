@@ -2,9 +2,6 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 
 import styles from "./AboutStyle";
 import AboutFunction from "./AboutFunction";
@@ -23,7 +20,9 @@ export default function About() {
       </Box>
       <Container>
         <Box sx={{ textAlign: "center", marginTop: "20px" }}>
-          <Typography variant="h5" sx={{fontWeight:'bold'}}>About</Typography>
+          <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+            About
+          </Typography>
           <Typography variant="subtitle1">
             Coral stands as your paramount online retail destination,
             meticulously curated to fulfill every discerning shopper's desires.
@@ -38,12 +37,11 @@ export default function About() {
             indulge in the epitome of online retail sophistication.
           </Typography>
         </Box>
-
       </Container>
-      <Box sx={{width:'98%',margin:'auto'}}>
-        <AboutFunction status='right' img='bags.png'/>
-        <AboutFunction status='left' img='watch.png'/>
-        <AboutFunction status='right' img='glasses.png'/>
+      <Box sx={{ width: "98%", margin: "auto" }}>
+        <AboutFunction status="right" img="bags.png" />
+        <AboutFunction status="left" img="watch.png" />
+        <AboutFunction status="right" img="glasses.png" />
       </Box>
     </>
   );
