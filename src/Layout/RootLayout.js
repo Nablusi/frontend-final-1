@@ -10,7 +10,7 @@ export default function RootLayout(){
         <NavBarProvider>
             <Navigation />
             <Outlet />
-            <Footer />
+            {/* <Footer /> */}
         </NavBarProvider>
         </>
     )

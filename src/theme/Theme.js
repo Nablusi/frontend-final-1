@@ -12,6 +12,7 @@ const theme = createTheme({
         star:'#FF8C4B', 
         inputBackground: "#F1F1F1", 
         sectionTitle: '#13101E', 
+        error: '#B00020'
       },
     },
     components:{
