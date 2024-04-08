@@ -17,7 +17,7 @@ export const image = {
     backgroundSize: 'cover',
 }
 
-export const Box = (isSmallScreen) =>({ 
+export const Box = (isSmallScreen, isPhoneScreen) =>({ 
     backgroundColor: 'rgb(222 222 222 / 70%)', 
     right: '0', 
     width: isSmallScreen ? "100%" :'56%', 
@@ -26,20 +26,21 @@ export const Box = (isSmallScreen) =>({
     padding: '40px 40px 10px 40px', 
     position: 'absolute', 
     height: '80%', 
-    display: isSmallScreen ? 'flex' : '', 
+    display: 'flex', 
     justifyContent: 'center', 
-    alignItems:'center', 
+    alignItems: isPhoneScreen ? 'center' : 'start', 
     flexDirection: 'column'
 }); 
 export const topic = (theme) => ({
     color: theme.palette.primary.carouselColor, 
     fontWeight: 'bold', 
-    fontSize: '60px'
+    fontSize: '60px', 
 }); 
 
 export const trendy = (theme, isMediumScreen,isSmallScreen ) =>({
     color: theme.palette.primary.carouselColor, 
     fontSize: '28px', 
+    textAlign:'start', 
     width: isMediumScreen ? "100%" : isSmallScreen ? "100%" :"74%",
 }); 
 

@@ -2,7 +2,7 @@ import { Fade, List, ListItem, ListItemButton, ListItemText, TextField, useTheme
 import React from "react";
 import { useNavBarContext } from "../../contexts/NavBarContext";
 import * as DropDownStyles from "./DropDownStyles";
-
+import { Link } from "react-router-dom";
 
 export const DropDown = ({ }) => {
     const { isPhone, more, dropDownAppearPhone } = useNavBarContext();
@@ -11,17 +11,19 @@ export const DropDown = ({ }) => {
 
 
     return (
-        <Fade in={more || dropDownAppearPhone } timeout={500} >
+        <Fade in={more || dropDownAppearPhone} timeout={500} >
             <List in={more} direction="up" >
                 {navItems.map((item) => (
                     <ListItem key={item} disablePadding>
                         <ListItemButton>
-                            <ListItemText primary={item} />
+                            <Link to={`/category/${item}`} style={DropDownStyles.link(theme)}>
+                                <ListItemText primary={item} />
+                            </Link>
                         </ListItemButton>
                     </ListItem>
                 ))}
                 {isPhone ?
-                    <Fade in={dropDownAppearPhone } timeout={500} >
+                    <Fade in={dropDownAppearPhone} timeout={500} >
                         <TextField
                             placeholder="Search for products or brands..."
                             variant="outlined"
