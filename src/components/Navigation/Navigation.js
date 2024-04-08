@@ -9,6 +9,7 @@ import * as NavigationStyles from "./NavigationStyles";
 import { DropDown } from "../DropDown/DropDown";
 import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import { useNavBarContext } from "../../contexts/NavBarContext";
+import { Link } from 'react-router-dom'; 
 
 
 export default function Navigation() {
@@ -25,26 +26,26 @@ export default function Navigation() {
                     <Box component={'div'} sx={NavigationStyles.toolbarBox} >
                         <Box component={'div'} sx={NavigationStyles.itemBox}>
                             {isPhone ? <IconButton onClick={dropDownHandler}><DensityMediumIcon /></IconButton> : ''}
-                            <Box component={'div'} sx={NavigationStyles.logo(theme)}> Coral's </Box>
+                            <Box component={'div'} sx={NavigationStyles.logo(theme)}> <img src={require('../../assets/image/logo.png')} style={{marginTop:'11px'}}  alt="logo"/> </Box>
                             {isPhone ? '' :
                                 isIpad ?
                                     <Box component={'div'}>
                                         {navItemsIpad.map((item, index) => (
-                                            <Button
+                                            <Link to={`/category/${item}`}
                                                 key={item}
-                                                sx={NavigationStyles.navItems(theme)}
+                                                style={NavigationStyles.navItems(theme)}
                                                 onClick={index === navItemsIpad.length - 1 ? dropDownMoreHandler : undefined}
                                             >
                                                 {item}
-                                            </Button>
+                                            </Link>
                                         ))}
                                     </Box>
                                     :
                                     <Box component={'div'}>
                                         {navItems.map((item) => (
-                                            <Button key={item} sx={NavigationStyles.navItems(theme)}>
+                                            <Link to={`/category/${item}`} key={item} style={NavigationStyles.navItems(theme)}>
                                                 {item}
-                                            </Button>
+                                            </Link>
                                         ))}
                                     </Box>
                             }

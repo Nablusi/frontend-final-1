@@ -30,7 +30,10 @@ export const logo = (theme) => ({
 
 export const navItems = (theme) => ({ 
     color: theme.palette.primary.textColor, 
-    fontSize: '14px'
+    fontSize: '14px', 
+    textDecoration: 'none',
+    padding:'0px 10px'
+
 });
 
 export const textField = (theme, isIpad) => ({ 

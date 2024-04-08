@@ -7,3 +7,8 @@ export const textField = (theme) => ({
     width: '100%', 
     backgroundColor: theme.palette.primary.inputBackground
 });
+
+export const link = (theme) => ({ 
+    textDecoration: 'none', 
+    color: theme.palette.primary.textColor, 
+});

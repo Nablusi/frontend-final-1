@@ -13,7 +13,11 @@ const theme = createTheme({
         inputBackground: "#F1F1F1", 
         sectionTitle: '#13101E',
         greyColor: '#B6B6B6', 
+        zaytiColor: '#639599', 
       },
+    },
+    typography: {
+      fontFamily: 'Inter',
     },
     components:{
         MuiContainer:{
