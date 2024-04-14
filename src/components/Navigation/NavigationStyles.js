@@ -1,5 +1,3 @@
-import { fontWeight, textTransform } from "@mui/system";
-
 export const nav = (theme) => ({ 
     backgroundColor: theme.palette.primary.textWhiteColor, 
     boxShadow: 'none'
