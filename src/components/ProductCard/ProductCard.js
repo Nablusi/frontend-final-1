@@ -9,6 +9,14 @@ import Box from "@mui/material/Box";
 import theme from "../../theme/Theme";
 
 export default function ProductCard({ rating, product }) {
+  const styles = {
+    text: {
+      width: "65%",
+      [theme.breakpoints.down("md")]: {
+        width: "100%",
+      },
+    },
+  };
   return (
     <>
       <Card sx={{ maxWidth: 320, boxShadow: "none" }}>
@@ -21,7 +29,7 @@ export default function ProductCard({ rating, product }) {
           <Typography
             gutterBottom
             variant="subtitle1"
-            component="div"
+            component="h2"
             sx={{
               display: "flex",
               justifyContent: "space-between",
@@ -34,7 +42,7 @@ export default function ProductCard({ rating, product }) {
             Grande
             <FavoriteBorderOutlinedIcon />
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="subtitle1" color="text.secondary" component="h3">
             Pink Bag
           </Typography>
 
@@ -62,20 +70,32 @@ export default function ProductCard({ rating, product }) {
           )}
           <Box
             sx={{
+              ...styles.text,
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              width: "65%",
               paddingTop: "8px",
             }}
           >
-            <Typography sx={{ color: theme.palette.primary.main }}>
+            <Typography
+              sx={{ color: theme.palette.primary.main }}
+              variant="subtitle1"
+              component="p"
+            >
               $39.49
             </Typography>
-            <Typography sx={{ textDecoration: "line-through" }}>
+            <Typography
+              sx={{ textDecoration: "line-through" }}
+              variant="subtitle1"
+              component="p"
+            >
               $78.66
             </Typography>
-            <Typography sx={{ color: theme.palette.primary.error }}>
+            <Typography
+              sx={{ color: theme.palette.primary.error }}
+              variant="subtitle1"
+              component="p"
+            >
               50%OFF
             </Typography>
           </Box>
