@@ -7,21 +7,32 @@ import Typography from "@mui/material/Typography";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import Box from "@mui/material/Box";
 import theme from "../../theme/Theme";
+import { Link } from "react-router-dom";
 
 export default function ProductCard({ rating, product }) {
   const styles = {
     text: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingTop: "8px",
       width: "65%",
       [theme.breakpoints.down("md")]: {
+        flexDirection: "column",
+        alignItems:'flex-start',
+        width: "100%",
+      },
+      [theme.breakpoints.between("md","lg")]: {
         width: "100%",
       },
     },
   };
   return (
     <>
-      <Card sx={{ maxWidth: 320, boxShadow: "none" }}>
+      <Link style={{ textDecoration:'none' }}>
+      <Card sx={{ maxWidth: 350, boxShadow: "none",margin:'auto' }}>
         <CardMedia
-          sx={{ height: 200, borderRadius: "10px" }}
+          sx={{ height: 280, borderRadius: "10px" }}
           image={require(`../../images/PinkBag.png`)}
           title="green iguana"
         />
@@ -71,10 +82,6 @@ export default function ProductCard({ rating, product }) {
           <Box
             sx={{
               ...styles.text,
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              paddingTop: "8px",
             }}
           >
             <Typography
@@ -101,6 +108,7 @@ export default function ProductCard({ rating, product }) {
           </Box>
         </CardContent>
       </Card>
+      </Link>
     </>
   );
 }
