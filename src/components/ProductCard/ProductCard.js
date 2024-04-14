@@ -40,6 +40,7 @@ export default function ProductCard({ rating, product }) {
             }}
           >
             Grande
+            {/* pls add smth */}
             <FavoriteBorderOutlinedIcon />
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="h3">
