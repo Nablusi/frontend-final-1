@@ -21,7 +21,7 @@ export const DropDown = () => {
 
   return (
     <Fade in={more || dropDownAppearPhone} timeout={500}>
-      <List in={more} direction="up">
+      <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton>
@@ -31,7 +31,7 @@ export const DropDown = () => {
             </ListItemButton>
           </ListItem>
         ))}
-        {isPhone ? (
+        {isPhone && (
           <Fade in={dropDownAppearPhone} timeout={500}>
             <TextField
               placeholder="Search for products or brands..."
@@ -39,8 +39,6 @@ export const DropDown = () => {
               sx={DropDownStyles.textField(theme)}
             />
           </Fade>
-        ) : (
-          ""
         )}
       </List>
     </Fade>
