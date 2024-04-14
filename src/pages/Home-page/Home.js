@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Container } from "@mui/material";
-// import Carousel from "./Carousel/Carousel";
 import Swiper from "./Swiper/Swiper";
+import FilteredShoppingOption from "./Filtered-Shopping-Options/FilteredHeroOption";
 
 export default function Home() {
   return (
@@ -9,7 +9,12 @@ export default function Home() {
       <Box component={"div"}>
         <Swiper />
 
-        {/* <Carousel /> */}
+
+
+
+
+
+          <FilteredShoppingOption />      
       </Box>
     </Container>
   );

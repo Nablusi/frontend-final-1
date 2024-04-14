@@ -58,14 +58,14 @@ export default function Navigation() {
               ) : (
                 ""
               )}
-              <Box component={"div"} sx={NavigationStyles.logo(theme)}>
+              <Link to={'/'} component={"div"} style={NavigationStyles.logo(theme)}>
                 {" "}
                 <img
                   src={require("../../assets/image/logo.png")}
                   style={{ marginTop: "11px" }}
                   alt="logo"
                 />{" "}
-              </Box>
+              </Link>
               {isPhone ? (
                 ""
               ) : isIpad ? (

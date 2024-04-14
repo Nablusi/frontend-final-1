@@ -7,14 +7,15 @@ export const imgContainer = (isLargeScreen, isPadScreen, isMediumScreen, isSmall
     overflow: 'hidden',
     width: '100%',
     position: 'relative', 
-    height : isLargeScreen ? '400x': isPadScreen ? "440px" : isMediumScreen ? '520px' : isSmallScreen ? "680px" : '100%', 
+    height : isLargeScreen ? '400x': isPadScreen ? "400px" : isMediumScreen ? '520px' : isSmallScreen ? "680px" : '100%', 
 });
 
 export const image = {
     width: '100%',
     borderRadius: "10px",
     height:'100%',
-    backgroundSize: 'cover',
+    // backgroundSize: 'cover',
+    objectFit: 'cover',
 }
 
 export const Box = (isSmallScreen, isPhoneScreen) =>({ 
@@ -31,16 +32,17 @@ export const Box = (isSmallScreen, isPhoneScreen) =>({
     alignItems: isPhoneScreen ? 'center' : 'start', 
     flexDirection: 'column'
 }); 
-export const topic = (theme) => ({
+export const topic = (theme, isPhoneScreen, isPadScreen) => ({
     color: theme.palette.primary.carouselColor, 
     fontWeight: 'bold', 
-    fontSize: '60px', 
+    fontSize: isPadScreen ? "40px" : '60px', 
+    textAlign: isPhoneScreen ? 'center' : "start", 
 }); 
 
-export const trendy = (theme, isMediumScreen,isSmallScreen ) =>({
+export const trendy = (theme, isMediumScreen,isSmallScreen, isPhoneScreen ) =>({
     color: theme.palette.primary.carouselColor, 
     fontSize: '28px', 
-    textAlign:'start', 
+    textAlign: isPhoneScreen ? 'center' : "start", 
     width: isMediumScreen ? "100%" : isSmallScreen ? "100%" :"74%",
 }); 
 
@@ -50,6 +52,10 @@ export const button = (theme) =>({
     marginTop: '70px', 
     width: '188px', 
     height: '44px', 
-    borderRadius: '10px', 
-    textTransform: 'capitalize'
+    borderRadius: '10px',  
+    textDecoration:'none', 
+    display:'flex', 
+    justifyContent:'center', 
+    alignItems:'center',
+    gap:'10px',
 })
