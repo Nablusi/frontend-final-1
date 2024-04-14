@@ -1,3 +1,5 @@
+import { fontWeight, textTransform } from "@mui/system";
+
 export const nav = (theme) => ({ 
     backgroundColor: theme.palette.primary.textWhiteColor, 
     boxShadow: 'none'
@@ -32,7 +34,9 @@ export const navItems = (theme) => ({
     color: theme.palette.primary.textColor, 
     fontSize: '14px', 
     textDecoration: 'none',
-    padding:'0px 10px'
+    padding:'0px 10px', 
+    textTransform: 'capitalize',
+    fontWeight:'400', 
 
 });
 
