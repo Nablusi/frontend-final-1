@@ -16,14 +16,14 @@ export default function ProductCard({ rating, product }) {
       justifyContent: "space-between",
       alignItems: "center",
       paddingTop: "8px",
-      width: "65%",
+      width: "70%",
       [theme.breakpoints.down("md")]: {
         flexDirection: "column",
         alignItems:'flex-start',
         width: "100%",
       },
       [theme.breakpoints.between("md","lg")]: {
-        width: "100%",
+        width: "80%",
       },
     },
   };
