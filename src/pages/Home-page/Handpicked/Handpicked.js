@@ -6,7 +6,7 @@ export default function Handpicked() {
   return (
     <Box
       component="section"
-      height={425}
+      minHeight={425}
       display="grid"
       sx={{
         backgroundColor: theme.palette.primary.carouselColor,
@@ -17,15 +17,24 @@ export default function Handpicked() {
         component="h3"
         color={theme.palette.primary.textWhiteColor}
         fontWeight={500}
+        sx={{
+          marginLeft: "20px",
+          marginTop: "30px",
+        }}
       >
         Handpicked Collections
       </Typography>
       <Box
         component={"section"}
-        height={285}
-        display={"flex"}
-        justifyContent={"flex-start"}
+        display={"grid"}
+        gridTemplateColumns={"repeat(auto-fit, minmax(280px, 1fr))"}
+        marginInline={"20px"}
+        gap={"30px"}
       >
+        {/* i will use map here when API is ready */}
+        <HandCard />
+        <HandCard />
+        <HandCard />
         <HandCard />
       </Box>
     </Box>
