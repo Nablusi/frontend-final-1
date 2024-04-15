@@ -50,7 +50,7 @@ export default function CategorizedProducts() {
             <Grid container spacing={2}>
             {/* Loop over one Ahmad */}
               <Grid item xs={12} sm={6} md={4} lg={3}>
-                <ProductCard />
+                <ProductCard rating={4}/>
               </Grid>
               <Grid item xs={12} sm={6} md={4} lg={3}>
                 <ProductCard />
