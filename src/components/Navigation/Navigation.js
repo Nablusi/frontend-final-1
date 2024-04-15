@@ -7,6 +7,7 @@ import {
   TextField,
   useTheme,
   Container,
+  Button,
 } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
@@ -58,31 +59,37 @@ export default function Navigation() {
               ) : (
                 ""
               )}
-              <Box component={"div"} sx={NavigationStyles.logo(theme)}>
+              <Link to={'/'} component={"div"} style={NavigationStyles.logo(theme)}>
                 {" "}
                 <img
                   src={require("../../assets/image/logo.png")}
                   style={{ marginTop: "11px" }}
                   alt="logo"
                 />{" "}
-              </Box>
+              </Link>
               {isPhone ? (
                 ""
               ) : isIpad ? (
                 <Box component={"div"}>
                   {navItemsIpad.map((item, index) => (
-                    <Link
-                      to={`/category/${item}`}
-                      key={item}
-                      style={NavigationStyles.navItems(theme)}
-                      onClick={
-                        index === navItemsIpad.length - 1
-                          ? dropDownMoreHandler
-                          : undefined
-                      }
-                    >
-                      {item}
-                    </Link>
+                    item === 'And More...' ?
+                      <Button key={item} sx={NavigationStyles.navItems(theme)}
+                        onClick={dropDownMoreHandler}>
+                        {item}
+                      </Button>
+                      :
+                      <Link
+                        to={`/category/${item}`}
+                        key={item}
+                        style={NavigationStyles.navItems(theme)}
+                        onClick={
+                          index === navItemsIpad.length - 1
+                            ? dropDownMoreHandler
+                            : ""
+                        }
+                      >
+                        {item}
+                      </Link>
                   ))}
                 </Box>
               ) : (
