@@ -9,7 +9,11 @@ export default function Category() {
     <Container>
       <Hero />
       <CategorizedProducts />
-      <PaginationCustomized currentPage={1} totalPages={5} />
+      <PaginationCustomized
+        currentPage={1}
+        totalPages={5}
+        onPageChange={() => {}}
+      />
     </Container>
   );
 }
