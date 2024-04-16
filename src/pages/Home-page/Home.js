@@ -1,8 +1,9 @@
 import React from "react";
 import { Box, Container } from "@mui/material";
-// import Carousel from "./Carousel/Carousel";
 import Swiper from "./Swiper/Swiper";
 import Handpicked from "./Handpicked/Handpicked";
+import FilteredShoppingOption from "./Filtered-Shopping-Options/FilteredHeroOption";
+
 
 export default function Home() {
   return (
@@ -11,6 +12,8 @@ export default function Home() {
         <Swiper />
         <Handpicked />
         {/* <Carousel /> */}
+        {/* git */}
+        <FilteredShoppingOption />      
       </Box>
     </Container>
   );
