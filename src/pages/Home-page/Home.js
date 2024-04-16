@@ -5,6 +5,7 @@ import Swiper from "./Swiper/Swiper";
 import NewArrivals from "./NewArrivals/NewArrivals";
 
 export default function Home() {
+  
   return (
     <Container>
       <Box component={"div"}>
