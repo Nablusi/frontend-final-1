@@ -27,7 +27,7 @@ export default function Handpicked() {
       <Box
         component={"section"}
         display={"grid"}
-        gridTemplateColumns={"repeat(auto-fit, minmax(280px, 1fr))"}
+        gridTemplateColumns={"repeat(auto-fit, minmax(200px, 1fr))"}
         marginInline={"20px"}
         gap={"30px"}
       >
