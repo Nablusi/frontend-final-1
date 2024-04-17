@@ -20,7 +20,7 @@ export default function NewArrivals() {
         >
           <Typography
             variant="h4"
-            component="h3"
+            component="h4"
             sx={{ textTransform: "capitalize", fontWeight: "600" }}
           >
             new arrivals

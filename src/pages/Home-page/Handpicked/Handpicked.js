@@ -14,9 +14,9 @@ export default function Handpicked() {
     >
       <Typography
         variant="h4"
-        component="h3"
+        component="h4"
         color={theme.palette.primary.textWhiteColor}
-        fontWeight={500}
+        fontWeight={600}
         sx={{
           marginLeft: "20px",
           marginTop: "30px",
