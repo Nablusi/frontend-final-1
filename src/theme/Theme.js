@@ -14,7 +14,8 @@ const theme = createTheme({
         sectionTitle: '#13101E',
         greyColor: '#B6B6B6', 
         zaytiColor: '#639599', 
-        error: '#B00020'
+        error: '#B00020',
+        lightGrey:'#F4F4F4',
       },
     },
     typography: {
