@@ -13,5 +13,5 @@ export default function RootLayout() {
         <Footer />
       </NavBarProvider>
     </>
-  )
+  );
 }
