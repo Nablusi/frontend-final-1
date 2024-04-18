@@ -4,13 +4,11 @@ import Hero from "./Hero/Hero";
 import CategorizedProducts from "./CategorizedProducts/CategorizedProducts";
 import { PaginationCustomized } from "./PaginationCustomized/PaginationCustomized";
 import useAxios from "../../Hooks/useAxios";
-import { useParams } from "react-router-dom";
 
-export default function Category() {
-  let { id } = useParams();
+export default function NewArrivalsFilter() {
   const [products, setProducts] = useState([]);
   const { res, error, loading } = useAxios(
-    `https://backend-final-1-latest.onrender.com/api/products/category/${id}`
+    `https://backend-final-1-latest.onrender.com/api/products/new`
   );
 
   useEffect(() => {
@@ -25,6 +23,7 @@ export default function Category() {
     return (
       <Container>
         <Hero />
+        new
         <CategorizedProducts products={products} />
         <PaginationCustomized
           currentPage={1}

@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 const useAxios = (url, method = "GET", postData = null) => {
   const [res, setRes] = useState(null);
   const [error, setError] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await axios({
           method: method,
@@ -16,6 +17,8 @@ const useAxios = (url, method = "GET", postData = null) => {
         setRes(response.data);
       } catch (e) {
         setError(e);
+      }finally{
+        setLoading(false)
       }
     };
 

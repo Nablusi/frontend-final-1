@@ -1,4 +1,4 @@
-import React from "react";
+import {React} from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -50,7 +50,7 @@ export default function ProductCard({ rating, product }) {
               fontFamily: "Inter",
             }}
           >
-            Grande
+            {product.name}
             <FavoriteBorderOutlinedIcon />
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="h3">
@@ -70,7 +70,7 @@ export default function ProductCard({ rating, product }) {
             >
               <Rating
                 name="read-only"
-                value={5}
+                value={rating}
                 sx={{ color: theme.palette.primary.star }}
                 readOnly
               />
@@ -84,7 +84,13 @@ export default function ProductCard({ rating, product }) {
               ...styles.text,
             }}
           >
-            <Typography
+            {product.discount === null ? (<Typography
+              sx={{ color: theme.palette.primary.main }}
+              variant="subtitle1"
+              component="p"
+            >
+              ${product.price}
+            </Typography>) : (<> <Typography
               sx={{ color: theme.palette.primary.main }}
               variant="subtitle1"
               component="p"
@@ -104,7 +110,8 @@ export default function ProductCard({ rating, product }) {
               component="p"
             >
               50%OFF
-            </Typography>
+            </Typography></>)}
+           
           </Box>
         </CardContent>
       </Card>
