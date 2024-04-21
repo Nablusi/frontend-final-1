@@ -3,7 +3,7 @@ import { Container, LinearProgress } from "@mui/material";
 import Hero from "./Hero/Hero";
 import CategorizedProducts from "./CategorizedProducts/CategorizedProducts";
 import { PaginationCustomized } from "./PaginationCustomized/PaginationCustomized";
-import useAxios from "../../Hooks/useAxios";
+import useAxios from "../../services/Hooks/useAxios";
 import { useParams } from "react-router-dom";
 import { urls } from "../../config/urls";
 
