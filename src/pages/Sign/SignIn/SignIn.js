@@ -99,10 +99,10 @@ export default function SignInSide() {
                 autoFocus
                 sx={{
                   "& .MuiFormLabel-root.Mui-focused": {
-                    color: theme.palette.primary.carouselColor,
+                    color: `${theme.palette.primary.carouselColor} !important`,
                   },
                   "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: theme.palette.primary.carouselColor,
+                    borderColor: `${theme.palette.primary.carouselColor} !important`,
                   },
                 }}
               />
@@ -117,10 +117,10 @@ export default function SignInSide() {
                 autoComplete="current-password"
                 sx={{
                   "& .MuiFormLabel-root.Mui-focused": {
-                    color: theme.palette.primary.carouselColor,
+                    color: `${theme.palette.primary.carouselColor} !important`,
                   },
                   "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: theme.palette.primary.carouselColor,
+                    borderColor: `${theme.palette.primary.carouselColor} !important`,
                   },
                 }}
               />

@@ -81,10 +81,10 @@ export default function SignUp() {
                   autoFocus
                   sx={{
                     "& .MuiFormLabel-root.Mui-focused": {
-                      color: theme.palette.primary.carouselColor,
+                      color: `${theme.palette.primary.carouselColor} !important`,
                     },
-                    "& .Mui-focused .MuiOutlinedInput-notchedOutline ": {
-                      borderColor: theme.palette.primary.carouselColor,
+                    "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
+                      borderColor: `${theme.palette.primary.carouselColor} !important`,
                     },
                   }}
                 />
@@ -100,10 +100,10 @@ export default function SignUp() {
                   variant="outlined"
                   sx={{
                     "& .MuiFormLabel-root.Mui-focused": {
-                      color: theme.palette.primary.carouselColor,
+                      color: `${theme.palette.primary.carouselColor} !important`,
                     },
                     "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: theme.palette.primary.carouselColor,
+                      borderColor: `${theme.palette.primary.carouselColor} !important`,
                     },
                   }}
                 />
@@ -118,10 +118,10 @@ export default function SignUp() {
                   autoComplete="email"
                   sx={{
                     "& .MuiFormLabel-root.Mui-focused": {
-                      color: theme.palette.primary.carouselColor,
+                      color: `${theme.palette.primary.carouselColor} !important`,
                     },
                     "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: theme.palette.primary.carouselColor,
+                      borderColor: `${theme.palette.primary.carouselColor} !important`,
                     },
                   }}
                 />
@@ -137,10 +137,10 @@ export default function SignUp() {
                   autoComplete="new-password"
                   sx={{
                     "& .MuiFormLabel-root.Mui-focused": {
-                      color: theme.palette.primary.carouselColor,
+                      color: `${theme.palette.primary.carouselColor} !important`,
                     },
                     "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: theme.palette.primary.carouselColor,
+                      borderColor: `${theme.palette.primary.carouselColor} !important`,
                     },
                   }}
                 />
