@@ -13,6 +13,7 @@ import { ThemeProvider } from "@mui/material";
 import Category from "./pages/Category-page/Category";
 import Product from "./pages/Product-page/Product";
 import NewArrivalsFilter from "./pages/Category-page/NewArrivalsFilter";
+import SignUp from "./pages/Sign/SignUP/SignUp";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -20,7 +21,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/category/:id" element={<Category />} />
-        <Route path="/newArrivals" element={ <NewArrivalsFilter/> } />
+        <Route path="/newArrivals" element={<NewArrivalsFilter />} />
         <Route path="/category/products/:id" element={<Product />} />
       </Route>
     )
@@ -28,8 +29,10 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-      <CssBaseline />
+      {/* <RouterProvider router={router} />
+      <CssBaseline /> 
+      */}
+      <SignUp />
     </ThemeProvider>
   );
 }
