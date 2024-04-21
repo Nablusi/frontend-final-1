@@ -5,12 +5,13 @@ import CategorizedProducts from "./CategorizedProducts/CategorizedProducts";
 import { PaginationCustomized } from "./PaginationCustomized/PaginationCustomized";
 import useAxios from "../../Hooks/useAxios";
 import { useParams } from "react-router-dom";
+import { urls } from "../../config/urls";
 
 export default function Category() {
   let { id } = useParams();
   const [products, setProducts] = useState([]);
   const { res, error, loading } = useAxios(
-    `https://backend-final-1-latest.onrender.com/api/products/category/${id}`
+    `${urls.getCategory}/${id}`
   );
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function Category() {
         <PaginationCustomized
           currentPage={1}
           totalPages={5}
-          onPageChange={() => {}}
+          onPageChange={() => { }}
         />
       </Container>
     );

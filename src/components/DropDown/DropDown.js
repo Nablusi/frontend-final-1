@@ -13,20 +13,22 @@ import * as DropDownStyles from "./DropDownStyles";
 import { Link } from "react-router-dom";
 
 export const DropDown = () => {
-  const { isPhone, more, dropDownAppearPhone } = useNavBarContext();
-  const navItems = isPhone
-    ? ["Handbags", "Watches", "Skincare", "Jewellery", "Apparels"]
-    : ["Watches", "Skincare", "Jewellery", "Apparels"];
+  const { isPhone, more, dropDownAppearPhone, categories } = useNavBarContext();
   const theme = useTheme();
+
+  const navItems = isPhone
+  ? categories?.slice(1)
+  : categories?.slice(2)
+
 
   return (
     <Fade in={more || dropDownAppearPhone} timeout={500}>
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.id} disablePadding>
             <ListItemButton>
-              <Link to={`/category/${item}`} style={DropDownStyles.link(theme)}>
-                <ListItemText primary={item} />
+              <Link to={`/category/${item.id}`} style={DropDownStyles.link(theme)}>
+                <ListItemText primary={item.name} />
               </Link>
             </ListItemButton>
           </ListItem>
