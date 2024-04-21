@@ -30,11 +30,11 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <RouterProvider router={router} />
-      <CssBaseline /> 
-      */}
-      {/* <SignUp /> */}
-      <SignInSide />
+      {/* <RouterProvider router={router} /> */}
+      <CssBaseline />
+
+      <SignUp />
+      {/* <SignInSide /> */}
     </ThemeProvider>
   );
 }

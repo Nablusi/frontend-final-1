@@ -80,12 +80,13 @@ export default function SignUp() {
                   label="First Name"
                   autoFocus
                   sx={{
-                    "& .MuiFormLabel-root.Mui-focused": {
-                      color: `${theme.palette.primary.carouselColor} !important`,
+                    "&.MuiFormControl-root .MuiFormLabel-root.Mui-focused": {
+                      color: `${theme.palette.primary.carouselColor} `,
                     },
-                    "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: `${theme.palette.primary.carouselColor} !important`,
-                    },
+                    "&.MuiFormControl-root .Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: `${theme.palette.primary.carouselColor} `,
+                      },
                   }}
                 />
               </Grid>
@@ -99,12 +100,13 @@ export default function SignUp() {
                   autoComplete="family-name"
                   variant="outlined"
                   sx={{
-                    "& .MuiFormLabel-root.Mui-focused": {
-                      color: `${theme.palette.primary.carouselColor} !important`,
+                    "&.MuiFormControl-root .MuiFormLabel-root.Mui-focused": {
+                      color: `${theme.palette.primary.carouselColor} `,
                     },
-                    "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: `${theme.palette.primary.carouselColor} !important`,
-                    },
+                    "&.MuiFormControl-root .Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: `${theme.palette.primary.carouselColor} `,
+                      },
                   }}
                 />
               </Grid>
@@ -117,12 +119,33 @@ export default function SignUp() {
                   name="email"
                   autoComplete="email"
                   sx={{
-                    "& .MuiFormLabel-root.Mui-focused": {
-                      color: `${theme.palette.primary.carouselColor} !important`,
+                    "&.MuiFormControl-root .MuiFormLabel-root.Mui-focused": {
+                      color: `${theme.palette.primary.carouselColor} `,
                     },
-                    "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: `${theme.palette.primary.carouselColor} !important`,
+                    "&.MuiFormControl-root .Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: `${theme.palette.primary.carouselColor} `,
+                      },
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="PhoneNumber"
+                  label="Phone Number"
+                  name="PhoneNumber"
+                  type="PhoneNumber"
+                  autoComplete="PhoneNumber"
+                  sx={{
+                    "&.MuiFormControl-root .MuiFormLabel-root.Mui-focused": {
+                      color: `${theme.palette.primary.carouselColor} `,
                     },
+                    "&.MuiFormControl-root .Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: `${theme.palette.primary.carouselColor} `,
+                      },
                   }}
                 />
               </Grid>
@@ -132,16 +155,20 @@ export default function SignUp() {
                   fullWidth
                   name="password"
                   label="Password"
-                  type="password"
+                  type="tel"
                   id="password"
                   autoComplete="new-password"
                   sx={{
-                    "& .MuiFormLabel-root.Mui-focused": {
-                      color: `${theme.palette.primary.carouselColor} !important`,
+                    "&.MuiFormControl-root .MuiFormLabel-root.Mui-focused": {
+                      color: `${theme.palette.primary.carouselColor} `,
                     },
-                    "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                      borderColor: `${theme.palette.primary.carouselColor} !important`,
-                    },
+                    "&.MuiFormControl-root .Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: `${theme.palette.primary.carouselColor} `,
+                      },
+                  }}
+                  inputProps={{
+                    pattern: "[0-9]*",
                   }}
                 />
               </Grid>

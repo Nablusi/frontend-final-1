@@ -98,12 +98,13 @@ export default function SignInSide() {
                 autoComplete="email"
                 autoFocus
                 sx={{
-                  "& .MuiFormLabel-root.Mui-focused": {
-                    color: `${theme.palette.primary.carouselColor} !important`,
+                  "&.MuiFormControl-root .MuiFormLabel-root.Mui-focused": {
+                    color: `${theme.palette.primary.carouselColor} `,
                   },
-                  "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: `${theme.palette.primary.carouselColor} !important`,
-                  },
+                  "&.MuiFormControl-root .Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: `${theme.palette.primary.carouselColor} `,
+                    },
                 }}
               />
               <TextField
@@ -116,12 +117,13 @@ export default function SignInSide() {
                 id="password"
                 autoComplete="current-password"
                 sx={{
-                  "& .MuiFormLabel-root.Mui-focused": {
-                    color: `${theme.palette.primary.carouselColor} !important`,
+                  "&.MuiFormControl-root .MuiFormLabel-root.Mui-focused": {
+                    color: `${theme.palette.primary.carouselColor} `,
                   },
-                  "& .Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: `${theme.palette.primary.carouselColor} !important`,
-                  },
+                  "&.MuiFormControl-root .Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: `${theme.palette.primary.carouselColor} `,
+                    },
                 }}
               />
               <FormControlLabel
