@@ -34,7 +34,8 @@ export default function Category() {
   // console.log(catname);
   useEffect(() => {
     if (res) {
-      setProducts(res);
+      setProducts(res.products);
+      // console.log(res.products);
     }
   }, [res]);
 
