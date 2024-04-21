@@ -5,7 +5,7 @@ import { ShopBrands } from "./ShopBrands/ShopBrands";
 import NewArrivals from "./NewArrivals/NewArrivals";
 import Handpicked from "./Handpicked/Handpicked";
 import FilteredShoppingOption from "./Filtered-Shopping-Options/FilteredHeroOption";
-import useAxios from "../../Hooks/useAxios";
+import useAxios from "../../services/Hooks/useAxios";
 
 export default function Home() {
   const [newArrivals, setnewArrivals] = useState([]);

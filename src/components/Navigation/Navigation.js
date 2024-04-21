@@ -22,8 +22,6 @@ import { Link } from "react-router-dom";
 
 export default function Navigation() {
   const theme = useTheme();
-  const navItems = ["Handbags", "Watches", "Skincare", "Jewellery", "Apparels"];
-  const navItemsIpad = ["Handbags", "And More..."];
   const {
     more,
     dropDownAppearPhone,
@@ -31,12 +29,15 @@ export default function Navigation() {
     isPhone,
     dropDownHandler,
     dropDownMoreHandler,
+    categories,
   } = useNavBarContext();
   const iconItems = [
     <FavoriteBorderIcon />,
     <PersonOutlineIcon />,
     <LocalMallOutlinedIcon />,
   ];
+
+  const navItemsIpad = [...categories.slice(1, 2), "And More..."];
 
   return (
     <Container>
@@ -71,39 +72,40 @@ export default function Navigation() {
                 ""
               ) : isIpad ? (
                 <Box component={"div"}>
-                  {navItemsIpad.map((item, index) => (
-                    item === 'And More...' ?
-                      <Button key={item} sx={NavigationStyles.navItems(theme)}
-                        onClick={dropDownMoreHandler}>
-                        {item}
-                      </Button>
-                      :
-                      <Link
-                        to={`/category/${item}`}
-                        key={item}
-                        style={NavigationStyles.navItems(theme)}
-                        onClick={
-                          index === navItemsIpad.length - 1
-                            ? dropDownMoreHandler
-                            : ""
-                        }
-                      >
-                        {item}
-                      </Link>
-                  ))}
+                  {navItemsIpad.map((item, index) => {
+                    if (typeof item === 'string' && item === 'And More...') {
+                      return (
+                        <Button key={item} sx={NavigationStyles.navItems(theme)} onClick={dropDownMoreHandler}>
+                          {item}
+                        </Button>
+                      );
+                    } else {
+                      return (
+                        <Link
+                          to={`/category/${item.id}`}
+                          key={item.id} 
+                          style={NavigationStyles.navItems(theme)}
+                          onClick={index === navItemsIpad.length - 1 ? dropDownMoreHandler : undefined}
+                        >
+                          {item.name}
+                        </Link>
+                      );
+                    }
+                  })}
                 </Box>
               ) : (
                 <Box component={"div"}>
-                  {navItems.map((item) => (
+                  {categories?.slice(1).map((category) => (
                     <Link
-                      to={`/category/${item}`}
-                      key={item}
+                      to={`/category/${category.id}`}
+                      key={category.id}
                       style={NavigationStyles.navItems(theme)}
                     >
-                      {item}
+                      {category.name}
                     </Link>
                   ))}
                 </Box>
+
               )}
             </Box>
             <Box component={"div"} sx={NavigationStyles.itemBox}>
