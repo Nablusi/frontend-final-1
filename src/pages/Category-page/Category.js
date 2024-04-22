@@ -9,11 +9,16 @@ import { urls } from "../../config/urls";
 import axios from "axios";
 export const categoryName = createContext();
 
+
 export default function Category() {
+  const PAGESIZE = 20;
   let { id } = useParams();
   const [products, setProducts] = useState([]);
+  const [pageNum, setPageNum] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [catname, setCatName] = useState("");
-  const { res, error, loading } = useAxios(`${urls.getCategory}/${id}`);
+  const { res, error, loading } = useAxios(`${urls.getCategory}/${id}?page=${pageNum}`);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,14 +36,15 @@ export default function Category() {
 
     fetchData();
   }, [id]);
-  // console.log(catname);
   useEffect(() => {
     if (res) {
       setProducts(res.products);
-      // console.log(res.products);
+      setTotalPages(Math.ceil((res.totalRecords)/PAGESIZE));
     }
   }, [res]);
-
+  const onPageChange = (pageNum) => {
+    setPageNum(pageNum);
+  };
   if (loading) {
     return <LinearProgress />;
   } else {
@@ -49,9 +55,9 @@ export default function Category() {
           <CategorizedProducts products={products} />
         </categoryName.Provider>
         <PaginationCustomized
-          currentPage={1}
-          totalPages={5}
-          onPageChange={() => {}}
+          currentPage={pageNum}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
         />
       </Container>
     );
