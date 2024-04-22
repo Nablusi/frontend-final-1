@@ -23,8 +23,7 @@ export default function NewArrivalsFilter() {
     return (
       <Container>
         <Hero />
-        new
-        <CategorizedProducts products={products} />
+        <CategorizedProducts products={products} BreadCrumbsName="New Arrivals"/>
         <PaginationCustomized
           currentPage={1}
           totalPages={5}
