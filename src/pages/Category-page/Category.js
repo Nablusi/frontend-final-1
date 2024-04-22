@@ -8,16 +8,18 @@ import { useParams } from "react-router-dom";
 import { urls } from "../../config/urls";
 
 export default function Category() {
+  const PAGESIZE = 20;
   let { id } = useParams();
   const [products, setProducts] = useState([]);
   const [pageNum, setPageNum] = useState(1);
-
+const [totalPages, setTotalPages] = useState(1);
   const { res, error, loading } = useAxios(
     `https://backend-final-1-latest.onrender.com/api/products/category/${id}?page=${pageNum}`
   );
   useEffect(() => {
     if (res) {
-      setProducts(res);
+      setProducts(res.products);
+      setTotalPages(Math.ceil((res.totalRecords)/PAGESIZE));
     }
   }, [res]);
   const onPageChange = (pageNum) => {
@@ -32,7 +34,7 @@ export default function Category() {
         <CategorizedProducts products={products} />
         <PaginationCustomized
           currentPage={pageNum}
-          totalPages={20}
+          totalPages={totalPages}
           onPageChange={onPageChange}
         />
       </Container>

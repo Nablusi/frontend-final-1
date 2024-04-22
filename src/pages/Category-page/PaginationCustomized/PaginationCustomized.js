@@ -26,6 +26,9 @@ export function PaginationCustomized({
       spacing={2}
       alignItems="center"
       justifyContent="center"
+      sx={{
+        paddingBlock: "15px",
+      }}
     >
       {currentPage > 1 ? (
         <Button
