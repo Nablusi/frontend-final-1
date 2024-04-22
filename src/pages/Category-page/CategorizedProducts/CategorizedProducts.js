@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import ProductCard from "../../../components/ProductCard/ProductCard";
 import { Grid, LinearProgress } from "@mui/material";
 import BreadCrumbs from "../../../components/BreadCrumbs/BreadCrumbs";
-export default function CategorizedProducts({ products,BreadCrumbsName }) {
+export default function CategorizedProducts({ products, BreadCrumbsName }) {
   if (products.length === 0) {
     return <LinearProgress />;
   } else {
@@ -11,7 +11,7 @@ export default function CategorizedProducts({ products,BreadCrumbsName }) {
       <Box sx={{ padding: "50px 0" }}>
         <Grid container>
           <Grid item sm={12} md={12} lg={2}>
-            <BreadCrumbs BreadCrumbsName = {BreadCrumbsName} />
+            <BreadCrumbs BreadCrumbsName={BreadCrumbsName} />
           </Grid>
           <Grid item sm={12} md={12} lg={10}>
             <Grid container spacing={2}>

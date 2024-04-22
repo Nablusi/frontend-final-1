@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Container, LinearProgress } from "@mui/material";
 import Hero from "./Hero/Hero";
 import CategorizedProducts from "./CategorizedProducts/CategorizedProducts";
@@ -6,9 +6,7 @@ import { PaginationCustomized } from "./PaginationCustomized/PaginationCustomize
 import useAxios from "../../services/Hooks/useAxios";
 import { useParams } from "react-router-dom";
 import { urls } from "../../config/urls";
-import axios from "axios";
-export const categoryName = createContext();
-
+export const categoryNameContext = createContext();
 
 export default function Category() {
   const PAGESIZE = 20;
@@ -16,44 +14,47 @@ export default function Category() {
   const [products, setProducts] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [catname, setCatName] = useState("");
-  const { res, error, loading } = useAxios(`${urls.getCategory}/${id}?page=${pageNum}`);
-
+  const [categoryName, setCategoryName] = useState("");
+  const {
+    res: categoryProducts,
+    // error: categoryError,
+    loading: categoryLoading,
+  } = useAxios(`${urls.getCategory}/${id}?page=${pageNum}`);
+  const {
+    res: categories,
+    // error: categoriesError,
+    // loading: categoriesLoading,
+  } = useAxios(`${urls.getCategories}`);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${urls.getCategories}`);
-        const cats = response.data;
-        const foundCategory = cats.find((cat) => cat.id == id);
-        if (foundCategory) {
-          setCatName(foundCategory.name);
-        }
-      } catch (error) {
-        console.error("Error fetching categories:", error);
+    if (categories) {
+      const categoriesData = categories;
+      const foundCategory = categoriesData.find(
+        (category) => parseInt(category.id) === parseInt(id)
+      );
+      if (foundCategory) {
+        setCategoryName(foundCategory.name);
       }
-    };
-
-    fetchData();
-  }, [id]);
-  useEffect(() => {
-    if (res) {
-      setProducts(res.products);
-      setTotalPages(Math.ceil((res.totalRecords)/PAGESIZE));
     }
-  }, [res]);
+  }, [id, categories]);
+  useEffect(() => {
+    if (categoryProducts) {
+      setProducts(categoryProducts.products);
+      setTotalPages(Math.ceil(categoryProducts.totalRecords / PAGESIZE));
+    }
+  }, [categoryProducts]);
   const onPageChange = (pageNum) => {
     setPageNum(pageNum);
   };
-  if (loading) {
+  if (categoryLoading) {
     return <LinearProgress />;
   } else {
     return (
       <Container>
         <Hero />
-        <categoryName.Provider value={catname}>
+        <categoryNameContext.Provider value={categoryName}>
           <CategorizedProducts products={products} />
-        </categoryName.Provider>
+        </categoryNameContext.Provider>
         <PaginationCustomized
           currentPage={pageNum}
           totalPages={totalPages}

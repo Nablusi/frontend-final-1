@@ -6,6 +6,8 @@ import Rating from "@mui/material/Rating";
 export default function GeneratedStars() {
   return (
     <Typography
+      variant="div"
+      component={"div"}
       sx={{
         display: "flex",
         justifyContent: "space-between",
