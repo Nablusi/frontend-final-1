@@ -13,6 +13,7 @@ export const NavBarProvider = ({ children }) => {
     const isIpad = useMediaQuery({ query: "(min-width: 768px) and (max-width: 1040px)" });
     const isPhone = useMediaQuery({ query: "(max-width: 767px)" });
     const [categories, setCategories] = useState([]);
+    const [open, setOpen] = useState(false); 
 
     const dropDownHandler = () => {
         setDropDownAppearPhone(prevState => !prevState);
@@ -20,6 +21,15 @@ export const NavBarProvider = ({ children }) => {
     const dropDownMoreHandler = () => {
         setMore(prevState => !prevState);
     }
+
+    const openDialogHandler = () =>{ 
+        setOpen(prevState => !prevState); 
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+      };
+    
 
     const { res, error } = useAxios(`${urls.getCategories}`);
 
@@ -38,7 +48,7 @@ export const NavBarProvider = ({ children }) => {
     }, [!isIpad]);
 
     return (
-        <NavBarContext.Provider value={{ dropDownAppearPhone, setDropDownAppearPhone, dropDownHandler, more, setMore, isIpad, isPhone, dropDownMoreHandler, categories }}>
+        <NavBarContext.Provider value={{ dropDownAppearPhone, setDropDownAppearPhone, dropDownHandler, more, setMore, isIpad, isPhone, dropDownMoreHandler, categories, openDialogHandler, open, handleClose }}>
             {children}
         </NavBarContext.Provider>
     )

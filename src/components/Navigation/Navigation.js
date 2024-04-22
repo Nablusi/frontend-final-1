@@ -30,12 +30,9 @@ export default function Navigation() {
     dropDownHandler,
     dropDownMoreHandler,
     categories,
+    openDialogHandler,
   } = useNavBarContext();
-  const iconItems = [
-    <FavoriteBorderIcon />,
-    <PersonOutlineIcon />,
-    <LocalMallOutlinedIcon />,
-  ];
+
 
   const navItemsIpad = [...categories.slice(1, 2), "And More..."];
 
@@ -83,7 +80,7 @@ export default function Navigation() {
                       return (
                         <Link
                           to={`/category/${item.id}`}
-                          key={item.id} 
+                          key={item.id}
                           style={NavigationStyles.navItems(theme)}
                           onClick={index === navItemsIpad.length - 1 ? dropDownMoreHandler : undefined}
                         >
@@ -130,14 +127,26 @@ export default function Navigation() {
                 )}
               </Box>
               <Box component={"div"}>
-                {iconItems.map((icon, index) => (
-                  <IconButton
-                    key={index}
-                    sx={NavigationStyles.IconButton(theme)}
-                  >
-                    {icon}
-                  </IconButton>
-                ))}
+
+                <IconButton
+                  sx={NavigationStyles.IconButton(theme)}
+
+                >
+                  <FavoriteBorderIcon />
+                </IconButton>
+                <IconButton
+                  sx={NavigationStyles.IconButton(theme)}
+
+                >
+                  <PersonOutlineIcon />
+                </IconButton>
+                <IconButton
+                  sx={NavigationStyles.IconButton(theme)}
+                  onClick={openDialogHandler}
+                >
+                  <LocalMallOutlinedIcon />
+                </IconButton>
+
               </Box>
             </Box>
           </Box>

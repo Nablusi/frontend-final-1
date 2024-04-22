@@ -8,14 +8,15 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useMediaQuery } from "react-responsive";
 import * as FooterStyles from "./FooterStyles";
+import { useNavBarContext } from "../../contexts/NavBarContext";
 
 
 export default function Footer() {
-    const ShopByCategory = ['Skincare', 'Personal Care', 'Handbags', 'Apparels', 'Watches', 'Jewellery'];
     const theme = useTheme();
     const date = new Date();
     const year = date.getFullYear();
     const isPhone = useMediaQuery({ query: '(max-width: 590px)' });
+    const { categories } = useNavBarContext(); 
     const iconButtonItems = [
     <FacebookIcon sx={FooterStyles.icon(theme)} />,
     <InstagramIcon sx={FooterStyles.icon(theme)} />,
@@ -29,9 +30,9 @@ export default function Footer() {
                     <Box sx={FooterStyles.categoryContainer}>
                         <Typography sx={FooterStyles.topics(theme)}> Shop by Category </Typography>
                         {
-                            ShopByCategory.map((category) =>
-                                <Link to={`/category/${category}`} style={FooterStyles.link(theme)} key={category}>
-                                    <Typography component={'p'} sx={FooterStyles.categoryStyle(theme)} > {category}</Typography>
+                            categories?.slice(1).map((category) =>
+                                <Link to={`/category/${category.id}`} style={FooterStyles.link(theme)} key={category.id}>
+                                    <Typography component={'p'} sx={FooterStyles.categoryStyle(theme)} > {category.name}</Typography>
                                 </Link>
                             )
                         }

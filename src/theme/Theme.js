@@ -16,6 +16,9 @@ const theme = createTheme({
         zaytiColor: '#639599', 
         error: '#B00020',
         lightGrey:'#F4F4F4',
+        brownColor: '#97451F', 
+        pinkColor: '#A53F64', 
+        darkBlueColor: '#1B4B66', 
       },
     },
     typography: {
