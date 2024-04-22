@@ -21,7 +21,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/category/:id" element={<Category />} />
         <Route path="/newArrivals" element={ <NewArrivalsFilter/> } />
-        <Route path="/category/products/:id" element={<Product />} />
+        <Route path="/product/:id" element={<Product />} />
       </Route>
     )
   );
