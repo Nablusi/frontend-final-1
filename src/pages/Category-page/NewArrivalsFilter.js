@@ -7,7 +7,7 @@ import useAxios from "../../services/Hooks/useAxios";
 
 export default function NewArrivalsFilter() {
   const [products, setProducts] = useState([]);
-  const { res, error, loading } = useAxios(
+  const { res, loading } = useAxios(
     `https://backend-final-1-latest.onrender.com/api/products/new`
   );
 
@@ -23,8 +23,10 @@ export default function NewArrivalsFilter() {
     return (
       <Container>
         <Hero />
-        new
-        <CategorizedProducts products={products} />
+        <CategorizedProducts
+          products={products}
+          BreadCrumbsName="New Arrivals"
+        />
         <PaginationCustomized
           currentPage={1}
           totalPages={5}

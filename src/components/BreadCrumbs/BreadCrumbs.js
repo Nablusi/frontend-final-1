@@ -1,45 +1,57 @@
-import React from 'react'
-import { Box } from '@mui/system'
+import React, { useContext } from "react";
+import { Box } from "@mui/system";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
-import theme from '../../theme/Theme';
+import theme from "../../theme/Theme";
 import Typography from "@mui/material/Typography";
+import { categoryNameContext } from "../../pages/Category-page/Category";
 
-
-export default function BreadCrumbs() {
+export default function BreadCrumbs({ BreadCrumbsName }) {
+  let name = useContext(categoryNameContext);
   return (
-        <Box>
-            <Breadcrumbs
-              sx={{ textAlign: "center" }}
-              aria-label="breadcrumb"
-              separator="›"
-            >
-              <Link
-                underline="hover"
-                sx={{ color: theme.palette.primary.main, fontWeight: "bold" }}
-                href="/"
-                aria-current="page"
-              >
-                Home
-              </Link>
-              <Link
-                underline="hover"
-                color="inherit"
-                href="/material-ui/getting-started/installation/"
-              >
-                HandBag
-              </Link>
-            </Breadcrumbs>
-            <Typography
-              variant="h6"
-              sx={{
-                color: theme.palette.primary.main,
-                fontWeight: "bold",
-                padding: "15px 0",
-              }}
-            >
-              Handbags
-            </Typography>
-          </Box>
-  )
+    <Box>
+      <Breadcrumbs
+        sx={{ textAlign: "center" }}
+        aria-label="breadcrumb"
+        separator="›"
+      >
+        <Link
+          underline="hover"
+          sx={{ color: theme.palette.primary.main, fontWeight: "bold" }}
+          to={"/"}
+          aria-current="page"
+        >
+          Home
+        </Link>
+        {BreadCrumbsName ? (
+          <Link
+            underline="hover"
+            color="inherit"
+            href="/material-ui/getting-started/installation/"
+          >
+            {BreadCrumbsName}
+          </Link>
+        ) : (
+          <Link
+            underline="hover"
+            color="inherit"
+            href="/material-ui/getting-started/installation/"
+          >
+            {name}
+          </Link>
+        )}
+      </Breadcrumbs>
+      <Typography
+        variant="h6"
+        component={"h6"}
+        sx={{
+          color: theme.palette.primary.main,
+          fontWeight: "bold",
+          padding: "15px 0",
+        }}
+      >
+        {name}
+      </Typography>
+    </Box>
+  );
 }

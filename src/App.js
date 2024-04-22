@@ -13,6 +13,8 @@ import { ThemeProvider } from "@mui/material";
 import Category from "./pages/Category-page/Category";
 import Product from "./pages/Product-page/Product";
 import NewArrivalsFilter from "./pages/Category-page/NewArrivalsFilter";
+// import SignUp from "./pages/Sign/SignUP/SignUp";
+// import SignInSide from "./pages/Sign/SignIn/SignIn";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -30,6 +32,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <RouterProvider router={router} />
       <CssBaseline />
+
+      {/* <SignUp /> */}
+      {/* <SignInSide /> */}
     </ThemeProvider>
   );
 }

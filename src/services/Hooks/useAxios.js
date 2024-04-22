@@ -17,15 +17,15 @@ const useAxios = (url, method = "GET", postData = null) => {
         setRes(response.data);
       } catch (e) {
         setError(e);
-      }finally{
-        setLoading(false)
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
   }, [url, method, postData]);
 
-  return { res, error };
+  return { res, error, loading };
 };
 
 export default useAxios;
