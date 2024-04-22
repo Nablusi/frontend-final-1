@@ -10,16 +10,19 @@ import { urls } from "../../config/urls";
 export default function Category() {
   let { id } = useParams();
   const [products, setProducts] = useState([]);
-  const { res, error, loading } = useAxios(
-    `${urls.getCategory}/${id}`
-  );
+  const [pageNum, setPageNum] = useState(1);
 
+  const { res, error, loading } = useAxios(
+    `https://backend-final-1-latest.onrender.com/api/products/category/${id}?page=${pageNum}`
+  );
   useEffect(() => {
     if (res) {
       setProducts(res);
     }
   }, [res]);
-
+  const onPageChange = (pageNum) => {
+    setPageNum(pageNum);
+  };
   if (loading) {
     return <LinearProgress />;
   } else {
@@ -28,9 +31,9 @@ export default function Category() {
         <Hero />
         <CategorizedProducts products={products} />
         <PaginationCustomized
-          currentPage={1}
-          totalPages={5}
-          onPageChange={() => { }}
+          currentPage={pageNum}
+          totalPages={20}
+          onPageChange={onPageChange}
         />
       </Container>
     );

@@ -10,13 +10,13 @@ export function PaginationCustomized({
 }) {
   const handlePrevClick = () => {
     if (currentPage > 1) {
-      //   onPageChange(currentPage - 1);
+      onPageChange(currentPage - 1);
     }
   };
 
   const handleNextClick = () => {
     if (currentPage < totalPages) {
-      //   onPageChange(currentPage + 1);
+      onPageChange(currentPage + 1);
     }
   };
 
@@ -27,20 +27,24 @@ export function PaginationCustomized({
       alignItems="center"
       justifyContent="center"
     >
-      {<Button
-        variant="contained"
-        disabled={currentPage === totalPages}
-        onClick={handlePrevClick}
-        sx={{
-          bgcolor: "#f1f1f1",
-          color: "#626262",
-          borderRadius: "10px !important",
-          boxShadow: "0",
-        }}
-      >
-        Prev
-      </Button> ? (
-        currentPage > 1
+      {currentPage > 1 ? (
+        <Button
+          variant="contained"
+          disabled={currentPage === 1}
+          onClick={handlePrevClick}
+          sx={{
+            bgcolor: "#f1f1f1",
+            color: "#626262",
+            borderRadius: "10px !important",
+            boxShadow: "0",
+            "&:hover": {
+              bgcolor: theme.palette.primary.carouselColor,
+              color: theme.palette.primary.textWhiteColor,
+            },
+          }}
+        >
+          Prev
+        </Button>
       ) : null}
       <Pagination
         count={totalPages}
@@ -62,23 +66,25 @@ export function PaginationCustomized({
           },
         }}
       />
-      <Button
-        variant="contained"
-        disabled={currentPage === totalPages}
-        onClick={handleNextClick}
-        sx={{
-          bgcolor: "#f1f1f1",
-          color: "#626262",
-          borderRadius: "10px !important",
-          boxShadow: "0",
-          "&:hover": {
-            bgcolor: theme.palette.primary.carouselColor,
-            color: theme.palette.primary.textWhiteColor,
-          },
-        }}
-      >
-        Next
-      </Button>
+      {currentPage < totalPages ? (
+        <Button
+          variant="contained"
+          disabled={currentPage === totalPages}
+          onClick={handleNextClick}
+          sx={{
+            bgcolor: "#f1f1f1",
+            color: "#626262",
+            borderRadius: "10px !important",
+            boxShadow: "0",
+            "&:hover": {
+              bgcolor: theme.palette.primary.carouselColor,
+              color: theme.palette.primary.textWhiteColor,
+            },
+          }}
+        >
+          Next
+        </Button>
+      ) : null}
     </Stack>
   );
 }
