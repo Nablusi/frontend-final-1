@@ -1,4 +1,4 @@
-import {React, useEffect,useState} from "react";
+import { React, useEffect, useState } from "react";
 import { Box, Container, LinearProgress } from "@mui/material";
 import Swiper from "./Swiper/Swiper";
 import { ShopBrands } from "./ShopBrands/ShopBrands";
@@ -9,7 +9,7 @@ import useAxios from "../../services/Hooks/useAxios";
 
 export default function Home() {
   const [newArrivals, setnewArrivals] = useState([]);
-  const { res, error, loading } = useAxios(
+  const { res, loading } = useAxios(
     `https://backend-final-1-latest.onrender.com/api/products/new`
   );
 
@@ -20,13 +20,12 @@ export default function Home() {
   }, [res]);
   if (loading) {
     return <LinearProgress />;
-  }
-  else{
+  } else {
     return (
       <Container>
         <Box component={"div"}>
           <Swiper />
-          <NewArrivals newArr={newArrivals}/>
+          <NewArrivals newArrivals={newArrivals} />
           <Handpicked />
           <ShopBrands />
           <FilteredShoppingOption />

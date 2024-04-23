@@ -14,6 +14,12 @@ export const outerContainer = {
     flexWrap: 'wrap'
 }
 
+export const shopByProducts = (isPhone) => ({
+    display: 'flex', 
+    gap: '50px', 
+    flexDirection: isPhone ? "column" : 'row'
+});
+
 export const categoryContainer =  {
     display: 'flex', 
     flexDirection: 'column', 

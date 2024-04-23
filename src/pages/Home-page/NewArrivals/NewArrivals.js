@@ -6,7 +6,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import theme from "../../../theme/Theme";
 import ProductCard from "../../../components/ProductCard/ProductCard";
 
-export default function NewArrivals({newArr}) {
+export default function NewArrivals({ newArrivals }) {
   return (
     <>
       <Box component="section" sx={{ padding: "35px 0" }}>
@@ -48,13 +48,9 @@ export default function NewArrivals({newArr}) {
           gridTemplateColumns={"repeat(auto-fit, minmax(280px, 1fr))"}
           gap={3}
         >
-          {
-          newArr.slice(0, 4).map((newarr)=>(
-
-            <ProductCard product={newarr}/>
-          ))
-
-          }
+          {newArrivals.slice(0, 4).map((Arrival) => (
+            <ProductCard product={Arrival} key={Arrival.id} />
+          ))}
           {/* <ProductCard />
           <ProductCard />
           <ProductCard /> */}

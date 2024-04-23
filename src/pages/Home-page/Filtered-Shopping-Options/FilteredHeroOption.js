@@ -1,25 +1,43 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Box } from "@mui/material";
 import { useMediaQuery } from "react-responsive";
 import { LinkImage } from "./LinkImage";
-import * as FilteredHeroStyles from "./FilteredHeroOption.styles"; 
+import * as FilteredHeroStyles from "./FilteredHeroOption.styles";
+import { SharedParentContext } from "../../../contexts/CategoryPageFilter"; 
 
 
 export default function FilteredShoppingOption() {
     const isSmall = useMediaQuery({query: "(max-width: 767px)"})
+    const {setDiscount, setPopular, setLimitedEdition } = useContext(SharedParentContext); 
+    
+
+    const popularHandler = () => {
+        setPopular(()=> true)
+    }
+
+    const limitedEditionHandler = () => { 
+        setLimitedEdition(()=> true); 
+    }
+
+    const discountHandler = () => {
+        setDiscount(()=> 15)
+    }
+
     return (
-        <Box sx={FilteredHeroStyles.hero}>       
+        <Box sx={FilteredHeroStyles.hero} id="trendy">       
             <LinkImage 
-                to={'/category/less-than-20-in-stock'}
+                to={'/category/limitedEdition'}
                 imgSrc={require('../../../assets/image/makeup.jpg')}
                 alt={'less than 20%'}
                 isSmall={isSmall}
                 isFull={true}
                 isOther={false}
                 flip = {false}
+                click={limitedEditionHandler}
+                
             />
             <LinkImage 
-                to={'/category/products-that-have-a-discount-of-15%-or-more'}
+                to={'/category/discount=15}'}
                 imgSrc={require('../../../assets/image/skincare.png')}
                 alt={'have discount 15%'}
                 isSmall={isSmall}
@@ -28,9 +46,10 @@ export default function FilteredShoppingOption() {
                 variant={"flip"}
                 flip = {true}
                 first= {true}
+                click={discountHandler}
             />
             <LinkImage 
-                to={'/category/any-products-that-have-a-rating-of-4.5-or-more'}
+                to={'/category/popular'}
                 imgSrc={require('../../../assets/image/skincare-one.png')}
                 alt={'have rating 4.5'}
                 isSmall={isSmall}
@@ -38,6 +57,7 @@ export default function FilteredShoppingOption() {
                 isOther={true}
                 variant={"flip"}
                 flip = {true}
+                click={popularHandler}
             />
         </Box>
     )

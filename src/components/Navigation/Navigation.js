@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   AppBar,
   Toolbar,
@@ -18,7 +18,9 @@ import * as NavigationStyles from "./NavigationStyles";
 import { DropDown } from "../DropDown/DropDown";
 import DensityMediumIcon from "@mui/icons-material/DensityMedium";
 import { useNavBarContext } from "../../contexts/NavBarContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { SharedParentContext } from "../../contexts/CategoryPageFilter";
+
 
 export default function Navigation() {
   const theme = useTheme();
@@ -33,6 +35,23 @@ export default function Navigation() {
     openDialogHandler,
   } = useNavBarContext();
 
+  const { setDiscount, setPopular ,setLimitedEdition, setSearch } =  useContext(SharedParentContext); 
+  const navigate = useNavigate(); 
+  const contextHandler = () => {
+    setDiscount(()=> 0); 
+    setPopular(()=> false); 
+    setLimitedEdition(()=>false); 
+  }
+
+  const changeSearchHandler = (e) =>  {
+    setSearch(e.target.value);
+  }
+
+  const keyHandler = (event) => { 
+    if(event.key === "Enter"){
+      navigate('/category/products/search'); 
+    }
+  }
 
   const navItemsIpad = [...categories.slice(1, 2), "And More..."];
 
@@ -63,6 +82,7 @@ export default function Navigation() {
                   src={require("../../assets/image/logo.png")}
                   style={{ marginTop: "11px" }}
                   alt="logo"
+                  onClick={contextHandler}
                 />{" "}
               </Link>
               {isPhone ? (
@@ -92,11 +112,12 @@ export default function Navigation() {
                 </Box>
               ) : (
                 <Box component={"div"}>
-                  {categories?.slice(1).map((category) => (
+                  {categories?.slice(1, 6).map((category) => (
                     <Link
                       to={`/category/${category.id}`}
                       key={category.id}
                       style={NavigationStyles.navItems(theme)}
+                      onClick={contextHandler}
                     >
                       {category.name}
                     </Link>
@@ -123,6 +144,8 @@ export default function Navigation() {
                       style: { height: "44px", alignItems: "center" },
                     }}
                     sx={NavigationStyles.textField(theme, isIpad)}
+                    onChange={changeSearchHandler}
+                    onKeyPress = {keyHandler}
                   />
                 )}
               </Box>

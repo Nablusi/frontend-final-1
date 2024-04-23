@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-export const LinkImage = ({ to, imgSrc, isFull, alt, isSmall, isOther, variant, flip, first }) => {
+export const LinkImage = ({ to, imgSrc, isFull, alt, isSmall, isOther, variant, flip, first, click }) => {
     const theme = useTheme();
 
     const contentDefault = (
-        <Link to={to} style={LinkStyles.link(isFull, isSmall, isOther, flip)}>
+        <Link to={to} style={LinkStyles.link(isFull, isSmall, isOther, flip)} onClick={click}>
             <img src={imgSrc} alt={alt} style={LinkStyles.image} />
             <Box component={'div'} sx={LinkStyles.defaultContent}>
                 <Typography component={'p'} variant="h6" sx={LinkStyles.limitedEdition(theme)}>

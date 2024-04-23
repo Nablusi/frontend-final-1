@@ -17,8 +17,8 @@ export const DropDown = () => {
   const theme = useTheme();
 
   const navItems = isPhone
-  ? categories?.slice(1)
-  : categories?.slice(2)
+  ? categories?.slice(1,6)
+  : categories?.slice(2,6)
 
 
   return (
