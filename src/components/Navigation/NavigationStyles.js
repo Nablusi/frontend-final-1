@@ -40,8 +40,12 @@ export const navItems = (theme) => ({
 
 export const textField = (theme, isIpad) => ({ 
     backgroundColor: theme.palette.primary.inputBackground,
+    borderRadius:'5px',
     fontSize: '14px',
-    width: isIpad ? "300px" : '362px', 
+    width: isIpad ? "300px" : '362px',
+    '& .MuiOutlinedInput-notchedOutline': {
+        borderWidth: '0px', 
+      },
 });
 
 export const textFieldInput = { 

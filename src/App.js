@@ -22,8 +22,9 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/category/:id" element={<Category />} />
-        <Route path="/newArrivals" element={ <NewArrivalsFilter/> } />
+        <Route path="/newArrivals" element={<NewArrivalsFilter />} />
         <Route path="/product/:id" element={<Product />} />
+        <Route path="/category/products/:id" element={<Product />} />
       </Route>
     )
   );
