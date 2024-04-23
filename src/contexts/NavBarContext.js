@@ -15,23 +15,20 @@ export const NavBarProvider = ({ children }) => {
   });
   const isPhone = useMediaQuery({ query: "(max-width: 767px)" });
   const [categories, setCategories] = useState([]);
-    const [open, setOpen] = useState(false); 
-
+  const [open, setOpen] = useState(false);
   const dropDownHandler = () => {
     setDropDownAppearPhone((prevState) => !prevState);
   };
   const dropDownMoreHandler = () => {
     setMore((prevState) => !prevState);
   };
+  const openDialogHandler = () => {
+    setOpen((prevState) => !prevState);
+  };
 
-    const openDialogHandler = () =>{ 
-        setOpen(prevState => !prevState); 
-    }
-
-    const handleClose = () => {
-        setOpen(false);
-      };
-    
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const { res } = useAxios(`${urls.getCategories}`);
 
@@ -61,8 +58,8 @@ export const NavBarProvider = ({ children }) => {
         dropDownMoreHandler,
         categories,
         openDialogHandler,
-        handleClose,
         open,
+        handleClose,
       }}
     >
       {children}
