@@ -7,9 +7,8 @@ import { urls } from "../../config/urls";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { LinearProgress } from "@mui/material";
-
+import ProductSlider from './ProductDetails/ProductSlider/ProductSlider'
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
-
 export default function Product() {
   let { id } = useParams();
   const [product, setProduct] = useState({});
@@ -68,6 +67,7 @@ export default function Product() {
       <Container>
         <ProductBreadCrumbs productName={product.name} />
         <ProductDetails product={product} addToCart={addToCart} />
+        {/* <ProductSlider/> */}
       </Container>
     </>
   );
