@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import React, { useState } from "react";
 import theme from "../../../theme/Theme";
-import { Box } from "@mui/system";
+import { Box, style, textAlign, width } from "@mui/system";
 import { Input } from "@mui/material";
 import { InputAdornment } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -10,6 +10,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { Button } from "@mui/material";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ProductSlider from "./ProductSlider/ProductSlider";
 export default function ProductDetails({ product, addToCart }) {
   let [qty, setQty] = useState(1);
   let [msg, setMsg] = useState("");
@@ -20,18 +21,29 @@ export default function ProductDetails({ product, addToCart }) {
       setMsg("You Can add qty only betweeen 1 and 20");
     }
   };
+  const styles = {
+    buttons:{
+      width:'35%',
+      "white-space": "nowrap",
+      [theme.breakpoints.down('lg')]:{
+        width:'100%'
+      }
+    }
+  }
   return (
     <>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item xs={12} lg={5}>
           <img
             src={require(`../../../images/product-image.png`)}
-            sx={{ margin: "auto" }}
+            sx={{ textAlign:'center' }}
             alt="product Name"
+            width="100%"
           ></img>
-          <Typography>slider</Typography>
+          <ProductSlider/>
+          {/* <Typography>slider</Typography> */}
         </Grid>
-        <Grid item xs={12} lg={6}>
+        <Grid item xs={12} lg={6} sx={{paddingBottom:'20px'}}>
           <Typography
             variant="h5"
             component="h3"
@@ -50,22 +62,33 @@ export default function ProductDetails({ product, addToCart }) {
           <Box
             sx={{ display: "flex", alignItems: "center", padding: "25px 0" }}
           >
-            {/* write rating  */}
-            <Rating
-              name="read-only"
-              value={5}
-              sx={{ color: theme.palette.primary.star }}
-              readOnly
-            />
+            {product.reviews && product.reviews.length > 0 ? (
+              <>
+                <Rating
+                  name="read-only"
+                  value={product.reviews[0].rating}
+                  sx={{ color: theme.palette.primary.star }}
+                  readOnly
+                />
 
-            <Typography
-              variant="p"
-              component="p"
-              sx={{ paddingLeft: "10px" }}
-              color={theme.palette.primary.paragraph}
-            >
-              (250) Ratings
-            </Typography>
+                <Typography
+                  variant="p"
+                  component="p"
+                  sx={{ paddingLeft: "10px" }}
+                  color={theme.palette.primary.paragraph}
+                >
+                  ({product.reviews.length}) Ratings
+                </Typography>
+              </>
+            ) : (
+              <Typography
+                variant="p"
+                component="p"
+                color={theme.palette.primary.error}
+              >
+                This product hasn't been reviewed yet
+              </Typography>
+            )}
           </Box>
           <Box
             sx={{
@@ -75,35 +98,46 @@ export default function ProductDetails({ product, addToCart }) {
               borderBottom: `3px solid ${theme.palette.primary.lightGrey}`,
             }}
           >
-            {/* make a condition for discount */}
-            <Typography
-              variant="p"
-              component="p"
-              sx={{ fontWeight: "bold", fontSize: "22px" }}
-            >
-              ${product.price}
-            </Typography>
-            <Typography
-              variant="p"
-              component="p"
-              sx={{
-                textDecoration: "line-through",
-                fontWeight: "bold",
-                fontSize: "22px",
-                padding: "0 15px",
-              }}
-              color={theme.palette.primary.paragraph}
-            >
-              $54.69
-            </Typography>
-            <Typography
-              variant="p"
-              component="p"
-              sx={{ fontWeight: "bold", fontSize: "22px" }}
-              color={theme.palette.primary.error}
-            >
-              50%OFF
-            </Typography>
+            {product.discountId !== null ? (
+              <>
+                <Typography
+                  variant="p"
+                  component="p"
+                  sx={{ fontWeight: "bold", fontSize: "22px" }}
+                >
+                  ${product.price}
+                </Typography>
+                <Typography
+                  variant="p"
+                  component="p"
+                  sx={{
+                    textDecoration: "line-through",
+                    fontWeight: "bold",
+                    fontSize: "22px",
+                    padding: "0 15px",
+                  }}
+                  color={theme.palette.primary.paragraph}
+                >
+                  $54.69
+                </Typography>
+                <Typography
+                  variant="p"
+                  component="p"
+                  sx={{ fontWeight: "bold", fontSize: "22px" }}
+                  color={theme.palette.primary.error}
+                >
+                  50%OFF
+                </Typography>
+              </>
+            ) : (
+              <Typography
+                variant="p"
+                component="p"
+                sx={{ fontWeight: "bold", fontSize: "22px" }}
+              >
+                ${product.price}
+              </Typography>
+            )}
           </Box>
           {msg !== "" && (
             <Typography variant="subtitle1" color={theme.palette.primary.error}>
@@ -170,10 +204,11 @@ export default function ProductDetails({ product, addToCart }) {
               variant="contained"
               sx={{
                 backgroundColor: theme.palette.primary.main,
-                width: "35%",
                 display: "flex",
                 alignItems: "center",
                 borderRadius: "0px 5px 5px 0px",
+                border: "2px solid transparent",
+                ...styles.buttons
               }}
               onClick={() => addToCart(product, qty)}
             >
@@ -185,12 +220,12 @@ export default function ProductDetails({ product, addToCart }) {
               variant="outlined"
               sx={{
                 backgroundColor: "transparent",
-                width: "35%",
                 display: "flex",
                 alignItems: "center",
                 marginLeft: "20px",
                 borderRadius: "5px",
-                border: `3px solid ${theme.palette.primary.main}`,
+                border: `2px solid ${theme.palette.primary.main}`,
+                ...styles.buttons
               }}
             >
               <FavoriteBorderIcon sx={{ paddingRight: "5px" }} />
