@@ -28,20 +28,20 @@ function App() {
         <Route path="/newArrivals" element={<NewArrivalsFilter />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/sign/:signtype" element={<Sign />} />
-        <Route path="/category/products/search" element={<SearchForProducts />} />
-
+        <Route
+          path="/category/products/search"
+          element={<SearchForProducts />}
+        />
       </Route>
     )
   );
 
   return (
     <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-      <CssBaseline />
-      <SharedParentProvider >
+      <SharedParentProvider>
         <RouterProvider router={router} />
-        <CssBaseline />
       </SharedParentProvider>
+      <CssBaseline />
     </ThemeProvider>
   );
 }
