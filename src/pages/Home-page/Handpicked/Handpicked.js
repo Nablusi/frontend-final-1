@@ -6,6 +6,7 @@ export default function Handpicked() {
   return (
     <Box
       component="section"
+      id="handpicked collection"
       minHeight={425}
       display="grid"
       sx={{

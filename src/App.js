@@ -15,6 +15,8 @@ import Product from "./pages/Product-page/Product";
 import NewArrivalsFilter from "./pages/Category-page/NewArrivalsFilter";
 // import SignUp from "./pages/Sign/SignUP/SignUp";
 // import SignInSide from "./pages/Sign/SignIn/SignIn";
+import { SharedParentProvider } from "./contexts/CategoryPageFilter";
+import SearchForProducts from "./pages/Category-page/SearchForProducts";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -22,7 +24,14 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/category/:id" element={<Category />} />
-        <Route path="/newArrivals" element={ <NewArrivalsFilter/> } />
+        <Route path="/newArrivals" element={<NewArrivalsFilter />} />
+        <Route path="/product/:id" element={<Product />} />
+        <Route path="/category/products/:id" element={<Product />} />
+        <Route path="/category/products/search" element={<SearchForProducts />} />
+
+
+
+
         <Route path="/product/:id" element={<Product />} />
       </Route>
     )
@@ -30,8 +39,10 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-      <CssBaseline />
+      <SharedParentProvider >
+        <RouterProvider router={router} />
+        <CssBaseline />
+      </SharedParentProvider>
 
       {/* <SignUp /> */}
       {/* <SignInSide /> */}
