@@ -1,9 +1,8 @@
 export const authUser = () => {
     try {
-        const token = JSON.parse(localStorage.getItem('token')) || '';
+        const token = JSON.parse(localStorage.getItem('token')) ||  JSON.parse(sessionStorage.getItem('token')) || '';
         if (token !== '') {
             console.log('Token exists:', token);
-            // You might want to perform additional checks on the token here
             return true;
         } else {
             console.log('Token does not exist or is invalid:', token);
