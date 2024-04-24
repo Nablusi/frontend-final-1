@@ -63,17 +63,15 @@ export default function ProductCard({ rating, product }) {
               ...styles.text,
             }}
           >
-            {product.discount === null ? (
-              <Typography
-                sx={{ color: theme.palette.primary.main }}
-                variant="subtitle1"
-                component="p"
-              >
-                ${product.price}
-              </Typography>
-            ) : (
+            {product.discountId !== null ? (
               <>
-                {" "}
+                <Typography
+                  sx={{ color: theme.palette.primary.main }}
+                  variant="subtitle1"
+                  component="p"
+                >
+                  ${product.price}
+                </Typography>
                 <Typography
                   sx={{ color: theme.palette.primary.main }}
                   variant="subtitle1"
@@ -94,6 +92,16 @@ export default function ProductCard({ rating, product }) {
                   component="p"
                 >
                   50%OFF
+                </Typography>
+              </>
+            ) : (
+              <>
+                <Typography
+                  sx={{ color: theme.palette.primary.main, fontWeight: "600" }}
+                  variant="subtitle1"
+                  component="p"
+                >
+                  ${product.price}
                 </Typography>
               </>
             )}
