@@ -4,16 +4,18 @@ import { Container } from "@mui/system";
 import ProductDetails from "./ProductDetails/ProductDetails";
 import useAxios from "../../services/Hooks/useAxios";
 import { urls } from "../../config/urls";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { LinearProgress } from "@mui/material";
 import ProductSlider from './ProductDetails/ProductSlider/ProductSlider'
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
+import { authUser } from "../../services/utils/authUser";
 export default function Product() {
   let { id } = useParams();
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState();
+  const navigate = useNavigate();
   const checkUserCart = () => {
     if (localStorage.getItem("cart")) {
       setCart(JSON.parse(localStorage.getItem("cart")));
@@ -25,22 +27,27 @@ export default function Product() {
 
   const addToCart = (product, qty) => {
     // need to check for token before allow user to add
-    setRefresh(()=>!refresh)
-    if (cart.length) {
-      const index = cart.findIndex((prod) => prod.product.id === product.id);
-      if (index !== -1) {
-        if (cart[index].qty + qty > 20) {
-          console.log("can not add more");
+    if(authUser()){
+      setRefresh(()=>!refresh)
+      if (cart.length) {
+        const index = cart.findIndex((prod) => prod.product.id === product.id);
+        if (index !== -1) {
+          if (cart[index].qty + qty > 20) {
+            console.log("can not add more");
+          } else {
+            cart[index].qty += qty;
+          }
         } else {
-          cart[index].qty += qty;
+          cart.push({ product: product, qty: qty });
         }
       } else {
         cart.push({ product: product, qty: qty });
       }
-    } else {
-      cart.push({ product: product, qty: qty });
+      localStorage.setItem("cart", JSON.stringify(cart));
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
+    else{
+      navigate('/sign/signin');
+    }
   };
   // console.log(cart);
   useEffect(() => {
