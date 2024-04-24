@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { Container, LinearProgress } from "@mui/material";
 import Hero from "./Hero/Hero";
 import CategorizedProducts from "./CategorizedProducts/CategorizedProducts";
@@ -6,7 +6,10 @@ import { PaginationCustomized } from "./PaginationCustomized/PaginationCustomize
 import useAxios from "../../services/Hooks/useAxios";
 import { useParams } from "react-router-dom";
 import { urls } from "../../config/urls";
+import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 export const categoryNameContext = createContext();
+
+
 
 export default function Category() {
   const PAGESIZE = 20;
@@ -15,11 +18,31 @@ export default function Category() {
   const [pageNum, setPageNum] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [categoryName, setCategoryName] = useState("");
+  const { popular, limitedEdition, discount } = useContext(SharedParentContext);
+  // const searchURL = urls.getProductsBySearch;
+
+  if (popular || limitedEdition || discount) {
+    id = 1;
+  }
+
+  let url = `${urls.getCategory}/${id}?page=${pageNum}`;
+
+  if (popular) {
+    url += "&popular=true";
+  }
+  if (discount) {
+    url += "&discount=0";
+  }
+  if (limitedEdition) {
+    url += "&limitedEdition=true";
+  }
+
+  
   const {
     res: categoryProducts,
     // error: categoryError,
     loading: categoryLoading,
-  } = useAxios(`${urls.getCategory}/${id}?page=${pageNum}`);
+  } = useAxios(`${url}`);
   const {
     res: categories,
     // error: categoriesError,
@@ -52,7 +75,7 @@ export default function Category() {
     return (
       <Container>
         <Hero />
-        <categoryNameContext.Provider value={categoryName}>
+        <categoryNameContext.Provider value={popular ? "Popular" : limitedEdition ? "Limited Edition" : categoryName}>
           <CategorizedProducts products={products} />
         </categoryNameContext.Provider>
         <PaginationCustomized

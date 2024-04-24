@@ -13,11 +13,11 @@ import { ThemeProvider } from "@mui/material";
 import Category from "./pages/Category-page/Category";
 import Product from "./pages/Product-page/Product";
 import NewArrivalsFilter from "./pages/Category-page/NewArrivalsFilter";
-// import SignUp from "./pages/Sign/SignUP/SignUp";
 import SignUp from "./pages/Sign/SignUP/SignUp";
 import SignIn from "./pages/Sign/SignIn/SignIn";
 import Sign from "./pages/Sign/Sign";
-// import SignInSide from "./pages/Sign/SignIn/SignIn";
+import { SharedParentProvider } from "./contexts/CategoryPageFilter";
+import SearchForProducts from "./pages/Category-page/SearchForProducts";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -27,9 +27,9 @@ function App() {
         <Route path="/category/:id" element={<Category />} />
         <Route path="/newArrivals" element={<NewArrivalsFilter />} />
         <Route path="/product/:id" element={<Product />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
         <Route path="/sign/:signtype" element={<Sign />} />
+        <Route path="/category/products/search" element={<SearchForProducts />} />
+
       </Route>
     )
   );
@@ -38,6 +38,10 @@ function App() {
     <ThemeProvider theme={theme}>
       <RouterProvider router={router} />
       <CssBaseline />
+      <SharedParentProvider >
+        <RouterProvider router={router} />
+        <CssBaseline />
+      </SharedParentProvider>
     </ThemeProvider>
   );
 }

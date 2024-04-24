@@ -1,22 +1,32 @@
 import React from "react";
-import heroImage from "../../../assets/image/heroCategory.png";
-// import * as HeroStyles from "./HeroStyles";
-// import { useMediaQuery } from "react-responsive";// uncomment it when u wanna use it because it gives a  warning
-
-
+import heroImage from "../../../assets/image/hero.png";
+import { Box, Typography } from "@mui/material";
+import { useMediaQuery } from "react-responsive";
+import * as HeroStyles from "./HeroStyles"; 
 export default function Hero() {
-  //const isLargeScreen = useMediaQuery({ query: "(min-width: 1280px)" });
-  // uncomment it when u wanna use it because it gives a  warning
+  
+  const isPhone = useMediaQuery({
+    query: '(max-width: 480px)'
+  })
+  const isSmall = useMediaQuery({
+    query: '(max-width: 767px)'
+  })
   return (
-    <img
-      src={heroImage}
-      style={{
-        width: "100%",
-        height: "auto", 
-        marginTop: "33px"
-      }}
-      alt="los"
-    />
-    // <div style={HeroStyles.img(heroImage)}></div>
+    <Box sx={HeroStyles.heroContainer(isPhone)}>
+      <img
+        src={heroImage}
+        style={HeroStyles.img}
+        alt="los"
+      />
+      <Box component={"div"} sx={HeroStyles.heroText(isPhone)}>
+        <Typography variant="h4" sx={HeroStyles.heroTextOne(isSmall)} >
+          UPTO 70% OFF
+        </Typography>
+        <Typography variant="h4" sx={HeroStyles.heroTextTwo(isSmall)}>
+          BLACK FRIDAY
+        </Typography>
+      </Box>
+
+    </Box>
   );
 }
