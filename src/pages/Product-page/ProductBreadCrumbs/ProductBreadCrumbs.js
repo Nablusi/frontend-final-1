@@ -4,11 +4,11 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import theme from "../../../theme/Theme";
 import { Box } from "@mui/system";
-export default function ProductBreadCrumbs() {
+export default function ProductBreadCrumbs({productName}) {
   return (
     <Box sx={{padding:'20px 0'}}>
       <Breadcrumbs aria-label="breadcrumb" separator=">" sx={{fontWeight:'bold',textDecoration:'none'}}>
-        <Link underline="hover" color={theme.palette.primary.main} href="/" sx={{textDecoration:"none"}}>
+        <Link underline="hover" color={theme.palette.primary.main} to="/" sx={{textDecoration:"none"}}>
           Home
         </Link>
         <Link
@@ -18,7 +18,7 @@ export default function ProductBreadCrumbs() {
         >
           CatsName
         </Link>
-        <Typography color="text.primary">productName</Typography>
+        <Typography color="text.primary" sx={{textTransform:'capitalize'}}>{productName}</Typography>
       </Breadcrumbs>
     </Box>
   );
