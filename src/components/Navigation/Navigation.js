@@ -22,6 +22,7 @@ import { useNavBarContext } from "../../contexts/NavBarContext";
 import { Link, useNavigate } from "react-router-dom";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 import { authUser } from "../../services/utils/authUser";
+import { emailAuth } from "../../services/utils/emailAuth";
 
 
 export default function Navigation() {
@@ -164,7 +165,11 @@ export default function Navigation() {
                   <FavoriteBorderIcon />
                 </IconButton>
                 {authUser() ? 
-                  <Link style={{textDecoration:'none'}}><Avatar>z</Avatar></Link>
+                  <Link style={{textDecoration:'none'}}>
+                    
+                    <Avatar>{emailAuth().slice(0,1).toUpperCase()}</Avatar>
+                    
+                    </Link>
                   :
                 <IconButton
                   sx={NavigationStyles.IconButton(theme)}
