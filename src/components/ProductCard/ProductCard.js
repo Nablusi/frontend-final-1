@@ -6,8 +6,9 @@ import Typography from "@mui/material/Typography";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import Box from "@mui/material/Box";
 import theme from "../../theme/Theme";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import GeneratedStars from "../../services/utils/GeneratedStars";
+import { Button } from "@mui/material";
 export default function ProductCard({ rating, product }) {
   const styles = {
     text: {
@@ -26,8 +27,16 @@ export default function ProductCard({ rating, product }) {
       },
     },
   };
+
+  const navigate = useNavigate();
+
+  
+  const goHandler = () => { 
+    navigate(`/product/${product.id}`)
+  }
+
   return (
-    <Link style={{ textDecoration: "none" }} to={`product/${product.id}`}>
+    <Link style={{ textDecoration: "none" }} onClick={goHandler} >
       <Card sx={{ maxWidth: 350, boxShadow: "none", margin: "auto" }}>
         <CardMedia
           sx={{ height: 280, borderRadius: "10px" }}
