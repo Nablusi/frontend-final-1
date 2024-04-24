@@ -1,6 +1,7 @@
 export const dialog = (theme) => ({ 
     '.MuiDialog-container': {
         justifyContent: 'flex-end',
+        alignItems:'flex-start'
     },
     '& .MuiDialog-paper': {
         margin: '16px',

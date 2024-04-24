@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -8,6 +8,7 @@ import {
   useTheme,
   Container,
   Button,
+  Avatar,
 } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
@@ -20,6 +21,7 @@ import DensityMediumIcon from "@mui/icons-material/DensityMedium";
 import { useNavBarContext } from "../../contexts/NavBarContext";
 import { Link, useNavigate } from "react-router-dom";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
+import { authUser } from "../../services/utils/authUser";
 
 
 export default function Navigation() {
@@ -52,6 +54,10 @@ export default function Navigation() {
       navigate('/category/products/search'); 
     }
   }
+
+  useEffect(()=>{
+    authUser();
+  },[]);
 
   const navItemsIpad = [...categories.slice(1, 2), "And More..."];
 
@@ -149,7 +155,7 @@ export default function Navigation() {
                   />
                 )}
               </Box>
-              <Box component={"div"}>
+              <Box sx={{display:'flex', flexDirection:'row', alignItems:'center'}} component={"div"}>
 
                 <IconButton
                   sx={NavigationStyles.IconButton(theme)}
@@ -157,12 +163,18 @@ export default function Navigation() {
                 >
                   <FavoriteBorderIcon />
                 </IconButton>
+                {authUser() ? 
+                  <Link style={{textDecoration:'none'}}><Avatar>z</Avatar></Link>
+                  :
                 <IconButton
                   sx={NavigationStyles.IconButton(theme)}
 
                 >
                   <PersonOutlineIcon />
                 </IconButton>
+              }
+
+
                 <IconButton
                   sx={NavigationStyles.IconButton(theme)}
                   onClick={openDialogHandler}

@@ -28,9 +28,9 @@ export default function SearchForProducts() {
                 clearTimeout(handler);
             };
         }
-    }, [search]);
+    }, [search, navigate]);
 
-    const { res, error } = useAxios(`${searchURL}${debouncedSearch}`);
+    const { res } = useAxios(`${searchURL}${debouncedSearch}`);
 
     useEffect(() => {
         if (res) {

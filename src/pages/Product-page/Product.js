@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import ProductBreadCrumbs from "./ProductBreadCrumbs/ProductBreadCrumbs";
 import { Container } from "@mui/system";
 import ProductDetails from "./ProductDetails/ProductDetails";
@@ -7,6 +7,8 @@ import { urls } from "../../config/urls";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { LinearProgress } from "@mui/material";
+
+import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 
 export default function Product() {
   let { id } = useParams();
@@ -20,9 +22,11 @@ export default function Product() {
       setCart([]);
     }
   };
+  const { setRefresh, refresh } = useContext(SharedParentContext); 
 
   const addToCart = (product, qty) => {
     // need to check for token before allow user to add
+    setRefresh(()=>!refresh)
     if (cart.length) {
       const index = cart.findIndex((prod) => prod.product.id === product.id);
       if (index !== -1) {
@@ -42,7 +46,7 @@ export default function Product() {
   // console.log(cart);
   useEffect(() => {
     checkUserCart();
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     let getProduct = async () => {
