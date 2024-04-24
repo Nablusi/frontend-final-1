@@ -27,7 +27,7 @@ export default function ProductCard({ rating, product }) {
     },
   };
   return (
-    <Link style={{ textDecoration: "none" }}>
+    <Link style={{ textDecoration: "none" }} to={`product/${product.id}`}>
       <Card sx={{ maxWidth: 350, boxShadow: "none", margin: "auto" }}>
         <CardMedia
           sx={{ height: 280, borderRadius: "10px" }}
