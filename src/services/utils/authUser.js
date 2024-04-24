@@ -1,6 +1,6 @@
 export const authUser = () => {
     try {
-        const token = JSON.parse(localStorage.getItem('token')) ||  JSON.parse(sessionStorage.getItem('token')) || '';
+        const token = localStorage.getItem('token') ||  sessionStorage.getItem('token') || '';
         if (token !== '') {
             console.log('Token exists:', token);
             return true;

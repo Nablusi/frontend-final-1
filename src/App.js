@@ -36,12 +36,10 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-      <CssBaseline />
       <SharedParentProvider >
         <RouterProvider router={router} />
-        <CssBaseline />
       </SharedParentProvider>
+        <CssBaseline />
     </ThemeProvider>
   );
 }

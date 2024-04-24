@@ -1,6 +1,6 @@
 export const emailAuth = () => {
     try {
-        const email = JSON.parse(localStorage.getItem('email')) || JSON.parse(sessionStorage.getItem('email')) || '';
+        const email = localStorage.getItem('email') || sessionStorage.getItem('email') || '';
         if (email !== '') {
             console.log('email exists:', email);
             return email;

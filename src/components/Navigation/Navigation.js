@@ -60,6 +60,10 @@ export default function Navigation() {
     authUser();
   },[]);
 
+  const navHandler = () => {
+    navigate('/sign/signin')
+  }
+
   const navItemsIpad = [...categories.slice(1, 2), "And More..."];
 
   return (
@@ -173,7 +177,7 @@ export default function Navigation() {
                   :
                 <IconButton
                   sx={NavigationStyles.IconButton(theme)}
-
+                  onClick={navHandler}
                 >
                   <PersonOutlineIcon />
                 </IconButton>
