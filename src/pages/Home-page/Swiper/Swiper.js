@@ -13,21 +13,21 @@ export default function Swiper() {
                     title="Carry your Funk"
                     description="Trendy handbags collection for your party animal"
                     buttonLabel="See more"
-                    to ={'/category/categoryName'}
+                    to ={`/category/2`}
                 />
                 <SwiperSlide
                     imageSrc={require('../../../assets/image/hero.png')}
                     title="Carry your Funk"
                     description="Trendy handbags collection for your party animal"
                     buttonLabel="See more"
-                    to ={'/category/categoryName'}
+                    to ={'/category/3'}
                 />
                 <SwiperSlide
                     imageSrc={require('../../../assets/image/hero.png')}
                     title="Carry your Funk"
                     description="Trendy handbags collection for your party animal"
                     buttonLabel="See more"
-                    to ={'/category/categoryName'}
+                    to ={'/category/4'}
                 />
             </Carousel>
         </div>

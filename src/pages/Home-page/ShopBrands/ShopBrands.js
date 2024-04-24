@@ -14,7 +14,7 @@ export function ShopBrands({ handleBrandClick }) {
 
   const theme = useTheme();
   return (
-    <div>
+    <div id="brands">
       <Typography
         variant="h4"
         component={"h4"}
