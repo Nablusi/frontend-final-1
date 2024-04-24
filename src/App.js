@@ -13,8 +13,9 @@ import { ThemeProvider } from "@mui/material";
 import Category from "./pages/Category-page/Category";
 import Product from "./pages/Product-page/Product";
 import NewArrivalsFilter from "./pages/Category-page/NewArrivalsFilter";
-// import SignUp from "./pages/Sign/SignUP/SignUp";
-// import SignInSide from "./pages/Sign/SignIn/SignIn";
+import SignUp from "./pages/Sign/SignUP/SignUp";
+import SignIn from "./pages/Sign/SignIn/SignIn";
+import Sign from "./pages/Sign/Sign";
 import { SharedParentProvider } from "./contexts/CategoryPageFilter";
 import SearchForProducts from "./pages/Category-page/SearchForProducts";
 function App() {
@@ -26,20 +27,21 @@ function App() {
         <Route path="/category/:id" element={<Category />} />
         <Route path="/newArrivals" element={<NewArrivalsFilter />} />
         <Route path="/product/:id" element={<Product />} />
+        <Route path="/sign/:signtype" element={<Sign />} />
         <Route path="/category/products/search" element={<SearchForProducts />} />
+
       </Route>
     )
   );
 
   return (
     <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+      <CssBaseline />
       <SharedParentProvider >
         <RouterProvider router={router} />
         <CssBaseline />
       </SharedParentProvider>
-
-      {/* <SignUp /> */}
-      {/* <SignInSide /> */}
     </ThemeProvider>
   );
 }

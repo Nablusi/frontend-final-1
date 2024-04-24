@@ -13,6 +13,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import theme from "../../../theme/Theme";
+import { AxiosPost } from "../../../services/API/AxiosPost";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
 
 function Copyright(props) {
   return (
@@ -36,14 +40,82 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignInSide() {
+export default function SignIn({
+  postRes,
+  setPostRes,
+  email,
+  handleEmail,
+  checkEmail,
+  password,
+  handlePassword,
+  checkPassword,
+  setToast,
+  rememberMe,
+  setRememberMe,
+}) {
+  const navigate = useNavigate();
+
+  const [signFlag, setSignFlag] = useState(0);
+  useEffect(() => {
+    if (signFlag === 1) {
+      setSignFlag(0);
+      if (postRes) {
+        if (postRes.data) {
+          if (rememberMe) {
+            localStorage.setItem("email", postRes.data.email);
+            localStorage.setItem("token", postRes.data.token);
+            localStorage.setItem("rememberMe", rememberMe);
+          } else {
+            sessionStorage.setItem("email", postRes.data.email);
+            sessionStorage.setItem("token", postRes.data.token);
+            sessionStorage.setItem("rememberMe", rememberMe);
+          }
+          navigate("/");
+        } else {
+          setToast({
+            message: postRes.message,
+            open: true,
+          });
+          setTimeout(() => {
+            setToast({ open: false });
+          }, 3000);
+        }
+      }
+    }
+  }, [postRes, setToast, navigate, signFlag, rememberMe]);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    if (checkEmail(data.get("email")) === false) {
+      setToast({ message: "Invalid email address", open: true });
+      setTimeout(() => {
+        setToast({ open: false });
+      }, 3000);
+      return;
+    }
+    if (
+      checkPassword(data.get("password") === false) |
+      (data.get("password").length < 8)
+    ) {
+      setToast({
+        message:
+          "Password should contain at least 8 characters, including letters, digits, and special characters",
+        open: true,
+      });
+      setTimeout(() => {
+        setToast({ open: false });
+      }, 3000);
+      return;
+    }
+    AxiosPost(
+      "https://backend-final-1-latest.onrender.com/api/auth/login",
+      {
+        email: data.get("email"),
+        password: data.get("password"),
+      },
+      setPostRes,
+      setSignFlag
+    );
   };
 
   return (
@@ -94,6 +166,8 @@ export default function SignInSide() {
                 fullWidth
                 id="email"
                 label="Email Address"
+                value={email}
+                onChange={handleEmail}
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -113,6 +187,8 @@ export default function SignInSide() {
                 fullWidth
                 name="password"
                 label="Password"
+                value={password}
+                onChange={handlePassword}
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -129,8 +205,13 @@ export default function SignInSide() {
               <FormControlLabel
                 control={
                   <Checkbox
-                    value="remember"
+                    name="remember"
+                    value={rememberMe}
                     color="primary"
+                    checked={rememberMe}
+                    onClick={() => {
+                      setRememberMe(!rememberMe);
+                    }}
                     sx={{
                       "&.MuiButtonBase-root.Mui-checked": {
                         color: theme.palette.primary.carouselColor,
