@@ -13,11 +13,12 @@ import { ThemeProvider } from "@mui/material";
 import Category from "./pages/Category-page/Category";
 import Product from "./pages/Product-page/Product";
 import NewArrivalsFilter from "./pages/Category-page/NewArrivalsFilter";
-import SignUp from "./pages/Sign/SignUP/SignUp";
-import SignIn from "./pages/Sign/SignIn/SignIn";
 import Sign from "./pages/Sign/Sign";
 import { SharedParentProvider } from "./contexts/CategoryPageFilter";
 import SearchForProducts from "./pages/Category-page/SearchForProducts";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -40,6 +41,7 @@ function App() {
         <RouterProvider router={router} />
       </SharedParentProvider>
         <CssBaseline />
+        <ToastContainer />
     </ThemeProvider>
   );
 }
