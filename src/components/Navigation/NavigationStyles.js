@@ -55,5 +55,17 @@ export const textFieldInput = {
 
 export const IconButton = (theme) => ({ 
     color: theme.palette.primary.main, 
-    padding: '5px'
+    padding: '5px',
+    position:'relative'
 });
+
+export const orangeDot = {
+    backgroundColor:'#FF8C4B', 
+    border:"2px solid white", 
+    position:'absolute', 
+    right:'5px',
+    top:'9px' ,
+    width:'8px', 
+    height:'8px', 
+    borderRadius:'50%'
+}
