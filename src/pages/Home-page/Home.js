@@ -1,24 +1,36 @@
-import React from "react";
-// import { Button } from '@mui/material';
-// import "./home.css";
-import styles from "./home.module.css"; 
-//import * as BtnStyles from "./button";
-import Button from '@mui/joy/Button';
-// import Box from '@mui/joy/Box';
-import { useMediaQuery } from 'react-responsive'
-
+import { React, useEffect, useState } from "react";
+import { Box, Container, LinearProgress } from "@mui/material";
+import Swiper from "./Swiper/Swiper";
+import { ShopBrands } from "./ShopBrands/ShopBrands";
+import NewArrivals from "./NewArrivals/NewArrivals";
+import Handpicked from "./Handpicked/Handpicked";
+import FilteredShoppingOption from "./Filtered-Shopping-Options/FilteredHeroOption";
+import useAxios from "../../services/Hooks/useAxios";
 
 export default function Home() {
-    const isPhone =  useMediaQuery({query: '(max-width: 480px)'})
+  const [newArrivals, setnewArrivals] = useState([]);
+  const { res, loading } = useAxios(
+    `https://backend-final-1-latest.onrender.com/api/products/new`
+  );
 
+  useEffect(() => {
+    if (res) {
+      setnewArrivals(res);
+    }
+  }, [res]);
+  if (loading) {
+    return <LinearProgress />;
+  } else {
     return (
-        <>
-            <Button sx={{color : isPhone ? "green" : "yellow" }}> Hello </Button>
-            <h1>Zaid say helloooooo</h1>
-        </>
-    )
+      <Container>
+        <Box component={"div"}>
+          <Swiper />
+          <NewArrivals newArrivals={newArrivals} />
+          <Handpicked />
+          <ShopBrands />
+          <FilteredShoppingOption />
+        </Box>
+      </Container>
+    );
+  }
 }
-//sx={{ color: 'green', border: '1px solid green' }}
-//
-
-//sx={BtnStyles.btn}
