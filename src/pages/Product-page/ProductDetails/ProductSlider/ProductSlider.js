@@ -1,5 +1,5 @@
 import React from "react";
-/*import Carousel from "react-multi-carousel";
+import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -77,4 +77,4 @@ export default function ProductSlider() {
       </Carousel>
     </Box>
   );
-}*/
+}

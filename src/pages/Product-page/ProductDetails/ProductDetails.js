@@ -41,7 +41,7 @@ export default function ProductDetails({ product, addToCart }) {
             width="100%"
           ></img>
           
-          {/* <Typography>slider</Typography> */}
+          <ProductSlider />
         </Grid>
         <Grid item xs={12} lg={6} sx={{paddingBottom:'20px'}}>
           <Typography

@@ -6,14 +6,14 @@ export function ProductDescrip({ selectedTab, handleChange, descrip, reviews }){
 
   return (
     <div style={{ margin: '30px 22px 24px 18px' }}>
-      <Paper sx={{backgroundColor: '#F1F1F1', borderRadius:'12px', boxShadow:'none', }} square>
+      <Paper sx={{backgroundColor: '#F1F1F1', borderRadius:'12px', boxShadow:'none', padding:'20px' }} square>
         <Tabs
           value={selectedTab}
           indicatorColor="white"
           textColor={theme.palette.primary.textWhiteColor}
           onChange={handleChange}
           aria-label="product details tabs"
-          sx={{ marginInline:'1em', fontWeight:'500' }}
+          sx={{  fontWeight:'500' }}
         >
           <Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
             <Tab 
@@ -41,19 +41,19 @@ export function ProductDescrip({ selectedTab, handleChange, descrip, reviews }){
         </Tabs>
       </Paper>
       {selectedTab === 0 && (
-        <div>
+        <div style={{marginTop:'20px'}}>
           {/* Product description content  */}
           {descrip}
         </div>
       )}
       {selectedTab === 1 && (
-        <div>
+        <div style={{marginTop:'20px'}}>
           {/* Related products content  */}
           <p>Related Products Content</p>
         </div>
       )}
       {selectedTab === 2 && (
-        <div>
+        <div style={{marginTop:'20px'}}>
           {/* Ratings and reviews content  */}
           {reviews}
         </div>
