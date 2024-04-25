@@ -10,12 +10,19 @@ import { LinearProgress } from "@mui/material";
 import ProductSlider from './ProductDetails/ProductSlider/ProductSlider'
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 import { authUser } from "../../services/utils/authUser";
+import { ProductDescrip } from "./ProductDescrip/ProductDescrip";
 export default function Product() {
   let { id } = useParams();
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState();
+  const [selectedTab, setSelectedTab] = useState(0);
   const navigate = useNavigate();
+  const handleChange = (event, newValue) => {
+    setSelectedTab(newValue);
+  };
+
+
   const checkUserCart = () => {
     if (localStorage.getItem("cart")) {
       setCart(JSON.parse(localStorage.getItem("cart")));
@@ -74,7 +81,10 @@ export default function Product() {
       <Container>
         <ProductBreadCrumbs productName={product.name} />
         <ProductDetails product={product} addToCart={addToCart} />
-        {/* <ProductSlider/> */}
+        <ProductDescrip descrip={product.description} 
+        selectedTab={selectedTab}
+        handleChange={handleChange}
+        reviews={product.reviews}/>
       </Container>
     </>
   );
