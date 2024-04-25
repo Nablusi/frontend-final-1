@@ -40,7 +40,7 @@ export default function ProductDetails({ product, addToCart }) {
             alt="product Name"
             width="100%"
           ></img>
-          <ProductSlider/>
+          
           {/* <Typography>slider</Typography> */}
         </Grid>
         <Grid item xs={12} lg={6} sx={{paddingBottom:'20px'}}>
