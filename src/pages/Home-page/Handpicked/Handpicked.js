@@ -49,7 +49,7 @@ export default function Handpicked() {
         {/* // <HandCard />
         // <HandCard />
         // <HandCard />
-        // <HandCard /> */}
+        // <HandCard />  */}
       </Box>
     </Box>
   );
