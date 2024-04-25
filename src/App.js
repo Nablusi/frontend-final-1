@@ -29,15 +29,17 @@ function App() {
         <Route path="/newArrivals" element={<NewArrivalsFilter />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/sign/:signtype" element={<Sign />} />
-        <Route path="/category/products/search" element={<SearchForProducts />} />
-
+        <Route
+          path="/category/products/search"
+          element={<SearchForProducts />}
+        />
       </Route>
     )
   );
 
   return (
     <ThemeProvider theme={theme}>
-      <SharedParentProvider >
+      <SharedParentProvider>
         <RouterProvider router={router} />
       </SharedParentProvider>
         <CssBaseline />
