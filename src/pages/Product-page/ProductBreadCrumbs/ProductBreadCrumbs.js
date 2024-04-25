@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import theme from "../../../theme/Theme";
 import { Box } from "@mui/system";
-export default function ProductBreadCrumbs({productName}) {
+export default function ProductBreadCrumbs({productName,categoryName}) {
   return (
     <Box sx={{padding:'20px 0'}}>
       <Breadcrumbs aria-label="breadcrumb" separator=">" sx={{fontWeight:'bold',textDecoration:'none'}}>
@@ -16,7 +16,7 @@ export default function ProductBreadCrumbs({productName}) {
           color={theme.palette.primary.main}
           href="/material-ui/getting-started/installation/"
         >
-          CatsName
+          {categoryName}
         </Link>
         <Typography color="text.primary" sx={{textTransform:'capitalize'}}>{productName}</Typography>
       </Breadcrumbs>
