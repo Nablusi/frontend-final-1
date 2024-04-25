@@ -2,7 +2,12 @@ import Box from "@mui/material/Box";
 import theme from "../../../theme/Theme";
 import { Typography } from "@mui/material";
 import HandCard from "./HandCard/HandCard";
+import useAxios from "../../../services/Hooks/useAxios";
 export default function Handpicked() {
+  let { res: handpickedData } = useAxios(
+    "https://backend-final-1-latest.onrender.com/api/products/handpicked"
+  );
+
   return (
     <Box
       component="section"
@@ -12,6 +17,7 @@ export default function Handpicked() {
       sx={{
         backgroundColor: theme.palette.primary.carouselColor,
       }}
+      marginInline={"-20px"}
     >
       <Typography
         variant="h4"
@@ -33,10 +39,17 @@ export default function Handpicked() {
         gap={"30px"}
       >
         {/* i will use map here when API is ready */}
-        <HandCard />
-        <HandCard />
-        <HandCard />
-        <HandCard />
+        {handpickedData ? (
+          handpickedData.map((card) => {
+            return <HandCard />;
+          })
+        ) : (
+          <></>
+        )}
+        {/* // <HandCard />
+        // <HandCard />
+        // <HandCard />
+        // <HandCard />  */}
       </Box>
     </Box>
   );

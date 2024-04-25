@@ -4,24 +4,29 @@ import { Container } from "@mui/system";
 import ProductDetails from "./ProductDetails/ProductDetails";
 import useAxios from "../../services/Hooks/useAxios";
 import { urls } from "../../config/urls";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { LinearProgress } from "@mui/material";
 import ProductSlider from './ProductDetails/ProductSlider/ProductSlider'
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 import { authUser } from "../../services/utils/authUser";
 import { ProductDescrip } from "./ProductDescrip/ProductDescrip";
+import { toast } from 'react-toastify';
 export default function Product() {
   let { id } = useParams();
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState();
+
   const [selectedTab, setSelectedTab] = useState(0);
+  const [categoryName, setCategoryName] = useState("");
   const navigate = useNavigate();
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);
   };
-
+  const {
+    res: categories,
+  } = useAxios(`${urls.getCategories}`);
 
   const checkUserCart = () => {
     if (localStorage.getItem("cart")) {
@@ -30,12 +35,12 @@ export default function Product() {
       setCart([]);
     }
   };
-  const { setRefresh, refresh } = useContext(SharedParentContext); 
+  const { setRefresh, refresh } = useContext(SharedParentContext);
 
   const addToCart = (product, qty) => {
     // need to check for token before allow user to add
-    if(authUser()){
-      setRefresh(()=>!refresh)
+    if (authUser()) {
+      setRefresh(() => !refresh)
       if (cart.length) {
         const index = cart.findIndex((prod) => prod.product.id === product.id);
         if (index !== -1) {
@@ -52,8 +57,13 @@ export default function Product() {
       }
       localStorage.setItem("cart", JSON.stringify(cart));
     }
-    else{
-      navigate('/sign/signin');
+    else {
+      toast.warning(
+        <>
+          Please <a href="/sign/signin">sign in</a> to continue the process. 
+        </>, 
+        { position: 'top-center' }
+      );
     }
   };
   // console.log(cart);
@@ -73,13 +83,26 @@ export default function Product() {
     };
     getProduct();
   }, [id]);
+
+  useEffect(() => {
+    if (categories) {
+      const categoriesData = categories;
+      const foundCategory = categoriesData.find(
+        (category) => parseInt(category.id) === parseInt(product.categoryId)
+      );
+      if (foundCategory) {
+        setCategoryName(foundCategory.name);
+      }
+    }
+  }, [id, categories]);
+  console.log(categoryName);
   if (loading) {
     return <LinearProgress />;
   }
   return (
     <>
       <Container>
-        <ProductBreadCrumbs productName={product.name} />
+        <ProductBreadCrumbs productName={product.name} categoryName={categoryName}/>
         <ProductDetails product={product} addToCart={addToCart} />
         <ProductDescrip descrip={product.description} 
         selectedTab={selectedTab}

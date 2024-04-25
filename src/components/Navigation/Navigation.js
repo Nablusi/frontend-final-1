@@ -23,6 +23,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 import { authUser } from "../../services/utils/authUser";
 import { emailAuth } from "../../services/utils/emailAuth";
+import { isProductsExistInBag } from "../../services/utils/orangeDotAuth";
 
 
 export default function Navigation() {
@@ -58,6 +59,7 @@ export default function Navigation() {
 
   useEffect(()=>{
     authUser();
+    isProductsExistInBag()
   },[]);
 
   const navHandler = () => {
@@ -91,7 +93,6 @@ export default function Navigation() {
                 {" "}
                 <img
                   src={require("../../assets/image/logo.png")}
-                  style={{ marginTop: "11px" }}
                   alt="logo"
                   onClick={contextHandler}
                 />{" "}
@@ -183,12 +184,15 @@ export default function Navigation() {
                 </IconButton>
               }
 
-
                 <IconButton
                   sx={NavigationStyles.IconButton(theme)}
                   onClick={openDialogHandler}
                 >
                   <LocalMallOutlinedIcon />
+                  {isProductsExistInBag() ? 
+                  <Box sx={NavigationStyles.orangeDot}></Box>
+                  :''
+                  }
                 </IconButton>
 
               </Box>

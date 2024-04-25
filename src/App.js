@@ -13,11 +13,12 @@ import { ThemeProvider } from "@mui/material";
 import Category from "./pages/Category-page/Category";
 import Product from "./pages/Product-page/Product";
 import NewArrivalsFilter from "./pages/Category-page/NewArrivalsFilter";
-import SignUp from "./pages/Sign/SignUP/SignUp";
-import SignIn from "./pages/Sign/SignIn/SignIn";
 import Sign from "./pages/Sign/Sign";
 import { SharedParentProvider } from "./contexts/CategoryPageFilter";
 import SearchForProducts from "./pages/Category-page/SearchForProducts";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -28,18 +29,21 @@ function App() {
         <Route path="/newArrivals" element={<NewArrivalsFilter />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/sign/:signtype" element={<Sign />} />
-        <Route path="/category/products/search" element={<SearchForProducts />} />
-
+        <Route
+          path="/category/products/search"
+          element={<SearchForProducts />}
+        />
       </Route>
     )
   );
 
   return (
     <ThemeProvider theme={theme}>
-      <SharedParentProvider >
+      <SharedParentProvider>
         <RouterProvider router={router} />
       </SharedParentProvider>
         <CssBaseline />
+        <ToastContainer />
     </ThemeProvider>
   );
 }
