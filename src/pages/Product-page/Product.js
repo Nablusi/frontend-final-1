@@ -15,7 +15,11 @@ export default function Product() {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState();
+  const [categoryName, setCategoryName] = useState("");
   const navigate = useNavigate();
+  const {
+    res: categories,
+  } = useAxios(`${urls.getCategories}`);
   const checkUserCart = () => {
     if (localStorage.getItem("cart")) {
       setCart(JSON.parse(localStorage.getItem("cart")));
@@ -66,13 +70,26 @@ export default function Product() {
     };
     getProduct();
   }, [id]);
+
+  useEffect(() => {
+    if (categories) {
+      const categoriesData = categories;
+      const foundCategory = categoriesData.find(
+        (category) => parseInt(category.id) === parseInt(product.categoryId)
+      );
+      if (foundCategory) {
+        setCategoryName(foundCategory.name);
+      }
+    }
+  }, [id, categories]);
+  console.log(categoryName);
   if (loading) {
     return <LinearProgress />;
   }
   return (
     <>
       <Container>
-        <ProductBreadCrumbs productName={product.name} />
+        <ProductBreadCrumbs productName={product.name} categoryName={categoryName}/>
         <ProductDetails product={product} addToCart={addToCart} />
         {/* <ProductSlider/> */}
       </Container>
