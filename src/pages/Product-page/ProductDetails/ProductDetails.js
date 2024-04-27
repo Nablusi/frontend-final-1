@@ -1,8 +1,8 @@
+import React, { useState, useRef, useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
 import Rating from "@mui/material/Rating";
-import React, { useState } from "react";
 import theme from "../../../theme/Theme";
-import { Box, style, textAlign, width } from "@mui/system";
+import { Box } from "@mui/system";
 import { Input } from "@mui/material";
 import { InputAdornment } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -10,7 +10,16 @@ import AddIcon from "@mui/icons-material/Add";
 import { Button } from "@mui/material";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ProductSlider from "./ProductSlider/ProductSlider";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { useMediaQuery } from "react-responsive"; 
+
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
+import "./ProductSlider/ProductSlider.css"
+
 export default function ProductDetails({ product, addToCart }) {
   let [qty, setQty] = useState(1);
   let [msg, setMsg] = useState("");
@@ -21,12 +30,25 @@ export default function ProductDetails({ product, addToCart }) {
       setMsg("You Can add qty only betweeen 1 and 20");
     }
   };
+
+  const [nav1, setNav1] = useState(null);
+  const [nav2, setNav2] = useState(null);
+  let sliderRef1 = useRef(null);
+  let sliderRef2 = useRef(null);
+
+  useEffect(() => {
+    setNav1(sliderRef1);
+    setNav2(sliderRef2);
+  }, []);
+
+  const isSmall = useMediaQuery({ query: '(max-width: 767px)' })
+
   const styles = {
-    buttons:{
-      width:'35%',
+    buttons: {
+      width: '35%',
       "white-space": "nowrap",
-      [theme.breakpoints.down('lg')]:{
-        width:'100%'
+      [theme.breakpoints.down('lg')]: {
+        width: '100%'
       }
     }
   }
@@ -34,16 +56,52 @@ export default function ProductDetails({ product, addToCart }) {
     <>
       <Grid container spacing={2}>
         <Grid item xs={12} lg={5}>
-          <img
-            src={require(`../../../images/product-image.png`)}
-            sx={{ textAlign:'center' }}
-            alt="product Name"
-            width="100%"
-          ></img>
-          
-          <ProductSlider />
+          <div className="slider-container">
+            <Slider asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
+              <div style={{ width: '75px', height: '75px' }}>
+                <img src={require(`../../../assets/image/bag1.png`)} style={{ width: '100%', height: '100%' }} alt='' />
+              </div>
+              <div style={{ width: '75px', height: '75px' }}>
+                <img src={require(`../../../assets/image/bag2.png`)} style={{ width: '100%', height: '100%' }} alt='' />
+              </div>
+              <div style={{ width: '75px', height: '75px' }}>
+                <img src={require(`../../../assets/image/bag3.png`)} style={{ width: '100%', height: '100%' }} alt='' />
+              </div>
+              <div style={{ width: '75px', height: '75px' }}>
+                <img src={require(`../../../assets/image/bag4.png`)} style={{ width: '100%', height: '100%' }} alt='' />
+              </div>
+            </Slider>
+            <Box sx={{width:'70%', margin:'0px auto'}}>
+              <Slider
+                asNavFor={nav1}
+                ref={slider => (sliderRef2 = slider)}
+                slidesToShow={isSmall ? 2 : 4}
+                swipeToSlide={true}
+                focusOnSelect={true}
+                nextArrow={<ArrowForwardIosIcon sx={{ color: 'black' }} />}
+                prevArrow={<ArrowBackIosNewIcon sx={{ color: 'black' }} />}
+                style={{ display: 'flex', gap: '31px' }}
+              >
+                <div style={{ width: '75px', height: '75px' }}>
+                  <img src={require(`../../../assets/image/bag1.png`)} style={{ width: '100%', height: '100%' }} alt='' />
+                </div>
+                <div style={{ width: '75px', height: '75px' }}>
+                  <img src={require(`../../../assets/image/bag2.png`)} style={{ width: '100%', height: '100%' }} alt='' />
+                </div>
+                <div style={{ width: '75px', height: '75px' }}>
+                  <img src={require(`../../../assets/image/bag3.png`)} style={{ width: '100%', height: '100%' }} alt='' />
+                </div>
+                <div style={{ width: '75px', height: '75px' }}>
+                  <img src={require(`../../../assets/image/bag4.png`)} style={{ width: '100%', height: '100%' }} alt='' />
+                </div>
+              </Slider>
+
+            </Box>
+          </div>
+
+
         </Grid>
-        <Grid item xs={12} lg={6} sx={{paddingBottom:'20px'}}>
+        <Grid item xs={12} lg={6} sx={{ paddingBottom: '20px' }}>
           <Typography
             variant="h5"
             component="h3"

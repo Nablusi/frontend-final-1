@@ -4,10 +4,9 @@ import { Container } from "@mui/system";
 import ProductDetails from "./ProductDetails/ProductDetails";
 import useAxios from "../../services/Hooks/useAxios";
 import { urls } from "../../config/urls";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { LinearProgress } from "@mui/material";
-import ProductSlider from './ProductDetails/ProductSlider/ProductSlider'
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 import { authUser } from "../../services/utils/authUser";
 import { ProductDescrip } from "./ProductDescrip/ProductDescrip";
