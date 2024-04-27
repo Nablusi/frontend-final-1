@@ -4,13 +4,13 @@ import { Container } from "@mui/system";
 import ProductDetails from "./ProductDetails/ProductDetails";
 import useAxios from "../../services/Hooks/useAxios";
 import { urls } from "../../config/urls";
-import {  useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { LinearProgress } from "@mui/material";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 import { authUser } from "../../services/utils/authUser";
 import { ProductDescrip } from "./ProductDescrip/ProductDescrip";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 export default function Product() {
   let { id } = useParams();
   const [product, setProduct] = useState({});
@@ -19,13 +19,10 @@ export default function Product() {
 
   const [selectedTab, setSelectedTab] = useState(0);
   const [categoryName, setCategoryName] = useState("");
-  const navigate = useNavigate();
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);
   };
-  const {
-    res: categories,
-  } = useAxios(`${urls.getCategories}`);
+  const { res: categories } = useAxios(`${urls.getCategories}`);
 
   const checkUserCart = () => {
     if (localStorage.getItem("cart")) {
@@ -39,7 +36,7 @@ export default function Product() {
   const addToCart = (product, qty) => {
     // need to check for token before allow user to add
     if (authUser()) {
-      setRefresh(() => !refresh)
+      setRefresh(() => !refresh);
       if (cart.length) {
         const index = cart.findIndex((prod) => prod.product.id === product.id);
         if (index !== -1) {
@@ -55,13 +52,12 @@ export default function Product() {
         cart.push({ product: product, qty: qty });
       }
       localStorage.setItem("cart", JSON.stringify(cart));
-    }
-    else {
+    } else {
       toast.warning(
         <>
-          Please <a href="/sign/signin">sign in</a> to continue the process. 
-        </>, 
-        { position: 'top-center' }
+          Please <a href="/sign/signin">sign in</a> to continue the process.
+        </>,
+        { position: "top-center" }
       );
     }
   };
@@ -69,7 +65,7 @@ export default function Product() {
   useEffect(() => {
     checkUserCart();
   }, [refresh]);
-
+  //You should not use axios.get while u have useAxios
   useEffect(() => {
     let getProduct = async () => {
       setLoading(true);
@@ -93,7 +89,7 @@ export default function Product() {
         setCategoryName(foundCategory.name);
       }
     }
-  }, [id, categories]);
+  }, [id, categories, product.categoryId]);
   console.log(categoryName);
   if (loading) {
     return <LinearProgress />;
@@ -101,12 +97,17 @@ export default function Product() {
   return (
     <>
       <Container>
-        <ProductBreadCrumbs productName={product.name} categoryName={categoryName}/>
+        <ProductBreadCrumbs
+          productName={product.name}
+          categoryName={categoryName}
+        />
         <ProductDetails product={product} addToCart={addToCart} />
-        <ProductDescrip descrip={product.description} 
-        selectedTab={selectedTab}
-        handleChange={handleChange}
-        reviews={product.reviews}/>
+        {/* <ProductDescrip
+          descrip={product.description}
+          selectedTab={selectedTab}
+          handleChange={handleChange}
+          reviews={product.reviews}
+        /> */}
       </Container>
     </>
   );
