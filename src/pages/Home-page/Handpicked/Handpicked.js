@@ -34,14 +34,14 @@ export default function Handpicked() {
       <Box
         component={"section"}
         display={"grid"}
-        gridTemplateColumns={"repeat(auto-fit, minmax(200px, 1fr))"}
+        gridTemplateColumns={"repeat(auto-fit, minmax(200px, 350px))"}
         marginInline={"20px"}
         gap={"30px"}
       >
         {/* i will use map here when API is ready */}
         {handpickedData ? (
           handpickedData.map((card) => {
-            return <HandCard />;
+            return <HandCard key={1} />;
           })
         ) : (
           <></>

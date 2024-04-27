@@ -40,10 +40,8 @@ export const NavBarProvider = ({ children }) => {
 
   useEffect(() => {
     setDropDownAppearPhone(false);
-  }, [isIpad]);
-  useEffect(() => {
     setMore(false);
-  }, [!isIpad]);
+  }, [isIpad]);
 
   return (
     <NavBarContext.Provider

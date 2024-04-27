@@ -16,8 +16,8 @@ import NewArrivalsFilter from "./pages/Category-page/NewArrivalsFilter";
 import Sign from "./pages/Sign/Sign";
 import { SharedParentProvider } from "./contexts/CategoryPageFilter";
 import SearchForProducts from "./pages/Category-page/SearchForProducts";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const router = createBrowserRouter(
@@ -42,8 +42,8 @@ function App() {
       <SharedParentProvider>
         <RouterProvider router={router} />
       </SharedParentProvider>
-        <CssBaseline />
-        <ToastContainer />
+      <CssBaseline />
+      <ToastContainer />
     </ThemeProvider>
   );
 }

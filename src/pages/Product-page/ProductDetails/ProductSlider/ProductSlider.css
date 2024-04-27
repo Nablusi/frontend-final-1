@@ -1,0 +1,5 @@
+.slick-track{
+    display: flex !important;
+    gap: 31px !important;
+    flex-direction: row !important;
+}
