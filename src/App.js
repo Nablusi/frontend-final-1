@@ -18,6 +18,8 @@ import { SharedParentProvider } from "./contexts/CategoryPageFilter";
 import SearchForProducts from "./pages/Category-page/SearchForProducts";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import CartPage from "./pages/CartPage/CartPage";
+import Checkout from "./pages/Checkout/Checkout ";
 
 function App() {
   const router = createBrowserRouter(
@@ -33,6 +35,8 @@ function App() {
           path="/category/products/search"
           element={<SearchForProducts />}
         />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Route>
     )
   );

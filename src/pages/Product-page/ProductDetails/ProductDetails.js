@@ -15,11 +15,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useMediaQuery } from "react-responsive";
 
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+// import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+// import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import "./ProductSlider/ProductSlider.css";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 export default function ProductDetails({ product, addToCart }) {
   let [qty, setQty] = useState(1);
   let [msg, setMsg] = useState("");
@@ -94,8 +93,8 @@ export default function ProductDetails({ product, addToCart }) {
                 slidesToShow={isSmall ? 2 : 4}
                 swipeToSlide={true}
                 focusOnSelect={true}
-                nextArrow={<ArrowForwardIosIcon sx={{ color: "black" }} />}
-                prevArrow={<ArrowBackIosNewIcon sx={{ color: "black" }} />}
+                // nextArrow={<ArrowForwardIosIcon sx={{ color: "black" }} />}
+                // prevArrow={<ArrowBackIosNewIcon sx={{ color: "black" }} />}
                 style={{ display: "flex", gap: "31px" }}
               >
                 <div style={{ width: "75px", height: "75px" }}>

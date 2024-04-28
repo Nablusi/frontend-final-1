@@ -25,7 +25,7 @@ export default function PopsUp() {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const [productList, setProductList] = useState(cart);
   const { open, handleClose } = useNavBarContext();
-  const { refresh } = useContext(SharedParentContext);
+  const { refresh, setRefresh } = useContext(SharedParentContext);
 
   useEffect(() => {
     setProductList(cart);
@@ -36,6 +36,7 @@ export default function PopsUp() {
     console.log(updatedList);
     updatedList[index].qty += 1;
     setProductList(updatedList);
+    localStorage.setItem("cart", JSON.stringify(updatedList));
   };
 
   const decrementHandler = (index) => {
@@ -43,10 +44,13 @@ export default function PopsUp() {
     if (updatedList[index].qty > 1) {
       updatedList[index].qty -= 1;
       setProductList(updatedList);
+      localStorage.setItem("cart", JSON.stringify(updatedList));
+      
     }
   };
 
   const closeHandler = (index) => {
+    setRefresh(()=> !refresh)
     const updatedList = [...productList];
     updatedList.splice(index, 1);
     setProductList(updatedList);
