@@ -8,6 +8,9 @@ export default function UserInfoSideBar({ active, handleActive }) {
       width={"286px"}
       bgcolor={theme.palette.primary.inputBackground}
       borderRadius={"8px"}
+      height={"140px"}
+      display={"flex"}
+      flexDirection={"column"}
     >
       <SelectedSideBar
         flag={"personalInformation"}
