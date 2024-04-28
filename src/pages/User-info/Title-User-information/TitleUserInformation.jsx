@@ -5,10 +5,8 @@ import React from "react";
 import Link from "@mui/material/Link";
 import { Typography } from "@mui/material";
 import theme from "../../../theme/Theme";
-import { Container } from "@mui/system";
-import UserInfoSideBar from "../../../components/User-Info-SideBar/UserInfoSideBar";
 
-export default function PersonalInformation() {
+export default function TitleUserInformation({ title }) {
   const breadcrumbs = [
     <Link
       underline="hover"
@@ -59,7 +57,7 @@ export default function PersonalInformation() {
         fontWeight={600}
         marginBlock={"1.5rem"}
       >
-        Personal Information
+        {title}
       </Typography>
     </>
   );
