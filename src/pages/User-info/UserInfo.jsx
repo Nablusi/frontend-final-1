@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import UserInfoSideBar from "../../components/User-Info-SideBar/UserInfoSideBar";
-import PersonalInformation from "./Personal-information/PersonalInformation";
-import { Container } from "@mui/system";
+import { Box, Container } from "@mui/system";
+import TitleUserInformation from "./Title-User-information/TitleUserInformation";
+import PersonalInformation from "./Personal-info/PersonalInformation";
 
 export default function UserInfo() {
   const [active, setActive] = useState("personalInformation");
@@ -10,9 +11,13 @@ export default function UserInfo() {
   };
   return (
     <Container>
-      <PersonalInformation />
-
-      <UserInfoSideBar active={active} handleActive={handleActive} />
+      <TitleUserInformation title={"Personal Information"} />
+      <Box display={"flex"} marginBlock={"24px"}>
+        <UserInfoSideBar active={active} handleActive={handleActive} />
+        <Box width={"100%"} display={"flex"} justifyContent={"center"}>
+          <PersonalInformation />
+        </Box>
+      </Box>
     </Container>
   );
 }
