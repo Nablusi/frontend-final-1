@@ -18,6 +18,7 @@ import { SharedParentProvider } from "./contexts/CategoryPageFilter";
 import SearchForProducts from "./pages/Category-page/SearchForProducts";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import UserInfo from "./pages/User-info/UserInfo";
 
 function App() {
   const router = createBrowserRouter(
@@ -33,6 +34,7 @@ function App() {
           path="/category/products/search"
           element={<SearchForProducts />}
         />
+        <Route path="/userInfo" element={<UserInfo />} />
       </Route>
     )
   );

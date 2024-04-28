@@ -94,6 +94,7 @@ export default function ProductDetails({ product, addToCart }) {
                 slidesToShow={isSmall ? 2 : 4}
                 swipeToSlide={true}
                 focusOnSelect={true}
+                // the error from arrow @Shaheera
                 nextArrow={<ArrowForwardIosIcon sx={{ color: "black" }} />}
                 prevArrow={<ArrowBackIosNewIcon sx={{ color: "black" }} />}
                 style={{ display: "flex", gap: "31px" }}
