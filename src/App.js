@@ -20,6 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import CartPage from "./pages/CartPage/CartPage";
 import Checkout from "./pages/Checkout/Checkout ";
+import UserInfo from "./pages/User-info/UserInfo";
 
 function App() {
   const router = createBrowserRouter(
@@ -37,6 +38,7 @@ function App() {
         />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/userInfo" element={<UserInfo />} />
       </Route>
     )
   );
