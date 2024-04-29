@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography, TextField, Button } from '@mui/material'; 
+import * as MasterStyle from "./checkoutStyling/MasterCardStyle"; 
 
 export const MasterCard = () => {
     const [cardNumber, setCardNumber] = useState('');
@@ -67,8 +68,8 @@ export const MasterCard = () => {
     };
 
     return (
-        <Box sx={{display:'flex', flexDirection:'column'}}>
-            <Typography sx={{ fontWeight: '500', mb: '8px' }}>Card Number</Typography>
+        <Box sx={MasterStyle.box}>
+            <Typography sx={MasterStyle.typo}>Card Number</Typography>
             <TextField
                 placeholder="Enter Card Number"
                 value={cardNumber}
@@ -78,7 +79,7 @@ export const MasterCard = () => {
                 required
             />
 
-            <Typography sx={{ fontWeight: '500', mb: '8px', mt: '16px' }}>Expiration Date</Typography>
+            <Typography sx={MasterStyle.typogra}>Expiration Date</Typography>
             <TextField
                 placeholder="MM/YY"
                 value={expiryDate}
@@ -88,7 +89,7 @@ export const MasterCard = () => {
                 required
             />
 
-            <Typography sx={{ fontWeight: '500', mb: '8px', mt: '16px' }}>CVV</Typography>
+            <Typography sx={MasterStyle.typogra}>CVV</Typography>
             <TextField
                 placeholder="Enter CVV"
                 value={cvv}
@@ -98,7 +99,7 @@ export const MasterCard = () => {
                 required
             />
 
-            <Typography sx={{ fontWeight: '500', mb: '8px', mt: '16px' }}>Cardholder Name</Typography>
+            <Typography sx={MasterStyle.typogra}>Cardholder Name</Typography>
             <TextField
                 placeholder="Enter Cardholder Name"
                 value={cardholderName}
@@ -108,7 +109,7 @@ export const MasterCard = () => {
                 required
             />
 
-            <Button variant="contained" onClick={handleSubmit} sx={{mt:'40px'}} >Submit</Button>
+            <Button variant="contained" onClick={handleSubmit} sx={MasterStyle.button} >Submit</Button>
         </Box>
     )
 }

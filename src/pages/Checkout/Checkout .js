@@ -16,7 +16,7 @@ import { PaymentMethodPaper } from "./PaymentMethodPaper";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 import { isLoggedIn } from "../../services/utils/isLoggedIn";
 import { toast } from "react-toastify";
-
+import * as CheckoutStyle from "./checkoutStyling/CheckoutStyle"
 export default function Checkout() {
     const theme = useTheme();
     const isSmall = useMediaQuery({ query: '(max-width: 991px)' });
@@ -97,32 +97,32 @@ export default function Checkout() {
                 ?
                 <>
                     <BreadCrumbs BreadCrumbsName={'checkout'} />
-                    <Typography sx={{ fontSize: '34px', fontWeight: '600', color: theme.palette.primary.carouselColor, mb: '40px' }}> Checkout </Typography>
+                    <Typography sx={CheckoutStyle.typoMain(theme)}> Checkout </Typography>
                     {getProductDetails().length === 0 ?
-                        <Box sx={{ marginBottom: '80px' }}>
-                            <Typography sx={{ fontWeight: '600', fontSize: '32px' }}> No thing in You Cart  </Typography>
-                            <Button sx={{ textTransform: 'capitalize', mt: '50px' }} variant="outlined" onClick={clickGoToHomePage} > Go To Home Page  </Button>
+                        <Box sx={CheckoutStyle.miniBox}>
+                            <Typography sx={CheckoutStyle.miniTypo}> No thing in You Cart  </Typography>
+                            <Button sx={CheckoutStyle.homeButton} variant="outlined" onClick={clickGoToHomePage} > Go To Home Page  </Button>
                         </Box>
 
                         :
 
-                        <Box sx={{ display: 'grid', gridTemplateColumns: isSmall ? 'minmax(1fr 1fr)' : '2fr 1fr', gap: '76px' }}>
+                        <Box sx={CheckoutStyle.smallBox(isSmall)}>
 
 
 
                             {seePayment ?
                                 <Box>
-                                    <Accordion sx={{ boxShadow: 'none', width: '100%', mb: '40px', padding: '0' }}>
+                                    <Accordion sx={CheckoutStyle.accordion}>
                                         <AccordionSummary
                                             expandIcon={<ExpandMoreIcon />}
                                             aria-controls="panel1-content"
                                             id="panel1-header"
-                                            sx={{ fontSize: '22px', fontWeight: '600', borderBottom: '1px solid #0000002e', padding: '0' }}
+                                            sx={CheckoutStyle.accordionSummary}
                                         >
                                             Contact Information
                                         </AccordionSummary>
                                         {/* i will do for loop here to get the user Information  */}
-                                        <AccordionDetails sx={{ display: 'grid', mt: '45px', gridTemplateColumns: isPhone ? 'ifr' : '1fr 1fr', gap: '31px', width: '100%' }} >
+                                        <AccordionDetails sx={CheckoutStyle.accordionDetails(isPhone)} >
                                             <Box>
                                                 <Typography>Name: Zaid Saeh</Typography>
                                             </Box>
@@ -144,17 +144,17 @@ export default function Checkout() {
                                         </AccordionDetails>
                                     </Accordion>
                                     <Box>
-                                        <Accordion sx={{ boxShadow: 'none', width: '100%', mb: '40px', padding: '0' }}>
+                                        <Accordion sx={CheckoutStyle.accordion}>
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon />}
                                                 aria-controls="panel1-content"
                                                 id="panel1-header"
-                                                sx={{ fontSize: '22px', fontWeight: '600', borderBottom: '1px solid #0000002e', padding: '0' }}
+                                                sx={CheckoutStyle.accordionSummary}
                                             >
                                                 Payment
                                             </AccordionSummary>
                                             <AccordionDetails>
-                                                <RadioGroup value={paymentMethod} onChange={handlePaymentChange} sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '20px', mt: '43px', mb: '68px' }} >
+                                                <RadioGroup value={paymentMethod} onChange={handlePaymentChange} sx={CheckoutStyle.radioGroup} >
                                                     <PaymentMethodPaper paymentMethod={paymentMethod} name={'upi'} imgName={'upi'} title={"UPI"} />
                                                     <PaymentMethodPaper paymentMethod={paymentMethod} name={'master'} imgName={'master'} title={"Credit/Debit Card"} />
                                                     <PaymentMethodPaper paymentMethod={paymentMethod} name={'appel'} imgName={'appel'} title={"Apple Pay"} />
@@ -182,24 +182,24 @@ export default function Checkout() {
                                         </Accordion>
                                     </Box>
 
-                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', mt: '20px', mb: '50px' }}>
-                                        <Button variant="text" sx={{ textTransform: 'capitalize', textDecoration: 'underline' }} onClick={cartHandler}>Back to Cart</Button>
-                                        <Button variant="contained" sx={{ textTransform: 'capitalize', color: theme.palette.primary.textWhiteColor, backgroundColor: theme.palette.primary.carouselColor }} onClick={paymentHandler} >Next</Button>
+                                    <Box sx={CheckoutStyle.buttonContainer}>
+                                        <Button variant="text" sx={CheckoutStyle.firstButton} onClick={cartHandler}>Back to Cart</Button>
+                                        <Button variant="contained" sx={CheckoutStyle.secondButton(theme)} onClick={paymentHandler} >Next</Button>
                                     </Box>
                                 </Box>
 
                                 :
                                 <Box>
-                                    <Accordion sx={{ boxShadow: 'none', width: '100%', mb: '40px', padding: '0' }}>
+                                    <Accordion sx={CheckoutStyle.accordion}>
                                         <AccordionSummary
                                             expandIcon={<ExpandMoreIcon />}
                                             aria-controls="panel1-content"
                                             id="panel1-header"
-                                            sx={{ fontSize: '22px', fontWeight: '600', borderBottom: '1px solid #0000002e', padding: '0' }}
+                                            sx={CheckoutStyle.accordionSummary}
                                         >
                                             Add New Address
                                         </AccordionSummary>
-                                        <AccordionDetails sx={{ display: 'grid', mt: '45px', gridTemplateColumns: isPhone ? 'ifr' : '1fr 1fr', gap: '31px', width: '100%' }} >
+                                        <AccordionDetails sx={CheckoutStyle.accordionDetails(isPhone)} >
                                             <TextFieldCheckout label="Full Name" theme={theme} placeholder="Name" change={(e) => setFullName(e.target.value)} />
                                             <TextFieldCheckout label="Mobile Number" theme={theme} placeholder="+11" change={handleMobileNumberChange} />
                                             <TextFieldCheckout label="Street Address" theme={theme} placeholder="Address" change={(e) => setStreetAddress(e.target.value)} />
@@ -209,33 +209,33 @@ export default function Checkout() {
                                         </AccordionDetails>
                                     </Accordion>
                                     <Box>
-                                        <Accordion sx={{ boxShadow: 'none', width: '100%', mb: '40px', padding: '0' }}>
+                                        <Accordion sx={CheckoutStyle.accordion}>
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon />}
                                                 aria-controls="panel1-content"
                                                 id="panel1-header"
-                                                sx={{ fontSize: '22px', fontWeight: '600', borderBottom: '1px solid #0000002e', padding: '0' }}
+                                                sx={CheckoutStyle.accordionSummary}
                                             >
                                                 Select Payment Method
                                             </AccordionSummary>
                                         </Accordion>
                                     </Box>
-                                    <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', mt: '20px', mb: '50px' }}>
-                                        <Button variant="text" sx={{ textTransform: 'capitalize', textDecoration: 'underline' }} onClick={cartHandler}>Back to Cart</Button>
-                                        <Button variant="contained" sx={{ textTransform: 'capitalize', color: theme.palette.primary.textWhiteColor, backgroundColor: theme.palette.primary.carouselColor }} onClick={allFieldsFilled} >Next</Button>
+                                    <Box sx={CheckoutStyle.buttonContainer}>
+                                        <Button variant="text" sx={CheckoutStyle.firstButton} onClick={cartHandler}>Back to Cart</Button>
+                                        <Button variant="contained" sx={CheckoutStyle.secondButton(theme)} onClick={allFieldsFilled} >Next</Button>
                                     </Box>
                                 </Box>
                             }
-                            <Box sx={{ display: 'flex', flexDirection: 'column', mb: '50px' }}>
-                                <Typography sx={{ fontSize: '20px', fontWeight: '600' }} >Order Summary</Typography>
-                                <Divider sx={{ mb: '24px', mt: '8px' }} />
+                            <Box sx={CheckoutStyle.lastBox}>
+                                <Typography sx={CheckoutStyle.lastTypo} >Order Summary</Typography>
+                                <Divider sx={CheckoutStyle.divider} />
                                 <OrderSummary getProductDetails={getProductDetails} variant={"withoutDetails"} />
                                 {
                                     getProductDetails().length === 0 ?
                                         "" :
                                         (
                                             <>
-                                                <Box sx={{ mt: '24px' }} />
+                                                <Box sx={CheckoutStyle.boxThree} />
                                                 <OrderDetails variant={"withoutButton"} title={'Order Details'} getProductDetails={getProductDetails} />
                                             </>
                                         )
@@ -247,8 +247,8 @@ export default function Checkout() {
                 </>
                 :
 
-                <Box sx={{ mt: '50px', mb: '100px' }}>
-                    <Typography>Please <Link to={'/sign/signin'}>Sign In</Link> To Proceed tp Checkout</Typography>
+                <Box sx={CheckoutStyle.toaster}>
+                    <Typography>Please <Link to={'/sign/signin'}>Sign In</Link> To Proceed to Checkout</Typography>
                 </Box>
             }
 

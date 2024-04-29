@@ -3,6 +3,7 @@ import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { authUser } from "../../services/utils/authUser";
 import { toast } from "react-toastify";
+import * as OrderStyles from "./OrderDetailsStyle"; 
 
 export const OrderDetails = ({ title, getProductDetails, variant }) => {
     const products = getProductDetails();
@@ -38,52 +39,52 @@ export const OrderDetails = ({ title, getProductDetails, variant }) => {
         'withButton': {
             content: (
                 products.length === 0 ? '' :
-                    <Box sx={{ display: 'flex', flexDirection: 'column', mt: '16px' }}>
-                        <Typography sx={{ fontWeight: '600', fontSize: '20px', color: '#13101E' }}>{title}</Typography>
-                        <Divider sx={{ mb: '16px' }} />
-                        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Typography sx={{ fontWeight: '500', color: '#626262', }} >Sub total</Typography>
-                            <Typography sx={{ fontWeight: '500', color: '#626262', }} >${totalPrice}</Typography>
+                    <Box sx={OrderStyles.boxContainer}>
+                        <Typography sx={OrderStyles.typoTitle}>{title}</Typography>
+                        <Divider sx={OrderStyles.dividerOne} />
+                        <Box sx={OrderStyles.box}>
+                            <Typography sx={OrderStyles.typo} >Sub total</Typography>
+                            <Typography sx={OrderStyles.typo} >${totalPrice}</Typography>
                         </Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Typography sx={{ fontWeight: '500', color: '#626262', }} >Discount</Typography>
-                            <Typography sx={{ fontWeight: '500', color: '#626262', }} >$ {discount}</Typography>
+                        <Box sx={OrderStyles.box}>
+                            <Typography sx={OrderStyles.typo} >Discount</Typography>
+                            <Typography sx={OrderStyles.typo} >$ {discount}</Typography>
                         </Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Typography sx={{ fontWeight: '500', color: '#626262', }} >Delivery Fee</Typography>
-                            <Typography sx={{ fontWeight: '500', color: '#626262', }} >${deliveryFee}</Typography>
+                        <Box sx={OrderStyles.box}>
+                            <Typography sx={OrderStyles.typo} >Delivery Fee</Typography>
+                            <Typography sx={OrderStyles.typo} >${deliveryFee}</Typography>
                         </Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Typography sx={{ fontWeight: '500', color: '#13101E', }} >Grand Total</Typography>
-                            <Typography sx={{ fontWeight: '500', color: '##13101E', }} >${grandTotal}</Typography>
+                        <Box sx={OrderStyles.box}>
+                            <Typography sx={OrderStyles.typoSecond} >Grand Total</Typography>
+                            <Typography sx={OrderStyles.typoSecond} >${grandTotal}</Typography>
                         </Box>
                         <Box sx={{ display: 'flex', flexDirection: 'row', gap: '32px', mt: '40px' }}>
-                            <Button sx={{ textTransform: 'capitalize', fontWeight: '500', backgroundColor: theme.palette.primary.carouselColor, color: theme.palette.primary.textWhiteColor }} variant="contained" onClick={placeOrderHandler} >place order</Button>
-                            <Button sx={{ textTransform: 'capitalize', fontWeight: '500', borderColor: theme.palette.primary.carouselColor, color: theme.palette.primary.carouselColor }} variant="outlined" onClick={clickHandler} >Continue Shopping</Button>
+                            <Button sx={OrderStyles.firstButton(theme)} variant="contained" onClick={placeOrderHandler} >place order</Button>
+                            <Button sx={OrderStyles.secondButton(theme)} variant="outlined" onClick={clickHandler} >Continue Shopping</Button>
                         </Box>
                     </Box>
             )
         },
         "withoutButton": {
             content: (
-                <Box sx={{ display: 'flex', flexDirection: 'column', mt: '16px' }}>
-                    <Typography sx={{ fontWeight: '600', fontSize: '20px', color: '#13101E' }}>{title}</Typography>
-                    <Divider sx={{ mb: '16px' }} />
-                    <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Typography sx={{ fontWeight: '500', color: '#626262', }} >Sub total</Typography>
-                        <Typography sx={{ fontWeight: '500', color: '#626262', }} >${totalPrice}</Typography>
+                <Box sx={OrderStyles.boxContainer}>
+                    <Typography sx={OrderStyles.typoTitle}>{title}</Typography>
+                    <Divider sx={OrderStyles.dividerOne} />
+                    <Box sx={OrderStyles.box}>
+                        <Typography sx={OrderStyles.typo} >Sub total</Typography>
+                        <Typography sx={OrderStyles.typo} >${totalPrice}</Typography>
                     </Box>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Typography sx={{ fontWeight: '500', color: '#626262', }} >Discount</Typography>
-                        <Typography sx={{ fontWeight: '500', color: '#626262', }} >$ {discount}</Typography>
+                    <Box sx={OrderStyles.box}>
+                        <Typography sx={OrderStyles.typo} >Discount</Typography>
+                        <Typography sx={OrderStyles.typo} >$ {discount}</Typography>
                     </Box>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Typography sx={{ fontWeight: '500', color: '#626262', }} >Delivery Fee</Typography>
-                        <Typography sx={{ fontWeight: '500', color: '#626262', }} >${deliveryFee}</Typography>
+                    <Box sx={OrderStyles.box}>
+                        <Typography sx={OrderStyles.typo} >Delivery Fee</Typography>
+                        <Typography sx={OrderStyles.typo} >${deliveryFee}</Typography>
                     </Box>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Typography sx={{ fontWeight: '500', color: '#13101E', }} >Grand Total</Typography>
-                        <Typography sx={{ fontWeight: '500', color: '##13101E', }} >${grandTotal}</Typography>
+                    <Box sx={OrderStyles.box}>
+                        <Typography sx={OrderStyles.typoSecond} >Grand Total</Typography>
+                        <Typography sx={OrderStyles.typoSecond} >${grandTotal}</Typography>
                     </Box>
                 </Box>
             )

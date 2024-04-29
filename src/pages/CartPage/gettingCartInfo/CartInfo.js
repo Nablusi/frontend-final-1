@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
 import { useMediaQuery } from "react-responsive";
+import * as cartStyle from "./CartInfoStyle"; 
 
 export const CartInfo = ({ getProductDetails, variant, removeHandler }) => {
     const products = getProductDetails();
@@ -11,7 +12,7 @@ export const CartInfo = ({ getProductDetails, variant, removeHandler }) => {
         'price': {
             content: (
                 products.map((product, index) =>
-                    <Box key={index} sx={{ height: isPhone ? '190px' : '94px', marginLeft: '20px' }}>
+                    <Box key={index} sx={cartStyle.cartInfo(isPhone)}>
                         {product.product.price}
                     </Box>
                 ))
@@ -19,7 +20,7 @@ export const CartInfo = ({ getProductDetails, variant, removeHandler }) => {
         "qty": {
             content: (
                 products.map((product, index) =>
-                    <Box key={index} sx={{  height: isPhone ? '190px' : '94px', marginLeft: '20px' }}>
+                    <Box key={index} sx={cartStyle.cartInfo(isPhone)}>
                         {product.qty}
                     </Box>
                 ))
@@ -27,9 +28,9 @@ export const CartInfo = ({ getProductDetails, variant, removeHandler }) => {
         "subtotal":{
             content: (
                 products.map((product, index) =>
-                    <Box key={index} sx={{  height: isPhone ? '190px' : '94px', marginLeft: '20px', display:'flex', flexDirection:'column' }}>
+                    <Box key={index} sx={cartStyle.subTotal(isPhone)}>
                         {product.product.price  * product.qty}
-                        <Button sx={{justifyContent:'flex-start', color:'red', textTransform:'capitalize', padding:'0'}} onClick={()=>removeHandler(index)} >Remove</Button>
+                        <Button sx={cartStyle.remove} onClick={()=>removeHandler(index)} >Remove</Button>
                     </Box>
                 ))
         }

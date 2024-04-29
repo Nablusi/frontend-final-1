@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography, TextField, Button } from '@mui/material'; 
+import * as amazonStyle from "./checkoutStyling/AmazonPayStyle"; 
 
 export const AmazonPay = () => {
     const [amazonPayEmail, setAmazonPayEmail] = useState('');
@@ -32,8 +33,8 @@ export const AmazonPay = () => {
     };
 
     return (
-        <Box sx={{display:'flex', flexDirection:'column'}}>
-            <Typography sx={{ fontWeight: '500', mb: '8px' }}>Amazon Pay Email</Typography>
+        <Box sx={amazonStyle.box}>
+            <Typography sx={amazonStyle.typo}>Amazon Pay Email</Typography>
             <TextField
                 placeholder="Enter Amazon Pay Email"
                 value={amazonPayEmail}
@@ -41,7 +42,7 @@ export const AmazonPay = () => {
                 error={!!errors.amazonPayEmail}
                 helperText={errors.amazonPayEmail}
                 required
-                sx={{mb:'20px'}}
+                sx={amazonStyle.text}
             />
 
             <Button variant="contained" onClick={handleSubmit}>Submit</Button>

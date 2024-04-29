@@ -8,6 +8,7 @@ import { useMediaQuery } from "react-responsive";
 import { CartInfo } from "./gettingCartInfo/CartInfo";
 import { OrderDetails } from "../../components/OrderDetails/OrderDetails";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
+import * as cartStyle from "./cartPageStyle";
 
 export default function CartPage() {
     const theme = useTheme();
@@ -34,31 +35,31 @@ export default function CartPage() {
 
 
     return (
-        <Container sx={{ marginBottom: '185px' }}>
+        <Container sx={cartStyle.cartContainer}>
             <BreadCrumbs BreadCrumbsName={'my cart'} />
-            <Typography sx={{ fontSize: '34px', fontWeight: '600', color: theme.palette.primary.carouselColor, padding: "0", mt: '28px', mb: '87px' }} >My Cart</Typography>
-            <Box sx={{ display: 'grid', gridTemplateColumns: isSmall ? 'minmax(1fr 1fr)' : '2fr 1fr', gap: '108px' }}>
+            <Typography sx={cartStyle.titleOfCart(theme)} >My Cart</Typography>
+            <Box sx={cartStyle.cartBox(isSmall)}>
 
-                <Box sx={{ display: 'grid', gridTemplateColumns: isSmall ? 'auto auto auto auto' : '2fr 1fr 1fr 1fr' }}>
+                <Box sx={cartStyle.secondGrid(isSmall)}>
                     <Box>
                         <Typography> Product Name </Typography>
-                        <Divider sx={{ mt: '8px', mb: '8px' }} />
+                        <Divider sx={cartStyle.divider} />
                         <OrderSummary getProductDetails={getProductDetails} variant={'withoutDetails'} />
                     </Box>
                     <Box>
-                        <Typography sx={{ marginLeft: '20px' }}> Price </Typography>
-                        <Divider sx={{ mt: '8px', mb: '8px' }} />
+                        <Typography sx={cartStyle.price}> Price </Typography>
+                        <Divider sx={cartStyle.divider} />
                         <CartInfo getProductDetails={getProductDetails} variant={'price'} />
                     </Box>
                     <Box>
                         <Typography> Qty </Typography>
-                        <Divider sx={{ mt: '8px', mb: '8px' }} />
+                        <Divider sx={cartStyle.divider} />
                         <CartInfo getProductDetails={getProductDetails} variant={'qty'} />
 
                     </Box>
                     <Box >
                         <Typography> Subtotal </Typography>
-                        <Divider sx={{ mt: '8px', mb: '8px' }} />
+                        <Divider sx={cartStyle.divider} />
                         <CartInfo getProductDetails={getProductDetails} variant={'subtotal'} removeHandler={removeHandler} />
                     </Box>
                 </Box>

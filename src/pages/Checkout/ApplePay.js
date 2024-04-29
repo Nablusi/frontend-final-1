@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography, TextField, Button } from '@mui/material'; 
+import * as AppleStyle from "./checkoutStyling/AppleStyles"; 
 
 export const ApplePay = () => {
     const [applePayEmail, setApplePayEmail] = useState('');
@@ -31,8 +32,8 @@ export const ApplePay = () => {
     };
 
     return (
-        <Box sx={{display:'flex',flexDirection:'column'}}>
-            <Typography sx={{ fontWeight: '500', mb: '8px' }}>Apple Pay Email</Typography>
+        <Box sx={AppleStyle.box}>
+            <Typography sx={AppleStyle.typo}>Apple Pay Email</Typography>
             <TextField
                 placeholder="Enter Apple Pay Email"
                 value={applePayEmail}
@@ -42,7 +43,7 @@ export const ApplePay = () => {
                 required
             />
 
-            <Button variant="contained" onClick={handleSubmit} sx={{mt:'40px'}}>Submit</Button>
+            <Button variant="contained" onClick={handleSubmit} sx={AppleStyle.button}>Submit</Button>
         </Box>
     )
 };

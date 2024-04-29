@@ -1,5 +1,5 @@
 import React, { useContext, useLayoutEffect } from "react";
-import { Container, Box, useTheme, Typography, IconButton, Button } from '@mui/material';
+import { Container, Box, useTheme, Typography, IconButton } from '@mui/material';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import InstagramIcon from '@mui/icons-material/Instagram';
