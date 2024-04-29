@@ -8,7 +8,7 @@ import { SharedParentContext } from "../../../contexts/CategoryPageFilter";
 
 export default function FilteredShoppingOption() {
     const isSmall = useMediaQuery({query: "(max-width: 767px)"})
-    const {setDiscount, setPopular, setLimitedEdition } = useContext(SharedParentContext); 
+    const {setDiscount, setPopular, setLimitedEdition, trendy } = useContext(SharedParentContext); 
     
 
     const popularHandler = () => {
@@ -24,7 +24,7 @@ export default function FilteredShoppingOption() {
     }
 
     return (
-        <Box sx={FilteredHeroStyles.hero} id="trendy">       
+        <Box sx={FilteredHeroStyles.hero} ref={trendy}>       
             <LinkImage 
                 to={'/category/limitedEdition'}
                 imgSrc={require('../../../assets/image/makeup.jpg')}
