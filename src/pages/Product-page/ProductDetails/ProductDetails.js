@@ -135,7 +135,7 @@ export default function ProductDetails({ product, addToCart }) {
           <Typography
             variant="h5"
             component="h3"
-            sx={{ fontWeight: "bold", textTransform: "capitalize" }}
+            sx={{ fontWeight: "600", textTransform: "capitalize",color:theme.palette.primary.sectionTitle }}
           >
             {product.name}
           </Typography>
@@ -191,7 +191,7 @@ export default function ProductDetails({ product, addToCart }) {
                 <Typography
                   variant="p"
                   component="p"
-                  sx={{ fontWeight: "bold", fontSize: "22px" }}
+                  sx={{ fontWeight: "700", fontSize: "24px",color:theme.palette.primary.textColor }}
                 >
                   ${product.price}
                 </Typography>
@@ -200,19 +200,19 @@ export default function ProductDetails({ product, addToCart }) {
                   component="p"
                   sx={{
                     textDecoration: "line-through",
-                    fontWeight: "bold",
-                    fontSize: "22px",
+                    fontWeight: "600",
+                    fontSize: "18px",
                     padding: "0 15px",
                   }}
-                  color={theme.palette.primary.paragraph}
+                  color={theme.palette.primary.greyColor}
                 >
                   $54.69
                 </Typography>
                 <Typography
                   variant="p"
                   component="p"
-                  sx={{ fontWeight: "bold", fontSize: "22px" }}
-                  color={theme.palette.primary.error}
+                  sx={{ fontWeight: "600", fontSize: "16px" }}
+                  color={theme.palette.primary.discount}
                 >
                   50%OFF
                 </Typography>
@@ -221,7 +221,7 @@ export default function ProductDetails({ product, addToCart }) {
               <Typography
                 variant="p"
                 component="p"
-                sx={{ fontWeight: "bold", fontSize: "22px" }}
+                sx={{ fontWeight: "700", fontSize: "24px",color:theme.palette.primary.textColor }}
               >
                 ${product.price}
               </Typography>
@@ -244,7 +244,7 @@ export default function ProductDetails({ product, addToCart }) {
             <Typography
               variant="p"
               component="p"
-              sx={{ fontWeight: "bold", paddingRight: "12px" }}
+              sx={{ fontWeight: "bold", paddingRight: "12px",color:theme.palette.primary.sectionTitle }}
             >
               Quantity:
             </Typography>
@@ -291,7 +291,7 @@ export default function ProductDetails({ product, addToCart }) {
             <Button
               variant="contained"
               sx={{
-                backgroundColor: theme.palette.primary.main,
+                backgroundColor: theme.palette.primary.carouselColor,
                 display: "flex",
                 alignItems: "center",
                 borderRadius: "0px 5px 5px 0px",
@@ -312,11 +312,11 @@ export default function ProductDetails({ product, addToCart }) {
                 alignItems: "center",
                 marginLeft: "20px",
                 borderRadius: "5px",
-                border: `2px solid ${theme.palette.primary.main}`,
+                border: `2px solid ${theme.palette.primary.carouselColor}`,
                 ...styles.buttons,
               }}
             >
-              <FavoriteBorderIcon sx={{ paddingRight: "5px" }} />
+              <FavoriteBorderIcon sx={{ paddingRight: "5px",color:theme.palette.primary.carouselColor }} />
               <Typography>Add to Wishlist</Typography>
             </Button>
           </Box>

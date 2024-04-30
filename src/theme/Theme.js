@@ -19,6 +19,7 @@ const theme = createTheme({
       brownColor: "#97451F",
       pinkColor: "#A53F64",
       darkBlueColor: "#1B4B66",
+      discount: "#E21D1D"
     },
   },
   typography: {

@@ -50,15 +50,17 @@ export default function ProductCard({ rating, product }) {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              fontSize: "18px",
-              fontWeight: "600",
+              fontSize: "16px",
+              fontWeight: "500",
               fontFamily: "Inter",
+              color:theme.palette.primary.textColor,
+              textTransform:'capitalize'
             }}
           >
             {product.name}
             <FavoriteBorderOutlinedIcon />
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="h3">
+          <Typography variant="subtitle1" color="text.secondary" component="h3" sx={{colot:theme.palette.primary.paragraph,fontWeight:'400',fontSize:'14px'}}>
             Pink Bag
           </Typography>
 
@@ -73,7 +75,7 @@ export default function ProductCard({ rating, product }) {
             {product.discountId !== null ? (
               <>
                 <Typography
-                  sx={{ color: theme.palette.primary.main }}
+                  sx={{ color: theme.palette.primary.textColor,fontWeight:'500' }}
                   variant="subtitle1"
                   component="p"
                 >
@@ -87,14 +89,14 @@ export default function ProductCard({ rating, product }) {
                   $39.49
                 </Typography>
                 <Typography
-                  sx={{ textDecoration: "line-through" }}
+                  sx={{ textDecoration: "line-through",fontWeight:'400',fontSize:'14px' }}
                   variant="subtitle1"
                   component="p"
                 >
                   $78.66
                 </Typography>
                 <Typography
-                  sx={{ color: theme.palette.primary.error }}
+                  sx={{ color: theme.palette.primary.error,fontWeight:'400',fontSize:'16px' }}
                   variant="subtitle1"
                   component="p"
                 >
