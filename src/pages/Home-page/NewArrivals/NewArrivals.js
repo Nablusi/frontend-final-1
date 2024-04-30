@@ -48,9 +48,9 @@ export default function NewArrivals({ newArrivals }) {
           gridTemplateColumns={"repeat(auto-fit, minmax(280px, 1fr))"}
           gap={3}
         >
-          {newArrivals.slice(0, 4).map((Arrival) => (
+          {/* {newArrivals.slice(0, 4).map((Arrival) => (
             <ProductCard product={Arrival} key={Arrival.id} />
-          ))}
+          ))} */}
           {/* <ProductCard />
           <ProductCard />
           <ProductCard /> */}

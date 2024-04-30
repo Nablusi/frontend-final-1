@@ -14,6 +14,7 @@ export default function PersonalInformation({
   getValues,
   active,
   flag,
+  userData,
 }) {
   return active === flag ? (
     <Box width={"95% "}>
@@ -84,8 +85,8 @@ export default function PersonalInformation({
                 borderRadius={"4px"}
               >
                 <input
+                  defaultValue={userData?.firstName}
                   type="text"
-                  defaultValue=""
                   {...register("firstName", { required: true })}
                   style={{
                     backgroundColor: "#f1f1f1",
@@ -109,6 +110,7 @@ export default function PersonalInformation({
                 borderRadius={"4px"}
               >
                 <input
+                  defaultValue={userData?.lastName}
                   type="text"
                   {...register("lastName", { required: true })}
                   style={{
@@ -134,6 +136,7 @@ export default function PersonalInformation({
             borderRadius={"4px"}
           >
             <input
+              defaultValue={userData?.email}
               type="email"
               {...register("email", { required: true })}
               style={{
@@ -156,6 +159,7 @@ export default function PersonalInformation({
             borderRadius={"4px"}
           >
             <input
+              defaultValue={userData?.phone}
               type="tel"
               {...register("mobileNumber", {
                 required: true,

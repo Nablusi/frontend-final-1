@@ -7,10 +7,18 @@ import OrderDetails from "./OrderDetails/OrderDetails";
 
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import useAxios from "../../services/Hooks/useAxios";
 
 export default function UserInfo() {
+  const id = localStorage.getItem("id") || sessionStorage.getItem("id");
+  const token =
+    localStorage.getItem("token") || sessionStorage.getItem("token");
   const [active, setActive] = useState("personalInformation");
   const [selectedTab, setSelectedTab] = useState(0);
+  const { res: userData } = useAxios(
+    `https://backend-final-1-latest.onrender.com/api/users/${id}`,
+    token
+  );
   const {
     register,
     handleSubmit,
@@ -59,6 +67,7 @@ export default function UserInfo() {
             onSubmit={onSubmit}
             toast={toast}
             getValues={getValues}
+            userData={userData}
           />
           <OrderDetails
             selectedTab={selectedTab}
