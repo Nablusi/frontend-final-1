@@ -170,7 +170,7 @@ export default function Navigation() {
                   <FavoriteBorderIcon />
                 </IconButton>
                 {authUser() ? 
-                  <Link style={{textDecoration:'none'}}>
+                  <Link style={{textDecoration:'none'}} to={'/userInfo'}>
                     
                     <Avatar>{emailAuth().slice(0,1).toUpperCase()}</Avatar>
                     

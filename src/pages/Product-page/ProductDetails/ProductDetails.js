@@ -19,7 +19,6 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import "./ProductSlider/ProductSlider.css";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 export default function ProductDetails({ product, addToCart }) {
   let [qty, setQty] = useState(1);
   let [msg, setMsg] = useState("");

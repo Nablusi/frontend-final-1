@@ -10,7 +10,7 @@ import { LinearProgress } from "@mui/material";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 import { authUser } from "../../services/utils/authUser";
 import { ProductDescrip } from "./ProductDescrip/ProductDescrip";
-import { toast } from "react-toastify";
+
 export default function Product() {
   let { id } = useParams();
   const [product, setProduct] = useState({});
@@ -35,32 +35,29 @@ export default function Product() {
 
   const addToCart = (product, qty) => {
     // need to check for token before allow user to add
-    if (authUser()) {
-      setRefresh(() => !refresh);
-      if (cart.length) {
-        const index = cart.findIndex((prod) => prod.product.id === product.id);
-        if (index !== -1) {
-          if (cart[index].qty + qty > 20) {
-            console.log("can not add more");
-          } else {
-            cart[index].qty += qty;
-          }
+    // u have to use useAuth to check if the user sign in to added to api or not to added to local storage
+    setRefresh(() => !refresh);
+    if (cart.length) {
+      const index = cart.findIndex((prod) => prod.product.id === product.id);
+      if (index !== -1) {
+        if (cart[index].qty + qty > 20) {
+          console.log("can not add more");
         } else {
-          cart.push({ product: product, qty: qty });
+          cart[index].qty += qty;
         }
       } else {
         cart.push({ product: product, qty: qty });
       }
-      localStorage.setItem("cart", JSON.stringify(cart));
     } else {
-      toast.warning(
-        <>
-          Please <a href="/sign/signin">sign in</a> to continue the process.
-        </>,
-        { position: "top-center" }
-      );
+      cart.push({ product: product, qty: qty });
     }
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+
+    
   };
+
+
   // console.log(cart);
   useEffect(() => {
     checkUserCart();

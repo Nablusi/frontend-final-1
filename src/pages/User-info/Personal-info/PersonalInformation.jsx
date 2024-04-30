@@ -12,8 +12,10 @@ export default function PersonalInformation({
   onSubmit,
   toast,
   getValues,
+  active,
+  flag,
 }) {
-  return (
+  return active === flag ? (
     <Box width={"95% "}>
       <Box height={"60px"}>
         <Typography
@@ -337,5 +339,7 @@ export default function PersonalInformation({
         </form>
       </Box>
     </Box>
+  ) : (
+    <></>
   );
 }
