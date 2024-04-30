@@ -7,13 +7,13 @@ import OrderDetails from "./OrderDetails/OrderDetails";
 
 export default function UserInfo() {
   const [active, setActive] = useState("personalInformation");
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedOrderTab, setSelectedOrderTab] = useState(0);
   const handleActive = (data) => {
     setActive(data);
   };
 
   const handleChange = (event, newValue) => {
-    setSelectedTab(newValue);
+    setSelectedOrderTab(newValue);
   };
   return (
     <Container>
@@ -23,7 +23,7 @@ export default function UserInfo() {
         <UserInfoSideBar active={active} handleActive={handleActive} />
         <Box width={"100%"} display={"flex"} justifyContent={"center"}>
           {/* <PersonalInformation /> */}
-          <OrderDetails selectedTab={selectedTab}
+          <OrderDetails selectedOrderTab={selectedOrderTab}
           handleChange={handleChange}/>
         </Box>
       </Box>

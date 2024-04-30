@@ -74,6 +74,7 @@ export default function Product() {
       setLoading(false);
     };
     getProduct();
+    console.log(product);
   }, [id]);
 
   useEffect(() => {
@@ -87,7 +88,7 @@ export default function Product() {
       }
     }
   }, [id, categories, product.categoryId]);
-  console.log(categoryName);
+  // console.log(categoryName);
   if (loading) {
     return <LinearProgress />;
   }

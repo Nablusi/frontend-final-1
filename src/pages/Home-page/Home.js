@@ -15,7 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     if (res) {
-      setnewArrivals(res);
+      setnewArrivals(res.products);
     }
   }, [res]);
   if (loading) {

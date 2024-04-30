@@ -9,8 +9,6 @@ import { urls } from "../../config/urls";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 export const categoryNameContext = createContext();
 
-
-
 export default function Category() {
   const PAGESIZE = 20;
   let { id } = useParams();
@@ -37,7 +35,6 @@ export default function Category() {
     url += "&limitedEdition=true";
   }
 
-  
   const {
     res: categoryProducts,
     // error: categoryError,
@@ -75,7 +72,15 @@ export default function Category() {
     return (
       <Container>
         <Hero />
-        <categoryNameContext.Provider value={popular ? "Popular" : limitedEdition ? "Limited Edition" : categoryName}>
+        <categoryNameContext.Provider
+          value={
+            popular
+              ? "Popular"
+              : limitedEdition
+              ? "Limited Edition"
+              : categoryName
+          }
+        >
           <CategorizedProducts products={products} />
         </categoryNameContext.Provider>
         <PaginationCustomized
