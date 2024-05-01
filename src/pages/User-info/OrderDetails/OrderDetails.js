@@ -16,6 +16,22 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { useOutletContext } from "react-router-dom";
+export default function OrderDetails() {
+  const [
+    active,
+    register,
+    handleSubmit,
+    errors,
+    onSubmit,
+    toast,
+    getValues,
+    userData,
+    selectedOrderTab,
+    handleChange,
+  ] = useOutletContext();
+
+
 export default function OrderDetails({ selectedOrderTab, handleChange }) {
   return (
     <Box sx={{ width: "95%" }}>
@@ -485,8 +501,9 @@ export default function OrderDetails({ selectedOrderTab, handleChange }) {
               sx={{
                 width: "296px",
                 height: "44px",
-                marginTop: "20px",
                 marginLeft: "auto",
+                marginTop: "20px",
+
               }}
             >
               <Button
