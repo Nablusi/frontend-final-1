@@ -17,22 +17,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useOutletContext } from "react-router-dom";
+
 export default function OrderDetails() {
-  const [
-    active,
-    register,
-    handleSubmit,
-    errors,
-    onSubmit,
-    toast,
-    getValues,
-    userData,
-    selectedOrderTab,
-    handleChange,
-  ] = useOutletContext();
-
-
-export default function OrderDetails({ selectedOrderTab, handleChange }) {
+  const { selectedOrderTab, handleChange } = useOutletContext();
   return (
     <Box sx={{ width: "95%" }}>
       <Paper
@@ -45,9 +32,9 @@ export default function OrderDetails({ selectedOrderTab, handleChange }) {
         square
       >
         <Tabs
-          value={selectedOrderTab}
+          value={0}
           indicatorColor="white"
-          textColor={theme.palette.primary.paragraph}
+          color={theme.palette.primary.paragraph}
           onChange={handleChange}
           aria-label="product details tabs"
           sx={{ fontWeight: "500" }}
@@ -65,7 +52,7 @@ export default function OrderDetails({ selectedOrderTab, handleChange }) {
                 borderRadius: "8px",
                 color: selectedOrderTab === 0 ? "white" : "#626262",
                 backgroundColor:
-                selectedOrderTab === 0
+                  selectedOrderTab === 0
                     ? theme.palette.primary.carouselColor
                     : "transparent",
               }}
@@ -81,7 +68,7 @@ export default function OrderDetails({ selectedOrderTab, handleChange }) {
                 borderRadius: "8px",
                 color: selectedOrderTab === 1 ? "white" : "#626262",
                 backgroundColor:
-                selectedOrderTab === 1
+                  selectedOrderTab === 1
                     ? theme.palette.primary.carouselColor
                     : "transparent",
               }}
@@ -97,7 +84,7 @@ export default function OrderDetails({ selectedOrderTab, handleChange }) {
                 borderRadius: "8px",
                 color: selectedOrderTab === 2 ? "white" : "#626262",
                 backgroundColor:
-                selectedOrderTab === 2
+                  selectedOrderTab === 2
                     ? theme.palette.primary.carouselColor
                     : "transparent",
               }}
@@ -113,7 +100,7 @@ export default function OrderDetails({ selectedOrderTab, handleChange }) {
               component={Paper}
               sx={{ backgroundColor: "transparent", boxShadow: "none" }}
             >
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <Table sx={{ minWidth: "650px" }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <TableCell
@@ -167,6 +154,7 @@ export default function OrderDetails({ selectedOrderTab, handleChange }) {
                     <TableCell sx={{ borderBottom: "none" }}>
                       <Box sx={{ display: "flex" }}>
                         <img
+                          alt="product.png"
                           src={require(`../../../images/product-image.png`)}
                           style={{
                             width: "75px",
@@ -503,7 +491,6 @@ export default function OrderDetails({ selectedOrderTab, handleChange }) {
                 height: "44px",
                 marginLeft: "auto",
                 marginTop: "20px",
-
               }}
             >
               <Button
@@ -543,7 +530,9 @@ export default function OrderDetails({ selectedOrderTab, handleChange }) {
         </Box>
       )}
       {selectedOrderTab === 2 && (
-        <Box style={{ marginTop: "20px" }}><p> Products </p></Box>
+        <Box style={{ marginTop: "20px" }}>
+          <p> Products </p>
+        </Box>
       )}
     </Box>
   );

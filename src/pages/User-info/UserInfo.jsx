@@ -9,14 +9,8 @@ import useAxios from "../../services/Hooks/useAxios";
 import { Outlet } from "react-router-dom";
 
 export default function UserInfo() {
-  const id = localStorage.getItem("id") || sessionStorage.getItem("id");
-  const token =
-    localStorage.getItem("token") || sessionStorage.getItem("token");
+  const [selectedOrderTab, setSelectedOrderTab] = useState(0);
   const [active, setActive] = useState("personalInformation");
-  const { res: userData } = useAxios(
-    `https://backend-final-1-latest.onrender.com/api/users/${id}`,
-    token
-  );
   const {
     register,
     handleSubmit,
@@ -24,15 +18,21 @@ export default function UserInfo() {
     formState: { errors },
     getValues,
   } = useForm();
+  const token =
+    localStorage.getItem("token") || sessionStorage.getItem("token");
+  const id = localStorage.getItem("id") || sessionStorage.getItem("id");
+  const { res: userData } = useAxios(
+    `https://backend-final-1-latest.onrender.com/api/users/${id}`,
+    token
+  );
+
+  //////////////////////////////////////////
   const onSubmit = (data) => {
     if (data.newPassword === data.confirmPassword) {
       console.log(data);
     }
   };
-  // console.log(watch("firstName"));
 
-
-  const [selectedOrderTab, setSelectedOrderTab] = useState(0);
   const handleActive = (data) => {
     setActive(data);
   };
@@ -59,10 +59,8 @@ export default function UserInfo() {
       <Box display={"flex"} marginBlock={"24px"}>
         <UserInfoSideBar active={active} handleActive={handleActive} />
         <Box width={"100%"} display={"flex"} justifyContent={"center"}>
-
           <Outlet
-            context={[
-              active,
+            context={{
               register,
               handleSubmit,
               errors,
@@ -72,9 +70,8 @@ export default function UserInfo() {
               userData,
               selectedOrderTab,
               handleChange,
-            ]}
+            }}
           />
-
         </Box>
       </Box>
     </Container>

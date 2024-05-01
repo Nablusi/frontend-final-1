@@ -7,8 +7,15 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useOutletContext } from "react-router-dom";
 
 export default function PersonalInformation() {
-  const [register, handleSubmit, errors, onSubmit, toast, getValues, userData] =
-    useOutletContext();
+  const {
+    register,
+    handleSubmit,
+    errors,
+    onSubmit,
+    toast,
+    getValues,
+    userData,
+  } = useOutletContext();
 
   return (
     <Box width={"95% "}>

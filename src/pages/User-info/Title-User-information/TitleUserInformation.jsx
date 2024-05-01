@@ -32,7 +32,7 @@ export default function TitleUserInformation({ active, flag, title }) {
       User Profile
     </Link>,
   ];
-  return active === active ? (
+  return flag === active ? (
     <>
       <Breadcrumbs
         separator={
