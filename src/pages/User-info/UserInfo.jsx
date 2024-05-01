@@ -13,7 +13,6 @@ export default function UserInfo() {
   const token =
     localStorage.getItem("token") || sessionStorage.getItem("token");
   const [active, setActive] = useState("personalInformation");
-  const [selectedTab, setSelectedTab] = useState(0);
   const { res: userData } = useAxios(
     `https://backend-final-1-latest.onrender.com/api/users/${id}`,
     token
@@ -32,12 +31,14 @@ export default function UserInfo() {
   };
   // console.log(watch("firstName"));
 
+
+  const [selectedOrderTab, setSelectedOrderTab] = useState(0);
   const handleActive = (data) => {
     setActive(data);
   };
 
   const handleChange = (event, newValue) => {
-    setSelectedTab(newValue);
+    setSelectedOrderTab(newValue);
   };
 
   return (
@@ -58,23 +59,7 @@ export default function UserInfo() {
       <Box display={"flex"} marginBlock={"24px"}>
         <UserInfoSideBar active={active} handleActive={handleActive} />
         <Box width={"100%"} display={"flex"} justifyContent={"center"}>
-          {/* <PersonalInformation
-            active={active}
-            flag={"personalInformation"}
-            register={register}
-            handleSubmit={handleSubmit}
-            errors={errors}
-            onSubmit={onSubmit}
-            toast={toast}
-            getValues={getValues}
-            userData={userData}
-          /> */}
-          {/* <OrderDetails
-            selectedTab={selectedTab}
-            handleChange={handleChange}
-            active={active}
-            flag={"myOrders"}
-          /> */}
+
           <Outlet
             context={[
               active,
@@ -85,10 +70,11 @@ export default function UserInfo() {
               toast,
               getValues,
               userData,
-              selectedTab,
+              selectedOrderTab,
               handleChange,
             ]}
           />
+
         </Box>
       </Box>
     </Container>

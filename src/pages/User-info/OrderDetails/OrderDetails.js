@@ -3,7 +3,6 @@ import {
   Tabs,
   Tab,
   Paper,
-  useTheme,
   Stack,
   Typography,
   Grid,
@@ -28,10 +27,12 @@ export default function OrderDetails() {
     toast,
     getValues,
     userData,
-    selectedTab,
+    selectedOrderTab,
     handleChange,
   ] = useOutletContext();
 
+
+export default function OrderDetails({ selectedOrderTab, handleChange }) {
   return (
     <Box sx={{ width: "95%" }}>
       <Paper
@@ -44,7 +45,7 @@ export default function OrderDetails() {
         square
       >
         <Tabs
-          value={selectedTab}
+          value={selectedOrderTab}
           indicatorColor="white"
           textColor={theme.palette.primary.paragraph}
           onChange={handleChange}
@@ -56,15 +57,15 @@ export default function OrderDetails() {
             <Tab
               label="Items Ordered"
               value={0}
-              selected={selectedTab === 0}
+              selected={selectedOrderTab === 0}
               onClick={() => handleChange(null, 0)}
               style={{
                 textTransform: "capitalize",
                 opacity: "1",
                 borderRadius: "8px",
-                color: selectedTab === 0 ? "white" : "#626262",
+                color: selectedOrderTab === 0 ? "white" : "#626262",
                 backgroundColor:
-                  selectedTab === 0
+                selectedOrderTab === 0
                     ? theme.palette.primary.carouselColor
                     : "transparent",
               }}
@@ -72,15 +73,15 @@ export default function OrderDetails() {
             <Tab
               label="Invoices"
               value={1}
-              selected={selectedTab === 1}
+              selected={selectedOrderTab === 1}
               onClick={() => handleChange(null, 1)}
               style={{
                 textTransform: "capitalize",
                 opacity: "1",
                 borderRadius: "8px",
-                color: selectedTab === 1 ? "white" : "#626262",
+                color: selectedOrderTab === 1 ? "white" : "#626262",
                 backgroundColor:
-                  selectedTab === 1
+                selectedOrderTab === 1
                     ? theme.palette.primary.carouselColor
                     : "transparent",
               }}
@@ -88,15 +89,15 @@ export default function OrderDetails() {
             <Tab
               label="order shipment"
               value={2}
-              selected={selectedTab === 2}
+              selected={selectedOrderTab === 2}
               onClick={() => handleChange(null, 2)}
               style={{
                 textTransform: "capitalize",
                 opacity: "1",
                 borderRadius: "8px",
-                color: selectedTab === 2 ? "white" : "#626262",
+                color: selectedOrderTab === 2 ? "white" : "#626262",
                 backgroundColor:
-                  selectedTab === 2
+                selectedOrderTab === 2
                     ? theme.palette.primary.carouselColor
                     : "transparent",
               }}
@@ -104,7 +105,7 @@ export default function OrderDetails() {
           </Stack>
         </Tabs>
       </Paper>
-      {selectedTab === 0 && (
+      {selectedOrderTab === 0 && (
         <Box style={{ margin: "20px 0" }}>
           {/* Tabel */}
           <Box sx={{ marginBottom: "20px" }}>
@@ -271,7 +272,7 @@ export default function OrderDetails() {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -283,7 +284,7 @@ export default function OrderDetails() {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -305,7 +306,7 @@ export default function OrderDetails() {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -317,7 +318,7 @@ export default function OrderDetails() {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -339,7 +340,7 @@ export default function OrderDetails() {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -351,7 +352,7 @@ export default function OrderDetails() {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -373,7 +374,7 @@ export default function OrderDetails() {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -385,7 +386,7 @@ export default function OrderDetails() {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -411,7 +412,7 @@ export default function OrderDetails() {
                   sx={{
                     color: theme.palette.primary.textColor,
                     fontSize: "14px",
-                    fontWeight: "bold",
+                    fontWeight: "500",
                   }}
                 >
                   Cash on Delivery
@@ -437,6 +438,7 @@ export default function OrderDetails() {
                     color: theme.palette.primary.textColor,
                     fontWeight: "500",
                     textTransform: "capitalize",
+                    fontSize: "14px",
                   }}
                 >
                   {" "}
@@ -449,6 +451,7 @@ export default function OrderDetails() {
                     color: theme.palette.primary.textColor,
                     fontWeight: "500",
                     textTransform: "capitalize",
+                    fontSize: "14px",
                   }}
                 >
                   {" "}
@@ -461,6 +464,7 @@ export default function OrderDetails() {
                     color: theme.palette.primary.textColor,
                     fontWeight: "500",
                     textTransform: "capitalize",
+                    fontSize: "14px",
                   }}
                 >
                   {" "}
@@ -473,6 +477,7 @@ export default function OrderDetails() {
                     color: theme.palette.primary.textColor,
                     fontWeight: "500",
                     textTransform: "capitalize",
+                    fontSize: "14px",
                   }}
                 >
                   {" "}
@@ -494,9 +499,11 @@ export default function OrderDetails() {
             </Grid>
             <Box
               sx={{
-                width: "fit-content",
+                width: "296px",
+                height: "44px",
                 marginLeft: "auto",
                 marginTop: "20px",
+
               }}
             >
               <Button
@@ -504,11 +511,14 @@ export default function OrderDetails() {
                 sx={{
                   backgroundColor: theme.palette.primary.darkBlueColor,
                   color: "white",
-                  padding: "8px 10px",
+                  padding: "8px 20px",
                   fontWeight: "bold",
                   fontSize: "14px",
                   textTransform: "capitalize",
                   borderRadius: "8px",
+                  "&:hover": {
+                    backgroundColor: theme.palette.primary.carouselColor,
+                  },
                 }}
               >
                 reorder
@@ -527,13 +537,13 @@ export default function OrderDetails() {
           </Box>
         </Box>
       )}
-      {selectedTab === 1 && (
-        <div style={{ marginTop: "20px" }}>
+      {selectedOrderTab === 1 && (
+        <Box style={{ marginTop: "20px" }}>
           <p>Related Products Content</p>
-        </div>
+        </Box>
       )}
-      {selectedTab === 2 && (
-        <div style={{ marginTop: "20px" }}>{"reviews"}</div>
+      {selectedOrderTab === 2 && (
+        <Box style={{ marginTop: "20px" }}><p> Products </p></Box>
       )}
     </Box>
   );
