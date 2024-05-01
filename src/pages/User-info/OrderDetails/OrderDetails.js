@@ -3,7 +3,6 @@ import {
   Tabs,
   Tab,
   Paper,
-  useTheme,
   Stack,
   Typography,
   Grid,
@@ -17,7 +16,10 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-export default function OrderDetails({ selectedTab, handleChange }) {
+import { useOutletContext } from "react-router-dom";
+
+export default function OrderDetails() {
+  const { selectedOrderTab, handleChange } = useOutletContext();
   return (
     <Box sx={{ width: "95%" }}>
       <Paper
@@ -30,9 +32,9 @@ export default function OrderDetails({ selectedTab, handleChange }) {
         square
       >
         <Tabs
-          value={selectedTab}
+          value={0}
           indicatorColor="white"
-          textColor={theme.palette.primary.paragraph}
+          color={theme.palette.primary.paragraph}
           onChange={handleChange}
           aria-label="product details tabs"
           sx={{ fontWeight: "500" }}
@@ -42,15 +44,15 @@ export default function OrderDetails({ selectedTab, handleChange }) {
             <Tab
               label="Items Ordered"
               value={0}
-              selected={selectedTab === 0}
+              selected={selectedOrderTab === 0}
               onClick={() => handleChange(null, 0)}
               style={{
                 textTransform: "capitalize",
                 opacity: "1",
                 borderRadius: "8px",
-                color: selectedTab === 0 ? "white" : "#626262",
+                color: selectedOrderTab === 0 ? "white" : "#626262",
                 backgroundColor:
-                  selectedTab === 0
+                  selectedOrderTab === 0
                     ? theme.palette.primary.carouselColor
                     : "transparent",
               }}
@@ -58,15 +60,15 @@ export default function OrderDetails({ selectedTab, handleChange }) {
             <Tab
               label="Invoices"
               value={1}
-              selected={selectedTab === 1}
+              selected={selectedOrderTab === 1}
               onClick={() => handleChange(null, 1)}
               style={{
                 textTransform: "capitalize",
                 opacity: "1",
                 borderRadius: "8px",
-                color: selectedTab === 1 ? "white" : "#626262",
+                color: selectedOrderTab === 1 ? "white" : "#626262",
                 backgroundColor:
-                  selectedTab === 1
+                  selectedOrderTab === 1
                     ? theme.palette.primary.carouselColor
                     : "transparent",
               }}
@@ -74,15 +76,15 @@ export default function OrderDetails({ selectedTab, handleChange }) {
             <Tab
               label="order shipment"
               value={2}
-              selected={selectedTab === 2}
+              selected={selectedOrderTab === 2}
               onClick={() => handleChange(null, 2)}
               style={{
                 textTransform: "capitalize",
                 opacity: "1",
                 borderRadius: "8px",
-                color: selectedTab === 2 ? "white" : "#626262",
+                color: selectedOrderTab === 2 ? "white" : "#626262",
                 backgroundColor:
-                  selectedTab === 2
+                  selectedOrderTab === 2
                     ? theme.palette.primary.carouselColor
                     : "transparent",
               }}
@@ -90,7 +92,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
           </Stack>
         </Tabs>
       </Paper>
-      {selectedTab === 0 && (
+      {selectedOrderTab === 0 && (
         <Box style={{ margin: "20px 0" }}>
           {/* Tabel */}
           <Box sx={{ marginBottom: "20px" }}>
@@ -98,7 +100,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
               component={Paper}
               sx={{ backgroundColor: "transparent", boxShadow: "none" }}
             >
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <Table sx={{ minWidth: "650px" }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <TableCell
@@ -152,6 +154,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                     <TableCell sx={{ borderBottom: "none" }}>
                       <Box sx={{ display: "flex" }}>
                         <img
+                          alt="product.png"
                           src={require(`../../../images/product-image.png`)}
                           style={{
                             width: "75px",
@@ -257,7 +260,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -269,7 +272,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -291,7 +294,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -303,7 +306,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -325,7 +328,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -337,7 +340,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -359,7 +362,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -371,7 +374,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                     component="p"
                     sx={{
                       color: theme.palette.primary.textColor,
-                      fontWeight: "bold",
+                      fontWeight: "500",
                       fontSize: "14px",
                     }}
                   >
@@ -397,7 +400,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                   sx={{
                     color: theme.palette.primary.textColor,
                     fontSize: "14px",
-                    fontWeight: "bold",
+                    fontWeight: "500",
                   }}
                 >
                   Cash on Delivery
@@ -423,6 +426,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                     color: theme.palette.primary.textColor,
                     fontWeight: "500",
                     textTransform: "capitalize",
+                    fontSize: "14px",
                   }}
                 >
                   {" "}
@@ -435,6 +439,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                     color: theme.palette.primary.textColor,
                     fontWeight: "500",
                     textTransform: "capitalize",
+                    fontSize: "14px",
                   }}
                 >
                   {" "}
@@ -447,6 +452,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                     color: theme.palette.primary.textColor,
                     fontWeight: "500",
                     textTransform: "capitalize",
+                    fontSize: "14px",
                   }}
                 >
                   {" "}
@@ -459,6 +465,7 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                     color: theme.palette.primary.textColor,
                     fontWeight: "500",
                     textTransform: "capitalize",
+                    fontSize: "14px",
                   }}
                 >
                   {" "}
@@ -478,17 +485,27 @@ export default function OrderDetails({ selectedTab, handleChange }) {
                 </Button>
               </Grid>
             </Grid>
-            <Box sx={{ width: "fit-content", marginLeft: "auto", marginTop: "20px" }}>
+            <Box
+              sx={{
+                width: "296px",
+                height: "44px",
+                marginLeft: "auto",
+                marginTop: "20px",
+              }}
+            >
               <Button
                 type="primary"
                 sx={{
                   backgroundColor: theme.palette.primary.darkBlueColor,
                   color: "white",
-                  padding: "8px 10px",
+                  padding: "8px 20px",
                   fontWeight: "bold",
                   fontSize: "14px",
                   textTransform: "capitalize",
                   borderRadius: "8px",
+                  "&:hover": {
+                    backgroundColor: theme.palette.primary.carouselColor,
+                  },
                 }}
               >
                 reorder
@@ -507,13 +524,15 @@ export default function OrderDetails({ selectedTab, handleChange }) {
           </Box>
         </Box>
       )}
-      {selectedTab === 1 && (
-        <div style={{ marginTop: "20px" }}>
+      {selectedOrderTab === 1 && (
+        <Box style={{ marginTop: "20px" }}>
           <p>Related Products Content</p>
-        </div>
+        </Box>
       )}
-      {selectedTab === 2 && (
-        <div style={{ marginTop: "20px" }}>{"reviews"}</div>
+      {selectedOrderTab === 2 && (
+        <Box style={{ marginTop: "20px" }}>
+          <p> Products </p>
+        </Box>
       )}
     </Box>
   );

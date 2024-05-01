@@ -23,6 +23,8 @@ import Checkout from "./pages/Checkout/Checkout ";
 import UserInfo from "./pages/User-info/UserInfo";
 import { AddToCartIfLoggedInProvider } from "./contexts/addToCart";
 
+import PersonalInformation from "./pages/User-info/Personal-info/PersonalInformation";
+import OrderDetails from "./pages/User-info/OrderDetails/OrderDetails";
 
 function App() {
   const router = createBrowserRouter(
@@ -40,7 +42,11 @@ function App() {
         />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/userInfo" element={<UserInfo />} />
+        <Route path="/userInfo" element={<UserInfo />}>
+          <Route path="" element={<PersonalInformation />} />
+          <Route path="personalInformation" element={<PersonalInformation />} />
+          <Route path="myOrders" element={<OrderDetails />} />
+        </Route>
       </Route>
     )
   );

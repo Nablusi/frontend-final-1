@@ -14,11 +14,12 @@ const theme = createTheme({
       sectionTitle: "#13101E",
       greyColor: "#B6B6B6",
       zaytiColor: "#639599",
-      error: "#B00020",
+      error: "#E21D1D",
       lightGrey: "#F4F4F4",
       brownColor: "#97451F",
       pinkColor: "#A53F64",
       darkBlueColor: "#1B4B66",
+      discount:"#FF404B"
     },
   },
   typography: {

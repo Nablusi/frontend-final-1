@@ -13,7 +13,7 @@ export default function NewArrivalsFilter() {
 
   useEffect(() => {
     if (res) {
-      setProducts(res);
+      setProducts(res.products);
     }
   }, [res]);
 

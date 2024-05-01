@@ -29,10 +29,13 @@ export default function HandCard({ title, imgSrc }) {
           top: "-55px",
 
           paddingInline: "15px",
+          overflow: "hidden", // truncate text
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+          textShadow: "0px 0px 10px #fff",
         }}
       >
-        Personal Care
-        {/* {title} */}
+        {title}
       </Typography>
     </Box>
   );

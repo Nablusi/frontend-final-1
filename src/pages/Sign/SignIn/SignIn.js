@@ -62,10 +62,12 @@ export default function SignIn({
       if (postRes) {
         if (postRes.data) {
           if (rememberMe) {
+            localStorage.setItem("id", postRes.data.id);
             localStorage.setItem("email", postRes.data.email);
             localStorage.setItem("token", postRes.data.token);
             localStorage.setItem("rememberMe", rememberMe);
           } else {
+            sessionStorage.setItem("id", postRes.data.id);
             sessionStorage.setItem("email", postRes.data.email);
             sessionStorage.setItem("token", postRes.data.token);
             sessionStorage.setItem("rememberMe", rememberMe);
@@ -240,7 +242,7 @@ export default function SignIn({
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href = {'/sign/signup'} variant="body2">
+                  <Link href={"/sign/signup"} variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

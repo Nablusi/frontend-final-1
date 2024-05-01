@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const useAxios = (url, method = "GET", postData = null) => {
+const useAxios = (url, token = "", method = "GET", postData = null) => {
   const [res, setRes] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -13,6 +13,9 @@ const useAxios = (url, method = "GET", postData = null) => {
           method: method,
           url: url,
           data: postData, // Include the data in the request
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
         });
         setRes(response.data);
       } catch (e) {
@@ -23,7 +26,7 @@ const useAxios = (url, method = "GET", postData = null) => {
     };
 
     fetchData();
-  }, [url, method, postData]);
+  }, [url, method, postData, token]);
 
   return { res, error, loading };
 };
