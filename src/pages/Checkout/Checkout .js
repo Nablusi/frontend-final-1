@@ -16,7 +16,8 @@ import { PaymentMethodPaper } from "./PaymentMethodPaper";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 import { isLoggedIn } from "../../services/utils/isLoggedIn";
 import { toast } from "react-toastify";
-import * as CheckoutStyle from "./checkoutStyling/CheckoutStyle"
+import * as CheckoutStyle from "./checkoutStyling/CheckoutStyle";
+
 export default function Checkout() {
     const theme = useTheme();
     const isSmall = useMediaQuery({ query: '(max-width: 991px)' });
@@ -64,7 +65,6 @@ export default function Checkout() {
         }
     };
 
-
     useEffect(() => {
         console.log('refreshed')
     }, [refresh]);
@@ -88,12 +88,9 @@ export default function Checkout() {
         navigate('/');
     }
 
-
     return (
         <Container>
             {isLoggedIn()
-
-
                 ?
                 <>
                     <BreadCrumbs BreadCrumbsName={'checkout'} />
@@ -103,13 +100,8 @@ export default function Checkout() {
                             <Typography sx={CheckoutStyle.miniTypo}> No thing in You Cart  </Typography>
                             <Button sx={CheckoutStyle.homeButton} variant="outlined" onClick={clickGoToHomePage} > Go To Home Page  </Button>
                         </Box>
-
                         :
-
                         <Box sx={CheckoutStyle.smallBox(isSmall)}>
-
-
-
                             {seePayment ?
                                 <Box>
                                     <Accordion sx={CheckoutStyle.accordion}>

@@ -43,13 +43,13 @@ export default function Handpicked() {
         gap={"30px"}
       >
         {/* i will use map here when API is ready */}
-        {handpickedData ? (
+        {/* {handpickedData ? (
           handpickedData.map((card) => {
             return <HandCard key={1} />;
           })
         ) : (
           <></>
-        )}
+        )} */}
         {/* // <HandCard />
         // <HandCard />
         // <HandCard />

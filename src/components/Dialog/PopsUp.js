@@ -19,6 +19,10 @@ import * as PopsUpStyles from "./PopsUpStyles";
 import { OrderSummary } from "./OrderSummary";
 import { TextFiledContainer } from "./TextFieldContainer";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
+import { isLoggedIn } from "../../services/utils/isLoggedIn";
+import { AddToCartIfLoggedInContext } from "../../contexts/addToCart";
+ 
+
 
 export default function PopsUp() {
   const theme = useTheme();
@@ -26,9 +30,12 @@ export default function PopsUp() {
   const [productList, setProductList] = useState(cart);
   const { open, handleClose } = useNavBarContext();
   const { refresh, setRefresh } = useContext(SharedParentContext);
-
+  const [productApi, setProductAPi] = useState([]);
+  const {  setProductListIfLoggedIn, productListIfLoggedIn, sendProductData } = useContext(AddToCartIfLoggedInContext)
+  
   useEffect(() => {
     setProductList(cart);
+    setProductListIfLoggedIn(cart)
   }, [refresh]);
 
   const incrementHandler = (index) => {
@@ -151,6 +158,7 @@ export default function PopsUp() {
             doSum={true}
           />
           <TextFiledContainer handleClose={handleClose} theme={theme} />
+          <Button onClick={sendProductData}>sendProductData </Button>
         </>
       )}
     </Dialog>

@@ -21,6 +21,8 @@ import { ToastContainer } from "react-toastify";
 import CartPage from "./pages/CartPage/CartPage";
 import Checkout from "./pages/Checkout/Checkout ";
 import UserInfo from "./pages/User-info/UserInfo";
+import { AddToCartIfLoggedInProvider } from "./contexts/addToCart";
+
 
 function App() {
   const router = createBrowserRouter(
@@ -46,7 +48,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <SharedParentProvider>
-        <RouterProvider router={router} />
+        <AddToCartIfLoggedInProvider>
+          <RouterProvider router={router} />
+        </AddToCartIfLoggedInProvider>
       </SharedParentProvider>
       <CssBaseline />
       <ToastContainer />
