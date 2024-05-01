@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import UserInfoSideBar from "../../components/User-Info-SideBar/UserInfoSideBar";
 import { Box, Container } from "@mui/system";
 import TitleUserInformation from "./Title-User-information/TitleUserInformation";
-import PersonalInformation from "./Personal-info/PersonalInformation";
-import OrderDetails from "./OrderDetails/OrderDetails";
 
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import useAxios from "../../services/Hooks/useAxios";
+import { Outlet } from "react-router-dom";
 
 export default function UserInfo() {
   const id = localStorage.getItem("id") || sessionStorage.getItem("id");
@@ -40,6 +39,7 @@ export default function UserInfo() {
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);
   };
+
   return (
     <Container>
       <Toaster reverseOrder={false} />
@@ -58,7 +58,7 @@ export default function UserInfo() {
       <Box display={"flex"} marginBlock={"24px"}>
         <UserInfoSideBar active={active} handleActive={handleActive} />
         <Box width={"100%"} display={"flex"} justifyContent={"center"}>
-          <PersonalInformation
+          {/* <PersonalInformation
             active={active}
             flag={"personalInformation"}
             register={register}
@@ -68,12 +68,26 @@ export default function UserInfo() {
             toast={toast}
             getValues={getValues}
             userData={userData}
-          />
-          <OrderDetails
+          /> */}
+          {/* <OrderDetails
             selectedTab={selectedTab}
             handleChange={handleChange}
             active={active}
             flag={"myOrders"}
+          /> */}
+          <Outlet
+            context={[
+              active,
+              register,
+              handleSubmit,
+              errors,
+              onSubmit,
+              toast,
+              getValues,
+              userData,
+              selectedTab,
+              handleChange,
+            ]}
           />
         </Box>
       </Box>

@@ -17,13 +17,22 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-export default function OrderDetails({
-  selectedTab,
-  handleChange,
-  active,
-  flag,
-}) {
-  return active === flag ? (
+import { useOutletContext } from "react-router-dom";
+export default function OrderDetails() {
+  const [
+    active,
+    register,
+    handleSubmit,
+    errors,
+    onSubmit,
+    toast,
+    getValues,
+    userData,
+    selectedTab,
+    handleChange,
+  ] = useOutletContext();
+
+  return (
     <Box sx={{ width: "95%" }}>
       <Paper
         sx={{
@@ -527,7 +536,5 @@ export default function OrderDetails({
         <div style={{ marginTop: "20px" }}>{"reviews"}</div>
       )}
     </Box>
-  ) : (
-    <></>
   );
 }

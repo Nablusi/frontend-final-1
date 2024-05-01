@@ -4,19 +4,13 @@ import Typography from "@mui/material/Typography";
 import theme from "../../../theme/Theme";
 import { Avatar, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useOutletContext } from "react-router-dom";
 
-export default function PersonalInformation({
-  register,
-  handleSubmit,
-  errors,
-  onSubmit,
-  toast,
-  getValues,
-  active,
-  flag,
-  userData,
-}) {
-  return active === flag ? (
+export default function PersonalInformation() {
+  const [register, handleSubmit, errors, onSubmit, toast, getValues, userData] =
+    useOutletContext();
+
+  return (
     <Box width={"95% "}>
       <Box height={"60px"}>
         <Typography
@@ -343,7 +337,5 @@ export default function PersonalInformation({
         </form>
       </Box>
     </Box>
-  ) : (
-    <></>
   );
 }
