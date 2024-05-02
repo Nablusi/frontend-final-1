@@ -34,7 +34,7 @@ export const AddToCartIfLoggedInProvider = ({ children }) => {
         getCartId(userId)
             .then((cartData) => {
                 setCartId(cartData.id);
-                console.log(cartData.id);
+                // console.log(cartData.id);
             })
             .catch(error => {
                 console.log('Error fetching cart data:', error);
