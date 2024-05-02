@@ -6,9 +6,13 @@ import { PaginationCustomized } from "./PaginationCustomized/PaginationCustomize
 import useAxios from "../../services/Hooks/useAxios";
 
 export default function NewArrivalsFilter() {
+  const PAGESIZE = 20;
+
+  const [pageNum, setPageNum] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [products, setProducts] = useState([]);
   const { res, loading } = useAxios(
-    `https://backend-final-1-latest.onrender.com/api/products/new`
+    `https://backend-final-1-latest.onrender.com/api/products/new?page=${pageNum}&pageSize=20`
   );
 
   useEffect(() => {
@@ -17,6 +21,14 @@ export default function NewArrivalsFilter() {
     }
   }, [res]);
 
+  const onPageChange = (pageNum) => {
+    setPageNum(pageNum);
+  };
+  useEffect(() => {
+    if (res) {
+      setTotalPages(Math.ceil(res.totalRecords / PAGESIZE));
+    }
+  }, [products]);
   if (loading) {
     return <LinearProgress />;
   } else {
@@ -28,9 +40,9 @@ export default function NewArrivalsFilter() {
           BreadCrumbsName="New Arrivals"
         />
         <PaginationCustomized
-          currentPage={1}
-          totalPages={5}
-          onPageChange={() => {}}
+          currentPage={pageNum}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
         />
       </Container>
     );

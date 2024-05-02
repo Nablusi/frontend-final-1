@@ -7,38 +7,47 @@ import useAxios from "../../services/Hooks/useAxios";
 import { useParams } from "react-router-dom";
 
 export default function BrandsPage() {
-    const [products, setProducts] = useState([]);
-    const params = useParams();
+  const PAGESIZE = 20;
 
-    console.log(params.brandName)
+  const [pageNum, setPageNum] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [products, setProducts] = useState([]);
+  const params = useParams();
 
-    const { res, loading } = useAxios(
-        `https://backend-final-1-latest.onrender.com/api/products/category/1/?page=1&pageSize=20&brand=${params.brandName}`
-    );
+  const { res, loading } = useAxios(
+    `https://backend-final-1-latest.onrender.com/api/products/category/1/?page=${pageNum}&pageSize=20&brand=${params.brandName}`
+  );
 
-    useEffect(() => {
-        if (res) {
-            setProducts(res.products);
-        }
-    }, [res]);
-
-    if (loading) {
-        return <LinearProgress />;
-    } else {
-        return (
-            <Container>
-                <Hero />
-                <CategorizedProducts
-                    products={products}
-                    BreadCrumbsName={params.brandName}
-                />
-
-                <PaginationCustomized
-                    currentPage={1}
-                    totalPages={5}
-                    onPageChange={() => { }}
-                />
-            </Container>
-        );
+  const onPageChange = (pageNum) => {
+    setPageNum(pageNum);
+  };
+  useEffect(() => {
+    if (res) {
+      setProducts(res.products);
     }
+  }, [res]);
+  useEffect(() => {
+    if (res) {
+      setTotalPages(Math.ceil(res.totalRecords / PAGESIZE));
+    }
+  }, [products]);
+  if (loading) {
+    return <LinearProgress />;
+  } else {
+    return (
+      <Container>
+        <Hero />
+        <CategorizedProducts
+          products={products}
+          BreadCrumbsName={params.brandName}
+        />
+
+        <PaginationCustomized
+          currentPage={pageNum}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        />
+      </Container>
+    );
+  }
 }

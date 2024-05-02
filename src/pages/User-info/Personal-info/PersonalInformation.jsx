@@ -8,12 +8,22 @@ import { useOutletContext } from "react-router-dom";
 import axios from "axios";
 
 export default function PersonalInformation() {
-  let { register, handleSubmit, errors, onSubmit, toast, getValues, userData } =
-    useOutletContext();
-  const [userDataTemp, setUserDataTemp] = useState(userData);
-  useEffect(() => {
-    setUserDataTemp(userData);
-  }, [userData]);
+  let {
+    register,
+    handleSubmit,
+    errors,
+    onSubmit,
+    toast,
+    getValues,
+    userData,
+    setValue,
+  } = useOutletContext();
+  React.useEffect(() => {
+    setValue("firstName", userData?.firstName);
+    setValue("lastName", userData?.lastName);
+    setValue("email", userData?.email);
+    setValue("phone", userData?.phone);
+  }, [setValue, userData]);
   return (
     <Box width={"95% "}>
       <Box height={"60px"}>
@@ -83,7 +93,7 @@ export default function PersonalInformation() {
                 borderRadius={"4px"}
               >
                 <input
-                  defaultValue={userDataTemp?.firstName}
+                  defaultValue={userData?.firstName}
                   type="text"
                   {...register("firstName", { required: true })}
                   style={{
@@ -108,7 +118,7 @@ export default function PersonalInformation() {
                 borderRadius={"4px"}
               >
                 <input
-                  defaultValue={userDataTemp?.lastName}
+                  defaultValue={userData?.lastName}
                   type="text"
                   {...register("lastName", { required: true })}
                   style={{
@@ -134,9 +144,12 @@ export default function PersonalInformation() {
             borderRadius={"4px"}
           >
             <input
-              defaultValue={userDataTemp?.email}
+              defaultValue={userData?.email}
               type="email"
-              {...register("email", { required: true })}
+              {...register("email", {
+                required: true,
+                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              })}
               style={{
                 backgroundColor: "#f1f1f1",
                 border: 0,
@@ -157,7 +170,7 @@ export default function PersonalInformation() {
             borderRadius={"4px"}
           >
             <input
-              defaultValue={userDataTemp?.phone}
+              defaultValue={userData?.phone}
               type="tel"
               {...register("mobileNumber", {
                 required: true,
@@ -172,8 +185,8 @@ export default function PersonalInformation() {
               }}
             />
           </Box>
-
-          <label style={{ marginBlock: "27px 4px" }}>>Date Of Birth</label>
+          {/* 
+          <label style={{ marginBlock: "27px 4px" }}>Date Of Birth</label>
           <Box
             bgcolor={"#f1f1f1"}
             height={"52px"}
@@ -194,7 +207,7 @@ export default function PersonalInformation() {
                 padding: "16px 12px 16px 16px",
               }}
             />
-          </Box>
+          </Box> */}
 
           <Box height={"60px"} marginBlock={"40px 24px"}>
             <Typography
@@ -219,7 +232,7 @@ export default function PersonalInformation() {
             <input
               type="password"
               {...register("currentPassword", {
-                required: true,
+                required: false,
                 pattern: /^.{8,}$/,
               })}
               style={{
@@ -244,7 +257,7 @@ export default function PersonalInformation() {
             <input
               type="password"
               {...register("newPassword", {
-                required: true,
+                required: false,
                 pattern: /^.{8,}$/,
               })}
               style={{
@@ -269,7 +282,7 @@ export default function PersonalInformation() {
             <input
               type="password"
               {...register("confirmPassword", {
-                required: true,
+                required: false,
                 pattern: /^.{8,}$/,
               })}
               style={{
@@ -299,53 +312,109 @@ export default function PersonalInformation() {
               onClick={() => {
                 if (errors.firstName) {
                   toast.error("First Name is required");
+                  return;
                 }
                 if (errors.lastName) {
                   toast.error("Last Name is required");
+                  return;
                 }
                 if (errors.email) {
-                  toast.error("Email is required");
+                  toast.error(
+                    "Email is required Or check if u have '@' and '.'"
+                  );
+                  return;
                 }
                 if (errors.mobileNumber) {
                   toast.error(
                     "Mobile Number is required and should only contain 10 numbers"
                   );
+                  return;
                 }
-                if (errors.date) {
-                  toast.error("Date of Birth is required");
-                }
+                // if (errors.date) {
+                //   toast.error("Date of Birth is required");
+                // }
                 if (errors.currentPassword) {
                   toast.error(
                     "Current Password is required and must be at least 8 characters long"
                   );
+                  return;
                 }
                 if (errors.newPassword) {
                   toast.error(
                     "New Password is required and must be at least 8 characters long"
                   );
+                  return;
                 }
                 if (errors.confirmPassword) {
                   toast.error(
                     "Confirm Password is required and must be at least 8 characters long"
                   );
+                  return;
                 }
 
                 const formData = getValues(); // Access form data
-                axios.put(
-                  `https://backend-final-1-latest.onrender.com/api/users/${userData.id}`,
-                  {
-                    firstName: formData.firstName,
-                    lastName: formData.lastName,
-                  },
-                  {
-                    headers: {
-                      Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    },
-                  }
-                );
+                const [oldPassword, newPassword, confirmPassword] = [
+                  formData.currentPassword,
+                  formData.newPassword,
+                  formData.confirmPassword,
+                ];
                 if (formData.newPassword !== formData.confirmPassword) {
                   toast.error("New Password and Confirm Password do not match");
                 }
+                if (oldPassword && newPassword && confirmPassword) {
+                  axios
+                    .put(
+                      `https://backend-final-1-latest.onrender.com/api/users/${userData.id}`,
+                      {
+                        firstName: formData.firstName,
+                        lastName: formData.lastName,
+                        phone: formData.mobileNumber,
+                        // dateOfBirth: formData.date,
+                        email: formData.email,
+                        oldPassword: formData.currentPassword,
+                        newPassword: formData.newPassword,
+                        confirmPassword: formData.confirmPassword,
+                      },
+                      {
+                        headers: {
+                          Authorization: `Bearer ${localStorage.getItem(
+                            "token"
+                          )}`,
+                        },
+                      }
+                    )
+                    .catch((e) => {
+                      toast.error(e.response.data.message);
+
+                      return;
+                    });
+                } else {
+                  axios
+                    .put(
+                      `https://backend-final-1-latest.onrender.com/api/users/${userData.id}`,
+                      {
+                        firstName: formData.firstName,
+                        lastName: formData.lastName,
+                        mobileNumber: formData.mobileNumber,
+                        // dateOfBirth: formData.date,
+                        email: formData.email,
+                      },
+                      {
+                        headers: {
+                          Authorization: `Bearer ${localStorage.getItem(
+                            "token"
+                          )}`,
+                        },
+                      }
+                    )
+                    .catch((e) => {
+                      toast.error(e.response.data.message);
+                      console.log(formData);
+                      console.log(e);
+                      return;
+                    });
+                }
+                toast.success("Successfully Edited!");
               }}
             />
           </Box>
