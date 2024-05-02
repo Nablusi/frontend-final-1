@@ -15,7 +15,7 @@ import { getUserId } from "../../services/utils/getUserId";
 export default function UserInfo() {
   const [selectedOrderTab, setSelectedOrderTab] = useState(0);
   const [active, setActive] = useState("personalInformation");
-  const [selectedTab, setSelectedTab] = useState('0');
+  const [selectedTab, setSelectedTab] = useState("0");
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [tempFilteredOrders, setTempFilteredOrders] = useState([]);
 
@@ -50,11 +50,10 @@ export default function UserInfo() {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-         ` https://backend-final-1-latest.onrender.com/api/orders/user/${getUserId()}`,
+          ` https://backend-final-1-latest.onrender.com/api/orders/user/${getUserId()}`,
           {
             headers: {
-              Authorization:
-                `Bearer ${getToken()}`,
+              Authorization: `Bearer ${getToken()}`,
             },
           }
         );
@@ -76,45 +75,33 @@ export default function UserInfo() {
     // console.log("useEffect triggered with selectedTab:", selectedTab);
     let filtered = [];
     if (filteredOrders && filteredOrders.length > 0) {
-      if (selectedTab === '0') {
+      if (selectedTab === "0") {
         filtered = [];
-         filteredOrders.forEach(
-          (order) => {
-            if(order.status === "done"){
-              filtered.push(order);
-            }
-          }
-        );
-      }
-      else if (selectedTab === '1') {
-        filtered = [];
-
         filteredOrders.forEach((order) => {
-          if(order.status === "pending"){
+          if (order.status === "done") {
             filtered.push(order);
           }
         });
-      } 
-      
-      else if (selectedTab === '2') {
+      } else if (selectedTab === "1") {
         filtered = [];
 
         filteredOrders.forEach((order) => {
-          if(order.status === "closed"){
+          if (order.status === "pending") {
             filtered.push(order);
           }
         });
+      } else if (selectedTab === "2") {
+        filtered = [];
 
-        
+        filteredOrders.forEach((order) => {
+          if (order.status === "closed") {
+            filtered.push(order);
+          }
+        });
       }
     }
     setTempFilteredOrders(filtered);
-
   }, [selectedTab, filteredOrders]);
-
-
-
-
   return (
     <Container>
       <Toaster reverseOrder={false} />
@@ -145,9 +132,8 @@ export default function UserInfo() {
               selectedOrderTab,
               handleChange,
               setValue,
-              selectedTab, 
-              tempFilteredOrders 
-
+              selectedTab,
+              tempFilteredOrders,
             }}
           />
         </Box>
@@ -155,4 +141,3 @@ export default function UserInfo() {
     </Container>
   );
 }
-

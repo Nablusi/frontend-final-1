@@ -10,40 +10,40 @@ import { useNavigate } from "react-router-dom";
 export const categoryNameContext = createContext();
 
 export default function SearchForProducts() {
-    const [products, setProducts] = useState([]);
-    const { search } = useContext(SharedParentContext);
-    const searchURL = urls.getProductsBySearch;
-    const [debouncedSearch, setDebouncedSearch] = useState(search);
-    const navigate = useNavigate(); 
+  const [products, setProducts] = useState([]);
+  const { search } = useContext(SharedParentContext);
+  const searchURL = urls.getProductsBySearch;
+  const [debouncedSearch, setDebouncedSearch] = useState(search);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        if(search.trim() === ''){
-            navigate('/category/1'); 
-        } else{
-            const handler = setTimeout(() => {
-                setDebouncedSearch(search);
-            }, 300); 
-    
-            return () => {
-                clearTimeout(handler);
-            };
-        }
-    }, [search, navigate]);
+  useEffect(() => {
+    if (search.trim() === "") {
+      navigate("/category/1");
+    } else {
+      const handler = setTimeout(() => {
+        setDebouncedSearch(search);
+      }, 300);
 
-    const { res } = useAxios(`${searchURL}${debouncedSearch}`);
+      return () => {
+        clearTimeout(handler);
+      };
+    }
+  }, [search, navigate]);
 
-    useEffect(() => {
-        if (res) {
-            setProducts(res);
-        }
-    }, [res]);
+  const { res } = useAxios(`${searchURL}${debouncedSearch}`);
 
-    return (
-        <Container>
-            <Hero />
-            <categoryNameContext.Provider value={debouncedSearch}>
-                <CategorizedProducts products={products} />
-            </categoryNameContext.Provider>
-        </Container>
-    );
+  useEffect(() => {
+    if (res) {
+      setProducts(res.products);
+    }
+  }, [res]);
+
+  return (
+    <Container>
+      <Hero />
+      <categoryNameContext.Provider value={debouncedSearch}>
+        <CategorizedProducts products={products} />
+      </categoryNameContext.Provider>
+    </Container>
+  );
 }

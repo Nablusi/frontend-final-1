@@ -19,7 +19,6 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 export function MyOrders() {
   const { selectedTab, handleChange, tempFilteredOrders } = useOutletContext();
   const theme = useTheme();
-  console.log(tempFilteredOrders);
   return (
     <div style={{ width: "100%", margin: "0px 20px 269px 24px" }}>
       <Paper
@@ -42,29 +41,29 @@ export function MyOrders() {
           <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
             <Tab
               label="Completed"
-              value={'0'}
-              selected={selectedTab === '0'}
-              onClick={() => handleChange(null, '0')}
-              sx={selectedTab === '0' ? Orderstyles.selectedTab(theme) : ""}
+              value={"0"}
+              selected={selectedTab === "0"}
+              onClick={() => handleChange(null, "0")}
+              sx={selectedTab === "0" ? Orderstyles.selectedTab(theme) : ""}
             />
             <Tab
               label="Processing"
-              value={'1'}
-              selected={selectedTab === '1'}
-              onClick={() => handleChange(null, '1')}
-              sx={selectedTab === '1' ? Orderstyles.selectedTab(theme) : ""}
+              value={"1"}
+              selected={selectedTab === "1"}
+              onClick={() => handleChange(null, "1")}
+              sx={selectedTab === "1" ? Orderstyles.selectedTab(theme) : ""}
             />
             <Tab
               label="Cancelled"
-              value={'2'}
-              selected={selectedTab === '2'}
-              onClick={() => handleChange(null, '2')}
-              sx={selectedTab === '2' ? Orderstyles.selectedTab(theme) : ""}
+              value={"2"}
+              selected={selectedTab === "2"}
+              onClick={() => handleChange(null, "2")}
+              sx={selectedTab === "2" ? Orderstyles.selectedTab(theme) : ""}
             />
           </Stack>
         </Tabs>
       </Paper>
-      {selectedTab === '0' && (
+      {selectedTab === "0" && (
         <TableContainer component={Paper}>
           <Table sx={{ border: "none" }}>
             <TableHead>
@@ -103,7 +102,7 @@ export function MyOrders() {
           </Table>
         </TableContainer>
       )}
-      {selectedTab === '1' && (
+      {selectedTab === "1" && (
         <TableContainer component={Paper}>
           <Table sx={{ border: "none" }}>
             <TableHead>
@@ -143,7 +142,7 @@ export function MyOrders() {
           </Table>
         </TableContainer>
       )}
-      {selectedTab === '2' && (
+      {selectedTab === "2" && (
         <TableContainer component={Paper}>
           <Table sx={{ border: "none" }}>
             <TableHead>

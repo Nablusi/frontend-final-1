@@ -32,7 +32,6 @@ import { MyOrders } from "./pages/User-info/MyOrders/MyOrders";
 import HandPickPage from "./pages/Category-page/HnadPickPage";
 import TestTabs from "./pages/TestTabs/TestTabs";
 
-
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -50,9 +49,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/userInfo" element={<UserInfo />}>
-
           <Route path="personalInformation" element={<PersonalInformation />} />
-
           <Route path="myOrders/:id" element={<OrderDetailsState />} />
           <Route path="myOrders" element={<MyOrders />} />
         </Route>
