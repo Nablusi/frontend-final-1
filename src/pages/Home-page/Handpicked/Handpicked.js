@@ -48,7 +48,7 @@ export default function Handpicked() {
           })
         ) : (
           <></>
-        )}
+        )} 
         {/* // <HandCard />
         // <HandCard />
         // <HandCard />

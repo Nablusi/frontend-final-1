@@ -45,7 +45,7 @@ export const AmazonPay = () => {
                 sx={amazonStyle.text}
             />
 
-            <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+            {/* <Button variant="contained" onClick={handleSubmit}>Submit</Button> */}
         </Box>
     )
 };

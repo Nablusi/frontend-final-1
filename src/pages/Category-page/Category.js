@@ -19,21 +19,29 @@ export default function Category() {
   const { popular, limitedEdition, discount } = useContext(SharedParentContext);
   // const searchURL = urls.getProductsBySearch;
 
-  if (popular || limitedEdition || discount) {
-    id = 1;
+
+
+
+  const check = () => {
+    if (popular) {
+      return "&popular=true";
+    } else if (discount) {
+      return "&discount=15";
+    } else if (limitedEdition) {
+      return "&limitedEdition=true";
+    } else {
+      return ''
+    }
   }
 
-  let url = `${urls.getCategory}/${id}?page=${pageNum}`;
 
-  if (popular) {
-    url += "&popular=true";
-  }
-  if (discount) {
-    url += "&discount=0";
-  }
-  if (limitedEdition) {
-    url += "&limitedEdition=true";
-  }
+
+  let url = `${urls.getCategory}/${id}?page=${pageNum}${check()}`;
+
+  // useEffect(()=>{
+  //   console.log(url);
+  //   console.log(discount); 
+  // },[])
 
   const {
     res: categoryProducts,
