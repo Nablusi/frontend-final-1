@@ -22,6 +22,7 @@ export default function UserInfo() {
     // watch,
     formState: { errors },
     getValues,
+    setValue,
   } = useForm();
   const token =
     localStorage.getItem("token") || sessionStorage.getItem("token");
@@ -115,6 +116,7 @@ export default function UserInfo() {
               userData,
               selectedOrderTab,
               handleChange,
+              setValue,
             }}
           />
         </Box>

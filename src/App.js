@@ -43,7 +43,6 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/userInfo" element={<UserInfo />}>
-          <Route path="" element={<PersonalInformation />} />
           <Route path="personalInformation" element={<PersonalInformation />} />
           <Route path="myOrders" element={<OrderDetails />} />
         </Route>
