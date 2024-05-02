@@ -1,15 +1,8 @@
 import React from "react";
-import {
-  Tabs,
-  Tab,
-  Paper,
-  Stack,
-  Typography,
-  Grid,
-  Button,
-} from "@mui/material";
+import { useState } from "react";
+import { Paper, Stack, Typography, Grid, Button } from "@mui/material";
 import theme from "../../../theme/Theme";
-import { Box } from "@mui/system";
+import { Box, border } from "@mui/system";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -17,216 +10,207 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useOutletContext } from "react-router-dom";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css"; // Import the default stylesheet
 export default function OrderDetails({ singleOrderInfo }) {
-  const { selectedOrderTab, handleChange, userData } = useOutletContext();
+  const { userData } = useOutletContext();
   let totalPrice = 0;
-  singleOrderInfo.items.map((item)=>{
-    let totalItem = (parseFloat(item.product.price)) * item.product.qty;
-    totalPrice+=totalItem;
-  })
+  singleOrderInfo.items.map((item) => {
+    let totalItem = parseFloat(item.product.price) * item.product.qty;
+    totalPrice += totalItem;
+  });
+  const [selectedIndex, setSelectedIndex] = useState(0); // For controlled mode
+
+  const handleTabSelect = (index) => {
+    setSelectedIndex(index);
+  };
+
   return (
-    <Box sx={{ width: "95%" }}>
-      <Paper
-        sx={{
-          backgroundColor: "#F1F1F1",
-          padding: "16px 12px",
-          boxShadow: "none",
-          borderRadius: "12px",
-        }}
-        square
-      >
-        <Tabs
-          value={0}
-          indicatorColor="white"
-          color={theme.palette.primary.paragraph}
-          onChange={handleChange}
-          aria-label="product details tabs"
-          sx={{ fontWeight: "500" }}
-          style={{ color: theme.palette.primary.paragraph }}
+    <Tabs
+      selectedIndex={selectedIndex}
+      onSelect={handleTabSelect}
+      style={{ width: "90%" }}
+    >
+      <TabList style={{ border: "none" }}>
+        <Tab
+          style={{
+            border: "none",
+            borderRadius: "8px",
+            fontWeight: "500",
+            backgroundColor:
+              selectedIndex === 0
+                ? theme.palette.primary.darkBlueColor
+                : "transparent",
+            color:
+              selectedIndex === 0 ? "white" : theme.palette.primary.paragraph,
+              padding:'12px 18px'
+          }}
         >
-          <Stack direction={{ xs: "column", md: "row" }} spacing={1}>
-            <Tab
-              label="Items Ordered"
-              value={0}
-              selected={selectedOrderTab === 0}
-              onClick={() => handleChange(null, 0)}
-              style={{
-                textTransform: "capitalize",
-                opacity: "1",
-                borderRadius: "8px",
-                color: selectedOrderTab === 0 ? "white" : "#626262",
-                backgroundColor:
-                  selectedOrderTab === 0
-                    ? theme.palette.primary.carouselColor
-                    : "transparent",
-              }}
-            />
-            <Tab
-              label="Invoices"
-              value={1}
-              selected={selectedOrderTab === 1}
-              onClick={() => handleChange(null, 1)}
-              style={{
-                textTransform: "capitalize",
-                opacity: "1",
-                borderRadius: "8px",
-                color: selectedOrderTab === 1 ? "white" : "#626262",
-                backgroundColor:
-                  selectedOrderTab === 1
-                    ? theme.palette.primary.carouselColor
-                    : "transparent",
-              }}
-            />
-            <Tab
-              label="order shipment"
-              value={2}
-              selected={selectedOrderTab === 2}
-              onClick={() => handleChange(null, 2)}
-              style={{
-                textTransform: "capitalize",
-                opacity: "1",
-                borderRadius: "8px",
-                color: selectedOrderTab === 2 ? "white" : "#626262",
-                backgroundColor:
-                  selectedOrderTab === 2
-                    ? theme.palette.primary.carouselColor
-                    : "transparent",
-              }}
-            />
-          </Stack>
-        </Tabs>
-      </Paper>
-      {selectedOrderTab === 0 && (
-        <Box style={{ margin: "20px 0" }}>
-          {/* Tabel */}
-          <Box sx={{ marginBottom: "20px" }}>
-            <TableContainer
-              component={Paper}
-              sx={{ backgroundColor: "transparent", boxShadow: "none" }}
-            >
-              <Table sx={{ minWidth: "650px" }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell
-                      sx={{
-                        color: theme.palette.primary.paragraph,
-                        fontWeight: "500",
-                        lineHeight: "20px",
-                        borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
-                      }}
-                      align="left"
-                    >
-                      Product Name
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: theme.palette.primary.paragraph,
-                        fontWeight: "500",
-                        lineHeight: "20px",
-                        borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
-                      }}
-                      align="right"
-                    >
-                      Price
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: theme.palette.primary.paragraph,
-                        fontWeight: "500",
-                        lineHeight: "20px",
-                        borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
-                      }}
-                      align="right"
-                    >
-                      Qty
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        color: theme.palette.primary.paragraph,
-                        fontWeight: "500",
-                        lineHeight: "20px",
-                        borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
-                      }}
-                      align="right"
-                    >
-                      Subtotal
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {singleOrderInfo.items.map((item) => (
+          Items Ordered
+        </Tab>
+        <Tab
+          style={{
+            border: "none",
+            borderRadius: "8px",
+            fontWeight: "500",
+            backgroundColor:
+              selectedIndex === 1
+                ? theme.palette.primary.darkBlueColor
+                : "transparent",
+            color:
+              selectedIndex === 1 ? "white" : theme.palette.primary.paragraph,
+              padding:'12px 18px'
+          }}
+        >
+          Invoices
+        </Tab>
+        <Tab
+          style={{
+            border: "none",
+            borderRadius: "8px",
+            fontWeight: "500",
+            backgroundColor:
+              selectedIndex === 2
+                ? theme.palette.primary.darkBlueColor
+                : "transparent",
+            color:
+              selectedIndex === 2 ? "white" : theme.palette.primary.paragraph,
+          }}
+        >
+          Order Shipment
+        </Tab>
+      </TabList>
+
+      <TabPanel>
+        <>
+          <Box style={{ margin: "20px 0" }}>
+            {/* Tabel */}
+            <Box sx={{ marginBottom: "20px" }}>
+              <TableContainer
+                component={Paper}
+                sx={{ backgroundColor: "transparent", boxShadow: "none" }}
+              >
+                <Table sx={{ minWidth: "650px" }} aria-label="simple table">
+                  <TableHead>
                     <TableRow>
-                      <TableCell sx={{ borderBottom: "none" }}>
-                        <Box sx={{ display: "flex" }}>
-                          <img
-                            alt="product.png"
-                            src={require(`../../../images/product-image.png`)}
-                            style={{
-                              width: "75px",
-                              height: "80px",
-                              borderRadius: "8px",
-                            }}
-                          />
-                          <Box sx={{ marginLeft: "15px" }}>
-                            <Typography
-                              sx={{
-                                fontSize: "14px",
-                                fontWeight: "500",
-                                color: theme.palette.primary.textColor,
-                              }}
-                            >
-                              {item.product.name}
-                            </Typography>
-                            <Typography
-                              sx={{
-                                fontSize: "14px",
-                                color: theme.palette.primary.paragraph,
-                              }}
-                            >
-                              Leather Coach Bag
-                            </Typography>
-                          </Box>
-                        </Box>
+                      <TableCell
+                        sx={{
+                          color: theme.palette.primary.paragraph,
+                          fontWeight: "500",
+                          lineHeight: "20px",
+                          borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
+                        }}
+                        align="left"
+                      >
+                        Product Name
                       </TableCell>
                       <TableCell
                         sx={{
-                          borderBottom: "none",
-                          color: theme.palette.primary.textColor,
+                          color: theme.palette.primary.paragraph,
                           fontWeight: "500",
+                          lineHeight: "20px",
+                          borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
                         }}
                         align="right"
                       >
-                        ${item.product.price}
+                        Price
                       </TableCell>
                       <TableCell
                         sx={{
-                          borderBottom: "none",
-                          color: theme.palette.primary.textColor,
+                          color: theme.palette.primary.paragraph,
                           fontWeight: "500",
+                          lineHeight: "20px",
+                          borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
                         }}
                         align="right"
                       >
-                        {item.product.qty}
+                        Qty
                       </TableCell>
                       <TableCell
                         sx={{
-                          borderBottom: "none",
-                          color: theme.palette.primary.textColor,
+                          color: theme.palette.primary.paragraph,
                           fontWeight: "500",
+                          lineHeight: "20px",
+                          borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
                         }}
                         align="right"
                       >
-                        ${(parseFloat(item.product.price)) * item.product.qty}
+                        Subtotal
                       </TableCell>
                     </TableRow>
-                  ))}
-                  
-                </TableBody>
-              </Table>
-            </TableContainer>
+                  </TableHead>
+                  <TableBody>
+                    {singleOrderInfo.items.map((item) => (
+                      <TableRow key={item.id}>
+                        <TableCell sx={{ borderBottom: "none" }}>
+                          <Box sx={{ display: "flex" }}>
+                            <img
+                              alt="product.png"
+                              src={require(`../../../images/product-image.png`)}
+                              style={{
+                                width: "75px",
+                                height: "80px",
+                                borderRadius: "8px",
+                              }}
+                            />
+                            <Box sx={{ marginLeft: "15px" }}>
+                              <Typography
+                                sx={{
+                                  fontSize: "14px",
+                                  fontWeight: "500",
+                                  color: theme.palette.primary.textColor,
+                                }}
+                              >
+                                {item.product.name}
+                              </Typography>
+                              <Typography
+                                sx={{
+                                  fontSize: "14px",
+                                  color: theme.palette.primary.paragraph,
+                                }}
+                              >
+                                Leather Coach Bag
+                              </Typography>
+                            </Box>
+                          </Box>
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            borderBottom: "none",
+                            color: theme.palette.primary.textColor,
+                            fontWeight: "500",
+                          }}
+                          align="right"
+                        >
+                          ${item.product.price}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            borderBottom: "none",
+                            color: theme.palette.primary.textColor,
+                            fontWeight: "500",
+                          }}
+                          align="right"
+                        >
+                          {item.product.qty}
+                        </TableCell>
+                        <TableCell
+                          sx={{
+                            borderBottom: "none",
+                            color: theme.palette.primary.textColor,
+                            fontWeight: "500",
+                          }}
+                          align="right"
+                        >
+                          ${parseFloat(item.product.price) * item.product.qty}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Box>
           </Box>
-
-          {/* Order info */}
           <Box>
             <Typography
               sx={{
@@ -438,7 +422,7 @@ export default function OrderDetails({ singleOrderInfo }) {
                     fontSize: "14px",
                   }}
                 >
-                  
+
                   3068 Woodlawn Drive
                 </Typography>
                 <Typography
@@ -451,7 +435,7 @@ export default function OrderDetails({ singleOrderInfo }) {
                     fontSize: "14px",
                   }}
                 >
-                  
+
                   Milwaukee
                 </Typography>
                 <Typography
@@ -464,7 +448,7 @@ export default function OrderDetails({ singleOrderInfo }) {
                     fontSize: "14px",
                   }}
                 >
-                  
+
                   414-672-5388
                 </Typography> */}
                 <Button
@@ -518,18 +502,14 @@ export default function OrderDetails({ singleOrderInfo }) {
               </Button>
             </Box>
           </Box>
-        </Box>
-      )}
-      {selectedOrderTab === 1 && (
-        <Box style={{ marginTop: "20px" }}>
-          <p>Related Products Content</p>
-        </Box>
-      )}
-      {selectedOrderTab === 2 && (
-        <Box style={{ marginTop: "20px" }}>
-          <p> Products </p>
-        </Box>
-      )}
-    </Box>
+        </>
+      </TabPanel>
+      <TabPanel>
+        <p style={{paddingTop:'20px'}}> content 2</p>
+      </TabPanel>
+      <TabPanel>
+        <p style={{paddingTop:'20px'}}>Any 3</p>
+      </TabPanel>
+    </Tabs>
   );
 }

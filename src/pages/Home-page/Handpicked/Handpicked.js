@@ -5,6 +5,7 @@ import { Typography } from "@mui/material";
 import HandCard from "./HandCard/HandCard";
 import useAxios from "../../../services/Hooks/useAxios";
 import { SharedParentContext } from "../../../contexts/CategoryPageFilter";
+import { Link } from "react-router-dom";
 export default function Handpicked() {
   let { res: handpickedData } = useAxios(
     "https://backend-final-1-latest.onrender.com/api/products/handpicked"
@@ -44,12 +45,14 @@ export default function Handpicked() {
       >
 
         {handpickedData ? (
-          handpickedData.products.map((card) => {
-            return <HandCard key={card.id} title={card.name} />;
-          })
+          handpickedData.products.map((card) => 
+            <Link key={card.id} style={{textDecoration:'none', color:'inherit'}} to={'/handpick'}>
+              <HandCard  title={card.name} />
+            </Link>
+          )
         ) : (
           <></>
-        )} 
+        )}
 
       </Box>
     </Box>

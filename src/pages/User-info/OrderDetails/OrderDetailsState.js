@@ -22,13 +22,13 @@ export default function OrderDetailsState() {
         setSingleOrderInfo(orderData.data);
       } catch (err) {
         if(err.response.data.message === "Unauthorized" || err.response.data === "Error getting order!"){
-          navigate('/NotFound');
+          navigate('/*');
         }
         // console.log(err);
         // Handle error
       } 
     };
-    console.log(singleOrderInfo);
+    // console.log(singleOrderInfo);
     useEffect(() => {
       if (authUser()) {
         // pass Id + getToken

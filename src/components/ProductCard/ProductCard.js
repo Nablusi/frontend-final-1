@@ -10,14 +10,15 @@ import { Link, useNavigate } from "react-router-dom";
 import GeneratedStars from "../../services/utils/GeneratedStars";
 export default function ProductCard({ rating, product }) {
   let newPrice = null;
-  if (product.discountId !== null && product.discount) {
-    let getNewPrice = () => {
-      return parseFloat(
-        product.price - (product.price * product.discount.percentage) / 100
-      );
-    };
+
+  if(product.discountId !== null && product.discount){
+    let getNewPrice = ()=>{
+      return parseFloat(product.price - (product.price * product.discount.percentage / 100) );  // check heres 
+    }
+
     newPrice = getNewPrice();
   }
+  //
   const styles = {
     text: {
       display: "flex",
@@ -136,6 +137,7 @@ export default function ProductCard({ rating, product }) {
                   variant="subtitle1"
                   component="p"
                 >
+                  {/* need to first */}
                   {product.discount.percentage}% OFF
                 </Typography>
               </>

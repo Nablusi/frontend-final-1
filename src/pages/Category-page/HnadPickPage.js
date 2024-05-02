@@ -4,33 +4,19 @@ import Hero from "./Hero/Hero";
 import CategorizedProducts from "./CategorizedProducts/CategorizedProducts";
 import { PaginationCustomized } from "./PaginationCustomized/PaginationCustomized";
 import useAxios from "../../services/Hooks/useAxios";
-import { useParams } from "react-router-dom";
 
-export default function BrandsPage() {
-  const PAGESIZE = 20;
-
-  const [pageNum, setPageNum] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+export default function HandPickPage() {
   const [products, setProducts] = useState([]);
-  const params = useParams();
-
   const { res, loading } = useAxios(
-    `https://backend-final-1-latest.onrender.com/api/products/category/1/?page=${pageNum}&pageSize=20&brand=${params.brandName}`
+    `https://backend-final-1-latest.onrender.com/api/products/handpicked?page=1&pageSize=20`
   );
 
-  const onPageChange = (pageNum) => {
-    setPageNum(pageNum);
-  };
   useEffect(() => {
     if (res) {
       setProducts(res.products);
     }
   }, [res]);
-  useEffect(() => {
-    if (res) {
-      setTotalPages(Math.ceil(res.totalRecords / PAGESIZE));
-    }
-  }, [products]);
+
   if (loading) {
     return <LinearProgress />;
   } else {
@@ -39,13 +25,12 @@ export default function BrandsPage() {
         <Hero />
         <CategorizedProducts
           products={products}
-          BreadCrumbsName={params.brandName}
+          BreadCrumbsName="HandPick"
         />
-
         <PaginationCustomized
-          currentPage={pageNum}
-          totalPages={totalPages}
-          onPageChange={onPageChange}
+          currentPage={1}
+          totalPages={5}
+          onPageChange={() => {}}
         />
       </Container>
     );
