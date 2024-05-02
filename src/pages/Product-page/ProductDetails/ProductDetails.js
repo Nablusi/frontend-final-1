@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
-import Rating from "@mui/material/Rating";
 import theme from "../../../theme/Theme";
 import { Box } from "@mui/system";
 import { Input } from "@mui/material";
@@ -14,12 +13,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useMediaQuery } from "react-responsive";
-
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
 import "./ProductSlider/ProductSlider.css";
 import GeneratedStars from "../../../services/utils/GeneratedStars";
+
 export default function ProductDetails({ product, addToCart }) {
   let [qty, setQty] = useState(1);
   let [msg, setMsg] = useState("");
@@ -28,6 +26,9 @@ export default function ProductDetails({ product, addToCart }) {
       setQty(qtyChange);
     } else {
       setMsg("You Can add qty only betweeen 1 and 20");
+      setTimeout(() => {
+        setMsg("");
+      }, 4000);
     }
   };
 
@@ -104,7 +105,6 @@ export default function ProductDetails({ product, addToCart }) {
                 slidesToShow={isSmall ? 2 : 4}
                 swipeToSlide={true}
                 focusOnSelect={true}
-                // the error from arrow @Shaheera
                 nextArrow={<ArrowForwardIosIcon sx={{ color: "black" }} />}
                 prevArrow={<ArrowBackIosNewIcon sx={{ color: "black" }} />}
                 style={{ display: "flex", gap: "31px" }}
@@ -234,7 +234,7 @@ export default function ProductDetails({ product, addToCart }) {
             )}
           </Box>
           {msg !== "" && (
-            <Typography variant="subtitle1" color={theme.palette.primary.error}>
+            <Typography sx={{fontWeight:'bold'}} variant="subtitle1" color={theme.palette.primary.error}>
               {msg}
             </Typography>
           )}
@@ -271,6 +271,7 @@ export default function ProductDetails({ product, addToCart }) {
                   width: "30%",
                   height: "25px",
                   textAlign: "center",
+                  color: theme.palette.primary.textColor,
                 }}
                 type="text"
                 style={{ textAlign: "center" }}
@@ -279,8 +280,11 @@ export default function ProductDetails({ product, addToCart }) {
                 startAdornment={
                   <InputAdornment
                     position="start"
-                    onClick={() => HandleQtyChange(qty--)}
-                    sx={{ cursor: "pointer", color: "black" }}
+                    onClick={() => HandleQtyChange(--qty)}
+                    sx={{
+                      cursor: "pointer",
+                      color: theme.palette.primary.textColor,
+                    }}
                   >
                     <RemoveIcon />
                   </InputAdornment>
@@ -288,8 +292,11 @@ export default function ProductDetails({ product, addToCart }) {
                 endAdornment={
                   <InputAdornment
                     position="end"
-                    sx={{ cursor: "pointer", color: "black" }}
-                    onClick={() => HandleQtyChange(qty++)}
+                    sx={{
+                      cursor: "pointer",
+                      color: theme.palette.primary.textColor,
+                    }}
+                    onClick={() => HandleQtyChange(++qty)}
                   >
                     <AddIcon />
                   </InputAdornment>
