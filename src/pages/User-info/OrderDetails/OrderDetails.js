@@ -17,9 +17,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useOutletContext } from "react-router-dom";
-
-export default function OrderDetails() {
-  const { selectedOrderTab, handleChange } = useOutletContext();
+export default function OrderDetails({ singleOrderInfo }) {
+  const { selectedOrderTab, handleChange, userData } = useOutletContext();
+  let totalPrice = 0;
+  singleOrderInfo.items.map((item)=>{
+    let totalItem = (parseFloat(item.product.price)) * item.product.qty;
+    totalPrice+=totalItem;
+  })
   return (
     <Box sx={{ width: "95%" }}>
       <Paper
@@ -150,71 +154,73 @@ export default function OrderDetails() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow>
-                    <TableCell sx={{ borderBottom: "none" }}>
-                      <Box sx={{ display: "flex" }}>
-                        <img
-                          alt="product.png"
-                          src={require(`../../../images/product-image.png`)}
-                          style={{
-                            width: "75px",
-                            height: "80px",
-                            borderRadius: "8px",
-                          }}
-                        />
-                        <Box sx={{ marginLeft: "15px" }}>
-                          {" "}
-                          <Typography
-                            sx={{
-                              fontSize: "14px",
-                              fontWeight: "500",
-                              color: theme.palette.primary.textColor,
+                  {singleOrderInfo.items.map((item) => (
+                    <TableRow>
+                      <TableCell sx={{ borderBottom: "none" }}>
+                        <Box sx={{ display: "flex" }}>
+                          <img
+                            alt="product.png"
+                            src={require(`../../../images/product-image.png`)}
+                            style={{
+                              width: "75px",
+                              height: "80px",
+                              borderRadius: "8px",
                             }}
-                          >
-                            Coach
-                          </Typography>
-                          <Typography
-                            sx={{
-                              fontSize: "14px",
-                              color: theme.palette.primary.paragraph,
-                            }}
-                          >
-                            Leather Coach Bag
-                          </Typography>
+                          />
+                          <Box sx={{ marginLeft: "15px" }}>
+                            <Typography
+                              sx={{
+                                fontSize: "14px",
+                                fontWeight: "500",
+                                color: theme.palette.primary.textColor,
+                              }}
+                            >
+                              {item.product.name}
+                            </Typography>
+                            <Typography
+                              sx={{
+                                fontSize: "14px",
+                                color: theme.palette.primary.paragraph,
+                              }}
+                            >
+                              Leather Coach Bag
+                            </Typography>
+                          </Box>
                         </Box>
-                      </Box>
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        borderBottom: "none",
-                        color: theme.palette.primary.textColor,
-                        fontWeight: "500",
-                      }}
-                      align="right"
-                    >
-                      $54
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        borderBottom: "none",
-                        color: theme.palette.primary.textColor,
-                        fontWeight: "500",
-                      }}
-                      align="right"
-                    >
-                      2
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        borderBottom: "none",
-                        color: theme.palette.primary.textColor,
-                        fontWeight: "500",
-                      }}
-                      align="right"
-                    >
-                      109$
-                    </TableCell>
-                  </TableRow>
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          borderBottom: "none",
+                          color: theme.palette.primary.textColor,
+                          fontWeight: "500",
+                        }}
+                        align="right"
+                      >
+                        ${item.product.price}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          borderBottom: "none",
+                          color: theme.palette.primary.textColor,
+                          fontWeight: "500",
+                        }}
+                        align="right"
+                      >
+                        {item.product.qty}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          borderBottom: "none",
+                          color: theme.palette.primary.textColor,
+                          fontWeight: "500",
+                        }}
+                        align="right"
+                      >
+                        ${(parseFloat(item.product.price)) * item.product.qty}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  
                 </TableBody>
               </Table>
             </TableContainer>
@@ -264,8 +270,7 @@ export default function OrderDetails() {
                       fontSize: "14px",
                     }}
                   >
-                    {" "}
-                    Sub Total{" "}
+                    Sub Total
                   </Typography>
                   <Typography
                     variant="p"
@@ -276,8 +281,7 @@ export default function OrderDetails() {
                       fontSize: "14px",
                     }}
                   >
-                    {" "}
-                    $119.69
+                    ${totalPrice}
                   </Typography>
                 </Box>
 
@@ -298,8 +302,7 @@ export default function OrderDetails() {
                       fontSize: "14px",
                     }}
                   >
-                    {" "}
-                    Discount{" "}
+                    Discount
                   </Typography>
                   <Typography
                     variant="p"
@@ -310,8 +313,7 @@ export default function OrderDetails() {
                       fontSize: "14px",
                     }}
                   >
-                    {" "}
-                    -$13.40
+                    $0
                   </Typography>
                 </Box>
 
@@ -332,8 +334,7 @@ export default function OrderDetails() {
                       fontSize: "14px",
                     }}
                   >
-                    {" "}
-                    Delivery Fee{" "}
+                    Delivery Fee
                   </Typography>
                   <Typography
                     variant="p"
@@ -344,7 +345,6 @@ export default function OrderDetails() {
                       fontSize: "14px",
                     }}
                   >
-                    {" "}
                     $12.00
                   </Typography>
                 </Box>
@@ -366,8 +366,7 @@ export default function OrderDetails() {
                       fontSize: "14px",
                     }}
                   >
-                    {" "}
-                    Grand Total{" "}
+                    Grand Total
                   </Typography>
                   <Typography
                     variant="p"
@@ -378,8 +377,7 @@ export default function OrderDetails() {
                       fontSize: "14px",
                     }}
                   >
-                    {" "}
-                    $106.29
+                    ${parseFloat(totalPrice) + 12}
                   </Typography>
                 </Box>
               </Grid>
@@ -416,7 +414,6 @@ export default function OrderDetails() {
                     textTransform: "capitalize",
                   }}
                 >
-                  {" "}
                   Address Details
                 </Typography>
                 <Typography
@@ -429,10 +426,9 @@ export default function OrderDetails() {
                     fontSize: "14px",
                   }}
                 >
-                  {" "}
-                  Vincent Lobo
+                  {userData && userData.location ? userData.location : ""}
                 </Typography>
-                <Typography
+                {/* <Typography
                   variant="p"
                   component="p"
                   sx={{
@@ -442,7 +438,7 @@ export default function OrderDetails() {
                     fontSize: "14px",
                   }}
                 >
-                  {" "}
+                  
                   3068 Woodlawn Drive
                 </Typography>
                 <Typography
@@ -455,7 +451,7 @@ export default function OrderDetails() {
                     fontSize: "14px",
                   }}
                 >
-                  {" "}
+                  
                   Milwaukee
                 </Typography>
                 <Typography
@@ -468,9 +464,9 @@ export default function OrderDetails() {
                     fontSize: "14px",
                   }}
                 >
-                  {" "}
+                  
                   414-672-5388
-                </Typography>
+                </Typography> */}
                 <Button
                   sx={{
                     position: "absolute",
