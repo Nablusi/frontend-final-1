@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
 
 import UserInfoSideBar from "../../components/User-Info-SideBar/UserInfoSideBar";
 import { Box, Container } from "@mui/system";
 import TitleUserInformation from "./Title-User-information/TitleUserInformation";
+
+import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import useAxios from "../../services/Hooks/useAxios";
 import { Outlet } from "react-router-dom";
-
 import axios from "axios";
+import { getToken } from "../../services/utils/getToken";
+import { getUserId } from "../../services/utils/getUserId";
 
 export default function UserInfo() {
   const [selectedOrderTab, setSelectedOrderTab] = useState(0);
   const [active, setActive] = useState("personalInformation");
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState('0');
   const [filteredOrders, setFilteredOrders] = useState([]);
+  const [tempFilteredOrders, setTempFilteredOrders] = useState([]);
 
   const {
     register,
@@ -41,23 +44,20 @@ export default function UserInfo() {
   const handleActive = (data) => {
     setActive(data);
   };
-  const handleChanges = (event, newValue) => {
-    setSelectedTab(newValue);
-  };
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          "https://backend-final-1-latest.onrender.com/api/orders/user/20",
+         ` https://backend-final-1-latest.onrender.com/api/orders/user/${getUserId()}`,
           {
             headers: {
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIwLCJpYXQiOjE3MTQ1NzkzOTV9.3bERkDj1cZjYFWzH_h57tF9Lno5dYCq3a8IGrjuoFIo",
+                `Bearer ${getToken()}`,
             },
           }
         );
-        // console.log(response.data);
+
         setFilteredOrders(response.data);
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -67,24 +67,52 @@ export default function UserInfo() {
     fetchOrders();
   }, []);
 
+  const handleChange = (event, newValue) => {
+    setSelectedTab(newValue);
+  };
+
   useEffect(() => {
     // console.log("useEffect triggered with selectedTab:", selectedTab);
     let filtered = [];
     if (filteredOrders && filteredOrders.length > 0) {
-      if (selectedTab === 0) {
-        filtered = filteredOrders.filter(
-          (order) => order.status === "approved"
+      if (selectedTab === '0') {
+        filtered = [];
+         filteredOrders.forEach(
+          (order) => {
+            if(order.status === "done"){
+              filtered.push(order);
+            }
+          }
         );
-      } else if (selectedTab === 2) {
-        filtered = filteredOrders.filter((order) => order.status === "done");
+      }
+      else if (selectedTab === '1') {
+        filtered = [];
+
+        filteredOrders.forEach((order) => {
+          if(order.status === "pending"){
+            filtered.push(order);
+          }
+        });
+      } 
+      
+      else if (selectedTab === '2') {
+        filtered = [];
+
+        filteredOrders.forEach((order) => {
+          if(order.status === "closed"){
+            filtered.push(order);
+          }
+        });
+
+        
       }
     }
-    setFilteredOrders(filtered);
-  }, [selectedTab]);
+    setTempFilteredOrders(filtered);
 
-  const handleChange = (newValue) => {
-    setSelectedOrderTab(newValue);
-  };
+  }, [selectedTab, filteredOrders]);
+
+
+
 
   return (
     <Container>
@@ -114,7 +142,9 @@ export default function UserInfo() {
               getValues,
               userData,
               selectedOrderTab,
-              handleChange,
+              selectedTab, 
+              handleChange, 
+              tempFilteredOrders 
             }}
           />
         </Box>
@@ -122,3 +152,4 @@ export default function UserInfo() {
     </Container>
   );
 }
+

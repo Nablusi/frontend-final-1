@@ -17,7 +17,7 @@ export default function CategorizedProducts({ products, BreadCrumbsName }) {
             <Grid container spacing={2}>
               {/* Loop over one Ahmad */}
 
-              {products.map((prod) => (
+              {products?.map((prod) => (
                 <Grid key={prod.id} item xs={12} sm={6} md={4} lg={3}>
                   <ProductCard product={prod} rating={true} />
                 </Grid>

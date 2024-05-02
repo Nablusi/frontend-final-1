@@ -6,4 +6,5 @@ export const urls = {
     isCartExist: "https://backend-final-1-latest.onrender.com/api/carts/user",
     updateCart:"https://backend-final-1-latest.onrender.com/api/carts", 
     createCart:"https://backend-final-1-latest.onrender.com/api/carts",
+    getBrands: "https://backend-final-1-latest.onrender.com/api/brands",
 };
