@@ -9,8 +9,6 @@ import { urls } from "../../config/urls";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 export const categoryNameContext = createContext();
 
-
-
 export default function Category() {
   const PAGESIZE = 20;
   let { id } = useParams();
@@ -21,23 +19,30 @@ export default function Category() {
   const { popular, limitedEdition, discount } = useContext(SharedParentContext);
   // const searchURL = urls.getProductsBySearch;
 
-  if (popular || limitedEdition || discount) {
-    id = 1;
+
+
+
+  const check = () => {
+    if (popular) {
+      return "&popular=true";
+    } else if (discount) {
+      return "&discount=15";
+    } else if (limitedEdition) {
+      return "&limitedEdition=true";
+    } else {
+      return ''
+    }
   }
 
-  let url = `${urls.getCategory}/${id}?page=${pageNum}`;
 
-  if (popular) {
-    url += "&popular=true";
-  }
-  if (discount) {
-    url += "&discount=0";
-  }
-  if (limitedEdition) {
-    url += "&limitedEdition=true";
-  }
 
-  
+  let url = `${urls.getCategory}/${id}?page=${pageNum}${check()}`;
+
+  // useEffect(()=>{
+  //   console.log(url);
+  //   console.log(discount); 
+  // },[])
+
   const {
     res: categoryProducts,
     // error: categoryError,
@@ -75,7 +80,15 @@ export default function Category() {
     return (
       <Container>
         <Hero />
-        <categoryNameContext.Provider value={popular ? "Popular" : limitedEdition ? "Limited Edition" : categoryName}>
+        <categoryNameContext.Provider
+          value={
+            popular
+              ? "Popular"
+              : limitedEdition
+              ? "Limited Edition"
+              : categoryName
+          }
+        >
           <CategorizedProducts products={products} />
         </categoryNameContext.Provider>
         <PaginationCustomized

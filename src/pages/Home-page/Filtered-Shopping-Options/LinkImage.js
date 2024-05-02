@@ -28,7 +28,7 @@ export const LinkImage = ({ to, imgSrc, isFull, alt, isSmall, isOther, variant, 
                 <Typography component={'h4'} variant="h4" sx={LinkStyles.contentTypo(theme,first)}>
                     { first ? '15% off and more!' :'Popular in the community!'} 
                 </Typography>
-                <Link to={to}>
+                <Link to={to} onClick={click} >
                     <IconButton variant="contained" color="primary"><ArrowForwardIcon sx={LinkStyles.contentButton(theme,first)} /></IconButton>
                 </Link>
             </Box>

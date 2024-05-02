@@ -18,7 +18,13 @@ import { SharedParentProvider } from "./contexts/CategoryPageFilter";
 import SearchForProducts from "./pages/Category-page/SearchForProducts";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import CartPage from "./pages/CartPage/CartPage";
+import Checkout from "./pages/Checkout/Checkout ";
 import UserInfo from "./pages/User-info/UserInfo";
+import { AddToCartIfLoggedInProvider } from "./contexts/addToCart";
+
+import PersonalInformation from "./pages/User-info/Personal-info/PersonalInformation";
+import OrderDetails from "./pages/User-info/OrderDetails/OrderDetails";
 
 function App() {
   const router = createBrowserRouter(
@@ -34,7 +40,13 @@ function App() {
           path="/category/products/search"
           element={<SearchForProducts />}
         />
-        <Route path="/userInfo" element={<UserInfo />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/userInfo" element={<UserInfo />}>
+          <Route path="" element={<PersonalInformation />} />
+          <Route path="personalInformation" element={<PersonalInformation />} />
+          <Route path="myOrders" element={<OrderDetails />} />
+        </Route>
       </Route>
     )
   );
@@ -42,7 +54,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <SharedParentProvider>
-        <RouterProvider router={router} />
+        <AddToCartIfLoggedInProvider>
+          <RouterProvider router={router} />
+        </AddToCartIfLoggedInProvider>
       </SharedParentProvider>
       <CssBaseline />
       <ToastContainer />

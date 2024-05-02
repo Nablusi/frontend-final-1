@@ -10,7 +10,8 @@ import { LinearProgress } from "@mui/material";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 import { authUser } from "../../services/utils/authUser";
 import { ProductDescrip } from "./ProductDescrip/ProductDescrip";
-import { toast } from "react-toastify";
+import { AddToCartIfLoggedInContext } from "../../contexts/addToCart";
+
 export default function Product() {
   let { id } = useParams();
   const [product, setProduct] = useState({});
@@ -24,6 +25,7 @@ export default function Product() {
   };
   const { res: categories } = useAxios(`${urls.getCategories}`);
 
+
   const checkUserCart = () => {
     if (localStorage.getItem("cart")) {
       setCart(JSON.parse(localStorage.getItem("cart")));
@@ -32,36 +34,35 @@ export default function Product() {
     }
   };
   const { setRefresh, refresh } = useContext(SharedParentContext);
+  const { setProductListIfLoggedIn , sendProductData, setGetProductId, setProductQty} = useContext(AddToCartIfLoggedInContext);
 
+  useEffect(()=>{
+    setGetProductId(id);
+  },[id])
+  
   const addToCart = (product, qty) => {
-    // need to check for token before allow user to add
-    if (authUser()) {
-      setRefresh(() => !refresh);
-      if (cart.length) {
-        const index = cart.findIndex((prod) => prod.product.id === product.id);
-        if (index !== -1) {
-          if (cart[index].qty + qty > 20) {
-            console.log("can not add more");
-          } else {
-            cart[index].qty += qty;
-          }
+    setRefresh(() => !refresh);
+    if(authUser()){sendProductData()};
+    if (cart.length) {
+      const index = cart.findIndex((prod) => prod.product.id === product.id);
+      if (index !== -1) {
+        if (cart[index].qty + qty > 20) {
+          setProductQty(qty)
         } else {
-          cart.push({ product: product, qty: qty });
+          cart[index].qty += qty;
+          setProductQty(qty)
         }
       } else {
         cart.push({ product: product, qty: qty });
+        setProductQty(qty)
       }
-      localStorage.setItem("cart", JSON.stringify(cart));
     } else {
-      toast.warning(
-        <>
-          Please <a href="/sign/signin">sign in</a> to continue the process.
-        </>,
-        { position: "top-center" }
-      );
+      cart.push({ product: product, qty: qty });
+      setProductQty(qty)
     }
+    localStorage.setItem("cart", JSON.stringify(cart));
   };
-  // console.log(cart);
+
   useEffect(() => {
     checkUserCart();
   }, [refresh]);
@@ -74,6 +75,7 @@ export default function Product() {
       );
       // let data = await res.data;
       setProduct(res.data);
+      setProductListIfLoggedIn(product);
       setLoading(false);
     };
     getProduct();
@@ -90,7 +92,6 @@ export default function Product() {
       }
     }
   }, [id, categories, product.categoryId]);
-  console.log(categoryName);
   if (loading) {
     return <LinearProgress />;
   }
@@ -103,7 +104,9 @@ export default function Product() {
           categoryName={categoryName}
         />
         <ProductDetails product={product} addToCart={addToCart} />
+
         <ProductDescrip
+
           descrip={product.description}
           selectedTab={selectedTab}
           handleChange={handleChange}

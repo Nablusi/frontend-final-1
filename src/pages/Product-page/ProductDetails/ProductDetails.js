@@ -19,7 +19,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import "./ProductSlider/ProductSlider.css";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import GeneratedStars from "../../../services/utils/GeneratedStars";
 export default function ProductDetails({ product, addToCart }) {
   let [qty, setQty] = useState(1);
   let [msg, setMsg] = useState("");
@@ -30,6 +30,16 @@ export default function ProductDetails({ product, addToCart }) {
       setMsg("You Can add qty only betweeen 1 and 20");
     }
   };
+
+  let newPrice = null;
+  if (product.discountId !== null && product.discount) {
+    let getNewPrice = () => {
+      return parseFloat(
+        product.price - (product.price * product.discount.percentage) / 100
+      );
+    };
+    newPrice = getNewPrice();
+  }
 
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
@@ -135,7 +145,11 @@ export default function ProductDetails({ product, addToCart }) {
           <Typography
             variant="h5"
             component="h3"
-            sx={{ fontWeight: "bold", textTransform: "capitalize" }}
+            sx={{
+              fontWeight: "600",
+              textTransform: "capitalize",
+              color: theme.palette.primary.sectionTitle,
+            }}
           >
             {product.name}
           </Typography>
@@ -147,26 +161,10 @@ export default function ProductDetails({ product, addToCart }) {
           >
             Leather Coach Bag with adjustable starps.
           </Typography>
-          <Box
-            sx={{ display: "flex", alignItems: "center", padding: "25px 0" }}
-          >
+          <Box sx={{ width: "fit-content", padding: "25px 0" }}>
             {product.reviews && product.reviews.length > 0 ? (
               <>
-                <Rating
-                  name="read-only"
-                  value={product.reviews[0].rating}
-                  sx={{ color: theme.palette.primary.star }}
-                  readOnly
-                />
-
-                <Typography
-                  variant="p"
-                  component="p"
-                  sx={{ paddingLeft: "10px" }}
-                  color={theme.palette.primary.paragraph}
-                >
-                  ({product.reviews.length}) Ratings
-                </Typography>
+                <GeneratedStars reviews={product.reviews} brackets={true} />
               </>
             ) : (
               <Typography
@@ -191,37 +189,45 @@ export default function ProductDetails({ product, addToCart }) {
                 <Typography
                   variant="p"
                   component="p"
-                  sx={{ fontWeight: "bold", fontSize: "22px" }}
+                  sx={{
+                    fontWeight: "700",
+                    fontSize: "24px",
+                    color: theme.palette.primary.textColor,
+                  }}
                 >
-                  ${product.price}
+                  ${newPrice}
                 </Typography>
                 <Typography
                   variant="p"
                   component="p"
                   sx={{
                     textDecoration: "line-through",
-                    fontWeight: "bold",
-                    fontSize: "22px",
+                    fontWeight: "600",
+                    fontSize: "18px",
                     padding: "0 15px",
                   }}
-                  color={theme.palette.primary.paragraph}
+                  color={theme.palette.primary.greyColor}
                 >
-                  $54.69
+                  ${product.price}
                 </Typography>
                 <Typography
                   variant="p"
                   component="p"
-                  sx={{ fontWeight: "bold", fontSize: "22px" }}
-                  color={theme.palette.primary.error}
+                  sx={{ fontWeight: "600", fontSize: "16px" }}
+                  color={theme.palette.primary.discount}
                 >
-                  50%OFF
+                  {product.discount ? `${product.discount.percentage}%OFF` : ""}
                 </Typography>
               </>
             ) : (
               <Typography
                 variant="p"
                 component="p"
-                sx={{ fontWeight: "bold", fontSize: "22px" }}
+                sx={{
+                  fontWeight: "700",
+                  fontSize: "24px",
+                  color: theme.palette.primary.textColor,
+                }}
               >
                 ${product.price}
               </Typography>
@@ -244,7 +250,11 @@ export default function ProductDetails({ product, addToCart }) {
             <Typography
               variant="p"
               component="p"
-              sx={{ fontWeight: "bold", paddingRight: "12px" }}
+              sx={{
+                fontWeight: "bold",
+                paddingRight: "12px",
+                color: theme.palette.primary.sectionTitle,
+              }}
             >
               Quantity:
             </Typography>
@@ -291,11 +301,11 @@ export default function ProductDetails({ product, addToCart }) {
             <Button
               variant="contained"
               sx={{
-                backgroundColor: theme.palette.primary.main,
+                backgroundColor: theme.palette.primary.carouselColor,
                 display: "flex",
                 alignItems: "center",
                 borderRadius: "0px 5px 5px 0px",
-                border: "2px solid transparent",
+                border: `2px solid ${theme.palette.primary.carouselColor}`,
                 ...styles.buttons,
               }}
               onClick={() => addToCart(product, qty)}
@@ -316,7 +326,12 @@ export default function ProductDetails({ product, addToCart }) {
                 ...styles.buttons,
               }}
             >
-              <FavoriteBorderIcon sx={{ paddingRight: "5px" }} />
+              <FavoriteBorderIcon
+                sx={{
+                  paddingRight: "5px",
+                  color: theme.palette.primary.carouselColor,
+                }}
+              />
               <Typography>Add to Wishlist</Typography>
             </Button>
           </Box>

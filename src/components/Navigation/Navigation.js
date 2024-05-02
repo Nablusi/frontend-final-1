@@ -114,7 +114,7 @@ export default function Navigation() {
                           to={`/category/${item.id}`}
                           key={item.id}
                           style={NavigationStyles.navItems(theme)}
-                          onClick={index === navItemsIpad.length - 1 ? dropDownMoreHandler : undefined}
+                          onClick={index === navItemsIpad.length - 1 ? dropDownMoreHandler : contextHandler}
                         >
                           {item.name}
                         </Link>
@@ -170,7 +170,7 @@ export default function Navigation() {
                   <FavoriteBorderIcon />
                 </IconButton>
                 {authUser() ? 
-                  <Link style={{textDecoration:'none'}}>
+                  <Link style={{textDecoration:'none'}} to={'/userInfo'}>
                     
                     <Avatar>{emailAuth().slice(0,1).toUpperCase()}</Avatar>
                     

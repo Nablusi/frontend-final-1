@@ -1,17 +1,21 @@
+import React, { useContext } from "react";
 import Box from "@mui/material/Box";
 import theme from "../../../theme/Theme";
 import { Typography } from "@mui/material";
 import HandCard from "./HandCard/HandCard";
 import useAxios from "../../../services/Hooks/useAxios";
+import { SharedParentContext } from "../../../contexts/CategoryPageFilter";
 export default function Handpicked() {
   let { res: handpickedData } = useAxios(
     "https://backend-final-1-latest.onrender.com/api/products/handpicked"
   );
 
+  const { handpicked } = useContext(SharedParentContext);
+
   return (
     <Box
       component="section"
-      id="handpicked collection"
+      ref={handpicked}
       minHeight={425}
       display="grid"
       sx={{
@@ -38,18 +42,15 @@ export default function Handpicked() {
         marginInline={"20px"}
         gap={"30px"}
       >
-        {/* i will use map here when API is ready */}
-        {/* {handpickedData ? (
-          handpickedData.map((card) => {
-            return <HandCard key={1} />;
+
+        {handpickedData ? (
+          handpickedData.products.map((card) => {
+            return <HandCard key={card.id} title={card.name} />;
           })
         ) : (
           <></>
-        )} */}
-        {/* // <HandCard />
-        // <HandCard />
-        // <HandCard />
-        // <HandCard />  */}
+        )} 
+
       </Box>
     </Box>
   );

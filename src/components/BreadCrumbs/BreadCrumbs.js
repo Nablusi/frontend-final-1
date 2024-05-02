@@ -17,7 +17,7 @@ export default function BreadCrumbs({ BreadCrumbsName }) {
       >
         <Link
           underline="hover"
-          sx={{ color: theme.palette.primary.main, fontWeight: "bold" }}
+          sx={{ color: theme.palette.primary.darkBlueColor, fontWeight: "500" }}
           to={"/"}
           aria-current="page"
         >
@@ -28,6 +28,11 @@ export default function BreadCrumbs({ BreadCrumbsName }) {
             underline="hover"
             color="inherit"
             href="/material-ui/getting-started/installation/"
+            sx={{
+              color: theme.palette.primary.paragraph,
+              fontWeight: "500",
+              textTransform: "capitalize",
+            }}
           >
             {BreadCrumbsName}
           </Link>
@@ -36,6 +41,11 @@ export default function BreadCrumbs({ BreadCrumbsName }) {
             underline="hover"
             color="inherit"
             href="/material-ui/getting-started/installation/"
+            sx={{
+              color: theme.palette.primary.paragraph,
+              fontWeight: "500",
+              textTransform: "capitalize",
+            }}
           >
             {name}
           </Link>
@@ -45,8 +55,8 @@ export default function BreadCrumbs({ BreadCrumbsName }) {
         variant="h6"
         component={"h6"}
         sx={{
-          color: theme.palette.primary.main,
-          fontWeight: "bold",
+          color: theme.palette.primary.darkBlueColor,
+          fontWeight: "600",
           padding: "15px 0",
         }}
       >

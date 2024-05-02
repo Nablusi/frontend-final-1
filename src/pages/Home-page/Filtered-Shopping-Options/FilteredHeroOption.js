@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import { Box } from "@mui/material";
+import { Box  } from "@mui/material";
 import { useMediaQuery } from "react-responsive";
 import { LinkImage } from "./LinkImage";
 import * as FilteredHeroStyles from "./FilteredHeroOption.styles";
@@ -8,25 +8,24 @@ import { SharedParentContext } from "../../../contexts/CategoryPageFilter";
 
 export default function FilteredShoppingOption() {
     const isSmall = useMediaQuery({query: "(max-width: 767px)"})
-    const {setDiscount, setPopular, setLimitedEdition } = useContext(SharedParentContext); 
-    
+    const { setDiscount, setPopular, setLimitedEdition, trendy, popular } = useContext(SharedParentContext);
 
     const popularHandler = () => {
-        setPopular(()=> true)
+        setPopular(!popular)
     }
 
     const limitedEditionHandler = () => { 
-        setLimitedEdition(()=> true); 
+        setLimitedEdition(true); 
     }
 
     const discountHandler = () => {
-        setDiscount(()=> 15)
+        setDiscount(15)
     }
 
     return (
-        <Box sx={FilteredHeroStyles.hero} id="trendy">       
+        <Box sx={FilteredHeroStyles.hero} ref={trendy}>       
             <LinkImage 
-                to={'/category/limitedEdition'}
+                to={'/category/1'}
                 imgSrc={require('../../../assets/image/makeup.jpg')}
                 alt={'less than 20%'}
                 isSmall={isSmall}
@@ -37,7 +36,7 @@ export default function FilteredShoppingOption() {
                 
             />
             <LinkImage 
-                to={'/category/discount=15}'}
+                to={'/category/1'}
                 imgSrc={require('../../../assets/image/skincare.png')}
                 alt={'have discount 15%'}
                 isSmall={isSmall}
@@ -49,7 +48,7 @@ export default function FilteredShoppingOption() {
                 click={discountHandler}
             />
             <LinkImage 
-                to={'/category/popular'}
+                to={'/category/1'}
                 imgSrc={require('../../../assets/image/skincare-one.png')}
                 alt={'have rating 4.5'}
                 isSmall={isSmall}

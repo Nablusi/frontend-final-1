@@ -10,10 +10,10 @@ export const ShopBy = ({ products, click, title, theme, type }) => {
             {
                 products?.slice(1).map((category, index) => (
                     <Link
-                        to={type ? `/category/${category.id}` : `#${category}`}
+                        to={type ? `/category/${category.id}` : `/`}
                         style={ShopByStyles.link(theme)}
                         key={type ? category.id : index}
-                        onClick={() => click(category)}
+                        onClick={() => click(category)} 
                     >
                         <Typography component={'p'} sx={ShopByStyles.categoryStyle(theme)}>{type ? category.name : category}</Typography>
                     </Link>

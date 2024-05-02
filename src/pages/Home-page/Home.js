@@ -13,9 +13,12 @@ export default function Home() {
     `https://backend-final-1-latest.onrender.com/api/products/new`
   );
 
+  
+
+
   useEffect(() => {
     if (res) {
-      setnewArrivals(res);
+      setnewArrivals(res.products);
     }
   }, [res]);
   if (loading) {

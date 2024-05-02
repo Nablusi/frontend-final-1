@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useRef } from "react";
 
 export const SharedParentContext = createContext();
 
@@ -8,6 +8,11 @@ export const SharedParentProvider = ({ children }) => {
   const [limitedEdition, setLimitedEdition] = useState(false);
   const [search, setSearch] = useState("");
   const [refresh, setRefresh] = useState(false);
+
+  const trendy = useRef(); 
+  const handpicked = useRef(); 
+  const  brands = useRef(); 
+
 
   return (
     <SharedParentContext.Provider
@@ -22,6 +27,9 @@ export const SharedParentProvider = ({ children }) => {
         search,
         setRefresh,
         refresh,
+        trendy,
+        handpicked, 
+        brands,
       }}
     >
       {children}

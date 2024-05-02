@@ -6,7 +6,7 @@ import Link from "@mui/material/Link";
 import { Typography } from "@mui/material";
 import theme from "../../../theme/Theme";
 
-export default function TitleUserInformation({ title }) {
+export default function TitleUserInformation({ active, flag, title }) {
   const breadcrumbs = [
     <Link
       underline="hover"
@@ -32,7 +32,7 @@ export default function TitleUserInformation({ title }) {
       User Profile
     </Link>,
   ];
-  return (
+  return flag === active ? (
     <>
       <Breadcrumbs
         separator={
@@ -60,5 +60,7 @@ export default function TitleUserInformation({ title }) {
         {title}
       </Typography>
     </>
+  ) : (
+    <></>
   );
 }

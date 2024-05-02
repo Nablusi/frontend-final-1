@@ -5,21 +5,42 @@ import Link from "@mui/material/Link";
 import theme from "../../../theme/Theme";
 import { Box } from "@mui/system";
 // add comment
-export default function ProductBreadCrumbs({productName,categoryName}) {
+export default function ProductBreadCrumbs({ productName, categoryName }) {
   return (
-    <Box sx={{padding:'20px 0'}}>
-      <Breadcrumbs aria-label="breadcrumb" separator=">" sx={{fontWeight:'bold',textDecoration:'none'}}>
-        <Link underline="hover" color={theme.palette.primary.main} to="/" sx={{textDecoration:"none"}}>
+    <Box sx={{ padding: "20px 0" }}>
+      <Breadcrumbs
+        aria-label="breadcrumb"
+        separator=">"
+        sx={{
+          fontWeight: "500",
+          textDecoration: "none",
+          color: theme.palette.primary.carouselColor,
+        }}
+      >
+        <Link
+          underline="hover"
+          color={theme.palette.primary.carouselColor}
+          to="/"
+          sx={{ textDecoration: "none", fontWeight: "500" }}
+        >
           Home
         </Link>
         <Link
           underline="hover"
-          color={theme.palette.primary.main}
+          color={theme.palette.primary.carouselColor}
           href="/material-ui/getting-started/installation/"
         >
           {categoryName}
         </Link>
-        <Typography color="text.primary" sx={{textTransform:'capitalize'}}>{productName}</Typography>
+        <Typography
+          sx={{
+            fontWeight: "500",
+            textTransform: "capitalize",
+            color: theme.palette.primary.paragraph,
+          }}
+        >
+          {productName}
+        </Typography>
       </Breadcrumbs>
     </Box>
   );

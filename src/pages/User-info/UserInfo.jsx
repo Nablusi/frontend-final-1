@@ -1,24 +1,57 @@
 import React, { useState , useEffect } from "react";
+import { useForm } from "react-hook-form";
+
 import UserInfoSideBar from "../../components/User-Info-SideBar/UserInfoSideBar";
 import { Box, Container } from "@mui/system";
 import TitleUserInformation from "./Title-User-information/TitleUserInformation";
-import PersonalInformation from "./Personal-info/PersonalInformation";
+import toast, { Toaster } from "react-hot-toast";
+import useAxios from "../../services/Hooks/useAxios";
+import { Outlet } from "react-router-dom";
+
 import { MyOrders } from "./MyOrders/MyOrders";
-import { selectedTab } from "./MyOrders/MyOrdersStyles";
 import axios from "axios";
 
+
+
+
 export default function UserInfo() {
+  const [selectedOrderTab, setSelectedOrderTab] = useState(0);
   const [active, setActive] = useState("personalInformation");
+    const [selectedTab, setSelectedTab] = useState(0);
+  const [filteredOrders, setFilteredOrders] = useState([]);
+
+  const {
+    register,
+    handleSubmit,
+    // watch,
+    formState: { errors },
+    getValues,
+  } = useForm();
+  const token =
+    localStorage.getItem("token") || sessionStorage.getItem("token");
+  const id = localStorage.getItem("id") || sessionStorage.getItem("id");
+  const { res: userData } = useAxios(
+    `https://backend-final-1-latest.onrender.com/api/users/${id}`,
+    token
+  );
+
+  //////////////////////////////////////////
+  const onSubmit = (data) => {
+    if (data.newPassword === data.confirmPassword) {
+      console.log(data);
+    }
+  };
+
   const handleActive = (data) => {
     setActive(data);
   };
-  const [selectedTab, setSelectedTab] = useState(0);
   const handleChanges = (event, newValue) => {
     setSelectedTab(newValue);
-    console.log('selected tab is',selectedTab , 'newvalue is ',newValue);
-  };
-  const [filteredOrders, setFilteredOrders] = useState([]);
-  const [userId, setUserId] = useState(null);
+  }
+
+
+  
+  
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -41,16 +74,6 @@ export default function UserInfo() {
     fetchOrders();
   }, []);
 
-  
-
-  // useEffect(() => {
-  //   const storedUserId = localStorage.getItem('userId');
-  //   if (storedUserId) {
-  //     setUserId(storedUserId);
-  //   }
-  // }, []);
-
-  
   useEffect(() => {
     console.log('useEffect triggered with selectedTab:', selectedTab);
     let filtered = [];
@@ -64,15 +87,43 @@ export default function UserInfo() {
     setFilteredOrders(filtered);
     
   }, [selectedTab]);
-  console.log('filteredorders is', filteredOrders);
-  
+
+
+  const handleChange = (event, newValue) => {
+    setSelectedOrderTab(newValue);
+  };
+
   return (
     <Container>
-      <TitleUserInformation title={"Personal Information"} />
-      <Box display={"flex"}  marginBlock={"24px"}>
+      <Toaster reverseOrder={false} />
+
+      <TitleUserInformation
+        active={active}
+        flag={"personalInformation"}
+        title={"Personal Information"}
+      />
+      <TitleUserInformation
+        active={active}
+        flag={"myOrders"}
+        title={"My Orders"}
+      />
+
+      <Box display={"flex"} marginBlock={"24px"}>
         <UserInfoSideBar active={active} handleActive={handleActive} />
-        <Box width={"100%"} flexGrow={1} display={"flex"} justifyContent={"center"}>
-        <MyOrders handleChange={handleChanges} selectedTab={selectedTab} filteredOrders={filteredOrders} />
+        <Box width={"100%"} display={"flex"} justifyContent={"center"}>
+          <Outlet
+            context={{
+              register,
+              handleSubmit,
+              errors,
+              onSubmit,
+              toast,
+              getValues,
+              userData,
+              selectedOrderTab,
+              handleChange,
+            }}
+          />
         </Box>
       </Box>
     </Container>

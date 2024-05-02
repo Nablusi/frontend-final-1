@@ -78,3 +78,18 @@ export const iconButton = (theme) =>  ({
 export const icon = (theme) =>  ({ 
     color: theme.palette.primary.carouselColor 
 });
+
+export const shopByContainer ={ 
+    display: 'flex', 
+    flexDirection: 'column', 
+    gap: '6px'
+}
+
+export const shopByTypograpphy = (theme) => ({
+    fontWeight: '400', 
+    color: theme.palette.primary.textWhiteColor
+});
+export const shopByLink = (theme) => ({
+    color: theme.palette.primary.greyColor,
+    textDecoration: 'none'
+});

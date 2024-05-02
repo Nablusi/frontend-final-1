@@ -19,16 +19,23 @@ import * as PopsUpStyles from "./PopsUpStyles";
 import { OrderSummary } from "./OrderSummary";
 import { TextFiledContainer } from "./TextFieldContainer";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
+import { isLoggedIn } from "../../services/utils/isLoggedIn";
+import { AddToCartIfLoggedInContext } from "../../contexts/addToCart";
+ 
+
 
 export default function PopsUp() {
   const theme = useTheme();
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const [productList, setProductList] = useState(cart);
   const { open, handleClose } = useNavBarContext();
-  const { refresh } = useContext(SharedParentContext);
-
+  const { refresh, setRefresh } = useContext(SharedParentContext);
+  const [productApi, setProductAPi] = useState([]);
+  const {  setProductListIfLoggedIn, productListIfLoggedIn, sendProductData } = useContext(AddToCartIfLoggedInContext)
+  
   useEffect(() => {
     setProductList(cart);
+    setProductListIfLoggedIn(cart)
   }, [refresh]);
 
   const incrementHandler = (index) => {
@@ -36,6 +43,7 @@ export default function PopsUp() {
     console.log(updatedList);
     updatedList[index].qty += 1;
     setProductList(updatedList);
+    localStorage.setItem("cart", JSON.stringify(updatedList));
   };
 
   const decrementHandler = (index) => {
@@ -43,10 +51,13 @@ export default function PopsUp() {
     if (updatedList[index].qty > 1) {
       updatedList[index].qty -= 1;
       setProductList(updatedList);
+      localStorage.setItem("cart", JSON.stringify(updatedList));
+      
     }
   };
 
   const closeHandler = (index) => {
+    setRefresh(()=> !refresh)
     const updatedList = [...productList];
     updatedList.splice(index, 1);
     setProductList(updatedList);
