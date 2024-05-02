@@ -42,6 +42,7 @@ export default function Handpicked() {
         marginInline={"20px"}
         gap={"30px"}
       >
+
         {handpickedData ? (
           handpickedData.products.map((card) => {
             return <HandCard key={card.id} title={card.name} />;
@@ -49,10 +50,7 @@ export default function Handpicked() {
         ) : (
           <></>
         )} 
-        {/* // <HandCard />
-        // <HandCard />
-        // <HandCard />
-        // <HandCard />  */}
+
       </Box>
     </Box>
   );
