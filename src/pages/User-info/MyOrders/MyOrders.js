@@ -2,25 +2,25 @@ import { Tabs, Tab, Paper, useTheme, Stack , Table, TableBody, TableCell, TableC
 import * as Orderstyles from './MyOrdersStyles.js'; 
 import { Link } from 'react-router-dom';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Box } from "@mui/system";
 
 const ordersTest = [{id:1 , date:"2014" , price:100 , status:"completed" } ,{id:2 , date:"2015" , price:200 , status:"completed" }
 ]
 export function MyOrders({ selectedTab, handleChange ,filteredOrders}){
     const theme = useTheme();
+    console.log('status is ',filteredOrders.status)
   
     return (
       <div style={{ width:'100%', margin: '0px 20px 269px 24px' }}>
-        <Paper sx={{backgroundColor: '#F1F1F1', borderRadius:'12px', boxShadow:'none', padding:'0px', display:'flex'  }} square>
+        <Paper sx={{backgroundColor: '#F1F1F1', borderRadius:'12px', boxShadow:'none', padding:'20px' }} square>
           <Tabs
             value={selectedTab}
             indicatorColor="white"
             textColor={theme.palette.primary.textWhiteColor}
             onChange={handleChange}
             aria-label="my orders tabs"
-            sx={{  fontWeight:'500', height:'68px' ,alignItems:'center', marginLeft:'16px'}}
+            sx={{  fontWeight:'500' }}
           >
-            <Stack direction={{ xs: 'column', md: 'row' }} sx={{gap:'24px'}} >
+            <Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
               <Tab 
                 label="Completed" 
                 value={0}
@@ -46,22 +46,18 @@ export function MyOrders({ selectedTab, handleChange ,filteredOrders}){
           </Tabs>
         </Paper>
         {selectedTab === 0 && (
-          <TableContainer component={Paper} width='100%'>
-          <Table sx={{border:'none', width:'100%'}}>
-            <Box sx={{height:'93px', width:'100%'}}>
-
-            <TableHead  sx={{width:'100%'}}> 
-              <TableRow >
+          <TableContainer component={Paper}>
+          <Table sx={{border:'none'}}>
+            <TableHead>
+              <TableRow>
                 <TableCell>Order ID</TableCell>
                 <TableCell>Date</TableCell>
                 <TableCell>Price</TableCell>
                 <TableCell>Status</TableCell>
               </TableRow>
             </TableHead>
-            </Box>
-
             <TableBody>
-            {ordersTest.map((order) => (
+            {filteredOrders.map((order) => (
               <TableRow sx={{
                 backgroundColor:'#F1F1F1' , marginTop:'17px' ,textDecoration: 'none'}}
                  key={order.id}
@@ -71,8 +67,8 @@ export function MyOrders({ selectedTab, handleChange ,filteredOrders}){
                   <Checkbox />
                   {order.id}
                 </TableCell>
-                <TableCell>{order.date}</TableCell>
-                <TableCell>{order.price}</TableCell>
+                <TableCell>{order.createdAt}</TableCell>
+                <TableCell>{order.total}</TableCell>
                 <TableCell>{order.status}</TableCell>
                 <TableCell align="right"><ChevronRightIcon /></TableCell>
               </TableRow>
@@ -93,18 +89,19 @@ export function MyOrders({ selectedTab, handleChange ,filteredOrders}){
               </TableRow>
             </TableHead>
             <TableBody>
-            {ordersTest.map((order) => (
+            {filteredOrders.map((order) => (
               <TableRow sx={{
-                backgroundColor:'#F1F1F1' , marginTop:'17px' ,textDecoration: 'none'}}
+                backgroundColor:'#F1F1F1' , marginTop:'17px !important' ,textDecoration: 'none'}}
                  key={order.id}
                  component={Link}
                  to={`/order/${order.id}`}>
+                {console.log(selectedTab)}
                 <TableCell>
                   <Checkbox />
                   {order.id}
                 </TableCell>
-                <TableCell>{order.date}</TableCell>
-                <TableCell>{order.price}</TableCell>
+                <TableCell>{order.createdAt}</TableCell>
+                <TableCell>{order.total}</TableCell>
                 <TableCell>{order.status}</TableCell>
                 <TableCell align="right"><ChevronRightIcon /></TableCell>
               </TableRow>
@@ -125,7 +122,7 @@ export function MyOrders({ selectedTab, handleChange ,filteredOrders}){
               </TableRow>
             </TableHead>
             <TableBody>
-            {ordersTest.map((order) => (
+            {filteredOrders.map((order) => (
               <TableRow sx={{
                 backgroundColor:'#F1F1F1' , marginTop:'17px' ,textDecoration: 'none'}}
                  key={order.id}
@@ -135,8 +132,8 @@ export function MyOrders({ selectedTab, handleChange ,filteredOrders}){
                   <Checkbox />
                   {order.id}
                 </TableCell>
-                <TableCell>{order.date}</TableCell>
-                <TableCell>{order.price}</TableCell>
+                <TableCell>{order.createdAt}</TableCell>
+                <TableCell>{order.total}</TableCell>
                 <TableCell>{order.status}</TableCell>
                 <TableCell align="right"><ChevronRightIcon /></TableCell>
               </TableRow>

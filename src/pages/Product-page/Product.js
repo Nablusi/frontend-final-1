@@ -94,6 +94,7 @@ export default function Product() {
   if (loading) {
     return <LinearProgress />;
   }
+  console.log("this is " , product)
   return (
     <>
       <Container>
@@ -102,12 +103,12 @@ export default function Product() {
           categoryName={categoryName}
         />
         <ProductDetails product={product} addToCart={addToCart} />
-        {/* <ProductDescrip
+        <ProductDescrip
           descrip={product.description}
           selectedTab={selectedTab}
           handleChange={handleChange}
           reviews={product.reviews}
-        /> */}
+        />
       </Container>
     </>
   );
