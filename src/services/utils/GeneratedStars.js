@@ -13,8 +13,6 @@ export default function GeneratedStars({ reviews, brackets }) {
     avg = sum / reviews.length;
     return avg;
   };
-  console.log(reviewResult());
-  // console.log(reviews);
   return (
     <Typography
       variant="div"

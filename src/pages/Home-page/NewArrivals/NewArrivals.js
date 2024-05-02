@@ -21,7 +21,7 @@ export default function NewArrivals({ newArrivals }) {
           <Typography
             variant="h4"
             component="h4"
-            sx={{ textTransform: "capitalize", fontWeight: "600" }}
+            sx={{ textTransform: "capitalize", fontWeight: "600",color:theme.palette.primary.sectionTitle }}
           >
             new arrivals
           </Typography>
@@ -34,7 +34,7 @@ export default function NewArrivals({ newArrivals }) {
               textDecoration: "none",
               textTransform: "capitalize",
               fontWeight: "600",
-              color: theme.palette.primary.main,
+              color: theme.palette.primary.darkBlueColor,
             }}
           >
             view all
@@ -48,12 +48,9 @@ export default function NewArrivals({ newArrivals }) {
           gridTemplateColumns={"repeat(auto-fit, minmax(280px, 1fr))"}
           gap={3}
         >
-          {/* {newArrivals.slice(0, 4).map((Arrival) => (
+          {newArrivals.slice(0, 4).map((Arrival) => (
             <ProductCard product={Arrival} key={Arrival.id} />
-          ))} */}
-          {/* <ProductCard />
-          <ProductCard />
-          <ProductCard /> */}
+          ))}
         </Box>
       </Box>
     </>

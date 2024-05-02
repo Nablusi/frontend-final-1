@@ -110,7 +110,7 @@ export default function ProductCard({ rating, product }) {
                   ${product.price}
                 </Typography>
                 <Typography
-                  sx={{ color: theme.palette.primary.error,fontWeight:'400',fontSize:'16px',fontWeight:'500' }}
+                  sx={{ color: theme.palette.primary.error,fontSize:'16px',fontWeight:'600' }}
                   variant="subtitle1"
                   component="p"
                 >

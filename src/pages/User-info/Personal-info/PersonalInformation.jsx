@@ -1,22 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import theme from "../../../theme/Theme";
 import { Avatar, Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useOutletContext } from "react-router-dom";
+import axios from "axios";
 
 export default function PersonalInformation() {
-  const {
-    register,
-    handleSubmit,
-    errors,
-    onSubmit,
-    toast,
-    getValues,
-    userData,
-  } = useOutletContext();
-
+  let { register, handleSubmit, errors, onSubmit, toast, getValues, userData } =
+    useOutletContext();
+  const [userDataTemp, setUserDataTemp] = useState(userData);
+  useEffect(() => {
+    setUserDataTemp(userData);
+  }, [userData]);
   return (
     <Box width={"95% "}>
       <Box height={"60px"}>
@@ -86,7 +83,7 @@ export default function PersonalInformation() {
                 borderRadius={"4px"}
               >
                 <input
-                  defaultValue={userData?.firstName}
+                  defaultValue={userDataTemp?.firstName}
                   type="text"
                   {...register("firstName", { required: true })}
                   style={{
@@ -111,7 +108,7 @@ export default function PersonalInformation() {
                 borderRadius={"4px"}
               >
                 <input
-                  defaultValue={userData?.lastName}
+                  defaultValue={userDataTemp?.lastName}
                   type="text"
                   {...register("lastName", { required: true })}
                   style={{
@@ -137,7 +134,7 @@ export default function PersonalInformation() {
             borderRadius={"4px"}
           >
             <input
-              defaultValue={userData?.email}
+              defaultValue={userDataTemp?.email}
               type="email"
               {...register("email", { required: true })}
               style={{
@@ -160,7 +157,7 @@ export default function PersonalInformation() {
             borderRadius={"4px"}
           >
             <input
-              defaultValue={userData?.phone}
+              defaultValue={userDataTemp?.phone}
               type="tel"
               {...register("mobileNumber", {
                 required: true,
@@ -334,7 +331,18 @@ export default function PersonalInformation() {
                 }
 
                 const formData = getValues(); // Access form data
-
+                axios.put(
+                  `https://backend-final-1-latest.onrender.com/api/users/${userData.id}`,
+                  {
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                  },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                  }
+                );
                 if (formData.newPassword !== formData.confirmPassword) {
                   toast.error("New Password and Confirm Password do not match");
                 }

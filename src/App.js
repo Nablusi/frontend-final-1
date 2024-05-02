@@ -24,7 +24,8 @@ import UserInfo from "./pages/User-info/UserInfo";
 import { AddToCartIfLoggedInProvider } from "./contexts/addToCart";
 
 import PersonalInformation from "./pages/User-info/Personal-info/PersonalInformation";
-import OrderDetails from "./pages/User-info/OrderDetails/OrderDetails";
+import OrderDetailsState from "./pages/User-info/OrderDetails/OrderDetailsState";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   const router = createBrowserRouter(
@@ -45,8 +46,9 @@ function App() {
         <Route path="/userInfo" element={<UserInfo />}>
           <Route path="" element={<PersonalInformation />} />
           <Route path="personalInformation" element={<PersonalInformation />} />
-          <Route path="myOrders" element={<OrderDetails />} />
+          <Route path="myOrders/:id" element={<OrderDetailsState />} />
         </Route>
+        <Route path="/NotFound" element={<NotFound />} />
       </Route>
     )
   );
