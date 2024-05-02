@@ -27,6 +27,8 @@ import PersonalInformation from "./pages/User-info/Personal-info/PersonalInforma
 import OrderDetailsState from "./pages/User-info/OrderDetails/OrderDetailsState";
 import NotFound from "./pages/NotFound/NotFound";
 import BrandsPage from "./pages/Category-page/BrandsPage";
+import { MyOrders } from "./pages/User-info/MyOrders/MyOrders";
+import HandPickPage from "./pages/Category-page/HnadPickPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -45,12 +47,13 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/userInfo" element={<UserInfo />}>
-          <Route path="" element={<PersonalInformation />} />
-          <Route path="personalInformation" element={<PersonalInformation />} />
+          <Route path="personalInformation" element={<PersonalInformation /> } />
           <Route path="myOrders/:id" element={<OrderDetailsState />} />
+          <Route path="myOrders" element={<MyOrders />} />
         </Route>
         <Route path="/NotFound" element={<NotFound />} />
         <Route path="/brands/:brandName" element={<BrandsPage />} />
+        <Route path="/handpick" element={<HandPickPage />} />
       </Route>
     )
   );

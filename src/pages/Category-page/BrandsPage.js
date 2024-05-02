@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, LinearProgress, Box, Typography } from "@mui/material";
+import { Container, LinearProgress } from "@mui/material";
 import Hero from "./Hero/Hero";
 import CategorizedProducts from "./CategorizedProducts/CategorizedProducts";
 import { PaginationCustomized } from "./PaginationCustomized/PaginationCustomized";

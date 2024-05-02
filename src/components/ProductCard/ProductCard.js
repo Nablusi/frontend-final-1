@@ -13,10 +13,11 @@ export default function ProductCard({ rating, product }) {
   let newPrice = null;
   if(product.discountId !== null && product.discount){
     let getNewPrice = ()=>{
-      return parseFloat(product.price - (product.price * product.discount.percentage / 100));
+      return parseFloat(product.price - (product.price * product.discount.percentage / 100) );  // check heres 
     }
     newPrice = getNewPrice();
   }
+  //
   const styles = {
     text: {
       display: "flex",
@@ -93,7 +94,7 @@ export default function ProductCard({ rating, product }) {
               ...styles.text,
             }}
           >
-            {product.discountId !== null ? (
+            {product.discount && product.discountId !== null ? (
               <>
                 <Typography
                   sx={{ color: theme.palette.primary.textColor,fontWeight:'500',fontSize:'16px' }}
@@ -114,6 +115,7 @@ export default function ProductCard({ rating, product }) {
                   variant="subtitle1"
                   component="p"
                 >
+                  {/* need to first */}
                   {product.discount.percentage}% OFF
                 </Typography>
               </>
