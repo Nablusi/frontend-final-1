@@ -98,7 +98,7 @@ export default function Product() {
   if (loading) {
     return <LinearProgress />;
   }
-  console.log("this is " , product)
+  // console.log("this is " , product)
   return (
     <>
       <Container>

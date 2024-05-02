@@ -26,6 +26,7 @@ import { AddToCartIfLoggedInProvider } from "./contexts/addToCart";
 import PersonalInformation from "./pages/User-info/Personal-info/PersonalInformation";
 import OrderDetailsState from "./pages/User-info/OrderDetails/OrderDetailsState";
 import NotFound from "./pages/NotFound/NotFound";
+import TestTabs from "./pages/TestTabs/TestTabs";
 
 function App() {
   const router = createBrowserRouter(
@@ -48,7 +49,7 @@ function App() {
           <Route path="personalInformation" element={<PersonalInformation />} />
           <Route path="myOrders/:id" element={<OrderDetailsState />} />
         </Route>
-        <Route path="/NotFound" element={<NotFound />} />
+        <Route path="/*" element={<NotFound />} />
       </Route>
     )
   );
