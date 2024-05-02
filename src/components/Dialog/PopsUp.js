@@ -158,7 +158,6 @@ export default function PopsUp() {
             doSum={true}
           />
           <TextFiledContainer handleClose={handleClose} theme={theme} />
-          <Button onClick={sendProductData}>sendProductData </Button>
         </>
       )}
     </Dialog>

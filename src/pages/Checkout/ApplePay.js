@@ -43,7 +43,7 @@ export const ApplePay = () => {
                 required
             />
 
-            <Button variant="contained" onClick={handleSubmit} sx={AppleStyle.button}>Submit</Button>
+            {/* <Button variant="contained" onClick={handleSubmit} sx={AppleStyle.button}>Submit</Button> */}
         </Box>
     )
 };

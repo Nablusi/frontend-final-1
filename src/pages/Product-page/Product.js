@@ -11,7 +11,6 @@ import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 import { authUser } from "../../services/utils/authUser";
 import { ProductDescrip } from "./ProductDescrip/ProductDescrip";
 import { AddToCartIfLoggedInContext } from "../../contexts/addToCart";
-import { Button } from "@mui/material";
 
 export default function Product() {
   let { id } = useParams();
@@ -35,48 +34,35 @@ export default function Product() {
     }
   };
   const { setRefresh, refresh } = useContext(SharedParentContext);
-  const { setProductListIfLoggedIn , sendProductData} = useContext(AddToCartIfLoggedInContext);
+  const { setProductListIfLoggedIn , sendProductData, setGetProductId, setProductQty} = useContext(AddToCartIfLoggedInContext);
 
-  const testPostHandler = async() =>  {
-        try{ 
-          if(authUser()){
-            sendProductData();
-          }
-            
-
-
-        } catch(e){
-          console.log('error in sending data', e);
-        }
-  }
-  
-  
+  useEffect(()=>{
+    setGetProductId(id);
+  },[id])
   
   const addToCart = (product, qty) => {
-    // need to check for token before allow user to add
-    // u have to use useAuth to check if the user sign in to added to api or not to added to local storage
     setRefresh(() => !refresh);
-
-
+    if(authUser()){sendProductData()};
     if (cart.length) {
       const index = cart.findIndex((prod) => prod.product.id === product.id);
       if (index !== -1) {
         if (cart[index].qty + qty > 20) {
-          console.log("can not add more");
+          setProductQty(qty)
         } else {
           cart[index].qty += qty;
+          setProductQty(qty)
         }
       } else {
         cart.push({ product: product, qty: qty });
+        setProductQty(qty)
       }
     } else {
       cart.push({ product: product, qty: qty });
+      setProductQty(qty)
     }
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
-
-  // console.log(cart);
   useEffect(() => {
     checkUserCart();
   }, [refresh]);
@@ -93,7 +79,6 @@ export default function Product() {
       setLoading(false);
     };
     getProduct();
-    console.log(product);
   }, [id]);
 
   useEffect(() => {
@@ -107,7 +92,6 @@ export default function Product() {
       }
     }
   }, [id, categories, product.categoryId]);
-  // console.log(categoryName);
   if (loading) {
     return <LinearProgress />;
   }
@@ -119,7 +103,7 @@ export default function Product() {
           categoryName={categoryName}
         />
         <ProductDetails product={product} addToCart={addToCart} />
-        <Button onClick={testPostHandler} > Test post axios   </Button>
+        
         {/* <ProductDescrip
           descrip={product.description}
           selectedTab={selectedTab}

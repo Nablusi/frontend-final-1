@@ -42,20 +42,13 @@ export default function Handpicked() {
         marginInline={"20px"}
         gap={"30px"}
       >
-<<<<<<< HEAD
-        {/* i will use map here when API is ready */}
-        {/* {handpickedData ? (
-          handpickedData.map((card) => {
-            return <HandCard key={1} />;
-=======
         {handpickedData ? (
           handpickedData.products.map((card) => {
             return <HandCard key={card.id} title={card.name} />;
->>>>>>> developer
           })
         ) : (
           <></>
-        )} */}
+        )} 
         {/* // <HandCard />
         // <HandCard />
         // <HandCard />

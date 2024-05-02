@@ -1,6 +1,6 @@
 export const getUserId = () =>  {
     try {
-        const userId = localStorage.getItem('userId') ||  sessionStorage.getItem('userId') || '';
+        const userId = localStorage.getItem('id') ||  sessionStorage.getItem('id') || '';
         if (userId !== '') {
             return userId;
         } else {

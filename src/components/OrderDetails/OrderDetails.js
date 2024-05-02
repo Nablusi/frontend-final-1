@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Box, Button, Divider, Typography, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { authUser } from "../../services/utils/authUser";
 import { toast } from "react-toastify";
-import * as OrderStyles from "./OrderDetailsStyle"; 
+import * as OrderStyles from "./OrderDetailsStyle";
+import { AddToCartIfLoggedInContext } from "../../contexts/addToCart";
+import axios from "axios";
+import { getUserId } from "../../services/utils/getUserId";
+import { getToken } from "../../services/utils/getToken";
 
 export const OrderDetails = ({ title, getProductDetails, variant }) => {
     const products = getProductDetails();
@@ -13,16 +17,52 @@ export const OrderDetails = ({ title, getProductDetails, variant }) => {
     const deliveryFee = 12;
     const grandTotal = totalPrice - discount + deliveryFee;
     const navigate = useNavigate();
+    const { sendProductData } = useContext(AddToCartIfLoggedInContext);
+    const total = localStorage.getItem('total');
+    const cart = JSON.parse(localStorage.getItem('cart'));
 
+    const [productList, setProductList] = useState(cart);
+    const [res, setRes] = useState([]);
+
+
+
+    
+
+    const placeOrderWithAxios = async () => {
+
+        const formattedItems = productList.map(item => ({
+            productId: item.product.id,
+            qty: item.qty,
+            price: item.product.price
+        }));
+
+        const response = await axios.post(`https://backend-final-1-latest.onrender.com/api/orders/user/${getUserId()}`,
+            {
+                total: total,
+                status: 'pending',
+                isPaid: false,
+                checkoutId: null,
+                items: formattedItems,
+
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            })
+        setRes(response.data)
+        return response.data
+    }
 
     const clickHandler = () => {
         navigate('/category/1');
-
+        sendProductData();
     }
 
 
     const placeOrderHandler = () => {
         if (authUser()) {
+            placeOrderWithAxios();
             navigate('/checkout');
         } else {
             toast.warning(

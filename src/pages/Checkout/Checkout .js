@@ -17,6 +17,9 @@ import { SharedParentContext } from "../../contexts/CategoryPageFilter";
 import { isLoggedIn } from "../../services/utils/isLoggedIn";
 import { toast } from "react-toastify";
 import * as CheckoutStyle from "./checkoutStyling/CheckoutStyle";
+import { getUserId } from "../../services/utils/getUserId";
+import axios from "axios";
+import { getToken } from "../../services/utils/getToken";
 
 export default function Checkout() {
     const theme = useTheme();
@@ -26,7 +29,7 @@ export default function Checkout() {
     const [seePayment, setSeePayment] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState('');
     const [upiMethod, setUpiMethod] = useState('');
-    const { refresh } = useContext(SharedParentContext);
+    const { refresh, setRefresh } = useContext(SharedParentContext);
     const [fullName, setFullName] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
     const [streetAddress, setStreetAddress] = useState('');
@@ -34,39 +37,52 @@ export default function Checkout() {
     const [city, setCity] = useState('');
     const [pinCode, setPinCode] = useState('');
     const [mobileNumberError, setMobileNumberError] = useState('');
+    const userId = getUserId();
+    const [userInfo, setUserInfo] = useState([]);
 
+    const fullUserName = userInfo.firstName + " " + userInfo.lastName;
+    const phone = userInfo.phone;
+    const total = localStorage.getItem('total');
+    const [amount, setAmount ] = useState([]);
 
-    const handleMobileNumberChange = (e) => {
-        const value = e.target.value;
-        const re = /^[0-9\b]+$/; 
-        if (value === '' || re.test(value)) {
-            setMobileNumber(value);
-            if (value.length !== 10) {
-                setMobileNumberError('Mobile number must be 10 digits');
-            } else {
-                setMobileNumberError('');
+    const getUserInfo = async () => {
+        const response = await axios.get(`https://backend-final-1-latest.onrender.com/api/users/${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${getToken()}`
             }
-        }
-    };
+        });
+        setUserInfo(response.data);
+
+    }
+
+
+    // const handleMobileNumberChange = (e) => {
+    //     const value = e.target.value;
+    //     const re = /^[0-9\b]+$/;
+    //     if (value === '' || re.test(value)) {
+    //         setMobileNumber(value);
+    //         if (value.length !== 10) {
+    //             setMobileNumberError('Mobile number must be 10 digits');
+    //         } else {
+    //             setMobileNumberError('');
+    //         }
+    //     }
+    // };
 
     const allFieldsFilled = () => {
-        if (fullName !== '' && mobileNumber.length === 10 && streetAddress !== '' && state !== '' && city !== '' && pinCode !== '') {
+        if (streetAddress !== '' && state !== '' && city !== '' && pinCode !== '') {
             setSeePayment(!seePayment);
         } else {
-            if (mobileNumber.length !== 10) {
-                toast.warning('Mobile number must be 10 digits', {
-                    position: 'top-center'
-                });
-            } else {
-                toast.warning('Please fill all fields', {
-                    position: 'top-center'
-                });
-            }
+            toast.warning('Please fill all fields', {
+                position: 'top-center'
+            });
+
         }
     };
 
     useEffect(() => {
         console.log('refreshed')
+        getUserInfo();
     }, [refresh]);
 
 
@@ -86,6 +102,24 @@ export default function Checkout() {
 
     const clickGoToHomePage = () => {
         navigate('/');
+    }
+
+
+    const sendDataOfCheckout = async () => {
+        const response = await axios.post(`https://backend-final-1-latest.onrender.com/api/checkouts`,
+            {
+                amount : total,
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            });
+            setAmount(response.data);
+            localStorage.removeItem('cart');
+            setRefresh(!refresh)
+            navigate('/userInfo'); 
+            toast.success('the payment method is done successfully', {position:'top-center'}); 
     }
 
     return (
@@ -116,22 +150,16 @@ export default function Checkout() {
                                         {/* i will do for loop here to get the user Information  */}
                                         <AccordionDetails sx={CheckoutStyle.accordionDetails(isPhone)} >
                                             <Box>
-                                                <Typography>Name: Zaid Saeh</Typography>
+                                                <Typography>Name: {fullUserName}</Typography>
                                             </Box>
                                             <Box>
-                                                <Typography>mobile Number: 0599206572</Typography>
+                                                <Typography>mobile Number: {phone}</Typography>
                                             </Box>
                                             <Box>
-                                                <Typography>Street Address: Beker Street</Typography>
+                                                <Typography>Email: {userInfo.email}</Typography>
                                             </Box>
                                             <Box>
-                                                <Typography>State: Palestine</Typography>
-                                            </Box>
-                                            <Box>
-                                                <Typography>City: Nablus</Typography>
-                                            </Box>
-                                            <Box>
-                                                <Typography>Pin Code: P499</Typography>
+                                                <Typography>City: {userInfo.location}</Typography>
                                             </Box>
                                         </AccordionDetails>
                                     </Accordion>
@@ -176,7 +204,7 @@ export default function Checkout() {
 
                                     <Box sx={CheckoutStyle.buttonContainer}>
                                         <Button variant="text" sx={CheckoutStyle.firstButton} onClick={cartHandler}>Back to Cart</Button>
-                                        <Button variant="contained" sx={CheckoutStyle.secondButton(theme)} onClick={paymentHandler} >Next</Button>
+                                        <Button variant="contained" sx={CheckoutStyle.secondButton(theme)} onClick={sendDataOfCheckout} >Next</Button>
                                     </Box>
                                 </Box>
 
@@ -192,8 +220,8 @@ export default function Checkout() {
                                             Add New Address
                                         </AccordionSummary>
                                         <AccordionDetails sx={CheckoutStyle.accordionDetails(isPhone)} >
-                                            <TextFieldCheckout label="Full Name" theme={theme} placeholder="Name" change={(e) => setFullName(e.target.value)} />
-                                            <TextFieldCheckout label="Mobile Number" theme={theme} placeholder="+11" change={handleMobileNumberChange} />
+                                            <TextFieldCheckout label="Full Name" theme={theme} placeholder="Name" change={(e) => setFullName(e.target.value)} value={fullUserName} />
+                                            <TextFieldCheckout label="Mobile Number" theme={theme} placeholder="+11" value={phone} />
                                             <TextFieldCheckout label="Street Address" theme={theme} placeholder="Address" change={(e) => setStreetAddress(e.target.value)} />
                                             <TextFieldCheckout label="State" theme={theme} placeholder="State" change={(e) => setState(e.target.value)} />
                                             <TextFieldCheckout label="City" theme={theme} placeholder="City" change={(e) => setCity(e.target.value)} />
