@@ -8,6 +8,8 @@ export const SharedParentProvider = ({ children }) => {
   const [limitedEdition, setLimitedEdition] = useState(false);
   const [search, setSearch] = useState("");
   const [refresh, setRefresh] = useState(false);
+  const [getBrand, setGetBrand] = useState([]); 
+
 
   const trendy = useRef(); 
   const handpicked = useRef(); 
@@ -30,6 +32,8 @@ export const SharedParentProvider = ({ children }) => {
         trendy,
         handpicked, 
         brands,
+        getBrand, 
+        setGetBrand
       }}
     >
       {children}
