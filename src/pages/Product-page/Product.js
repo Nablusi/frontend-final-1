@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 import ProductDetails from "./ProductDetails/ProductDetails";
 import useAxios from "../../services/Hooks/useAxios";
 import { urls } from "../../config/urls";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { LinearProgress } from "@mui/material";
 import { SharedParentContext } from "../../contexts/CategoryPageFilter";
@@ -16,7 +16,7 @@ export default function Product() {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState();
-
+  let navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState(0);
   const [categoryName, setCategoryName] = useState("");
   const handleChange = (event, newValue) => {
@@ -70,11 +70,13 @@ export default function Product() {
         `https://backend-final-1-latest.onrender.com/api/products/${id}`
       );
       // let data = await res.data;
+      if(res.data === null){
+        navigate('/NotFound')
+      }
       setProduct(res.data);
       setLoading(false);
     };
     getProduct();
-    console.log(product);
   }, [id]);
 
   useEffect(() => {
