@@ -57,7 +57,7 @@ export default function UserInfo() {
             },
           }
         );
-        console.log(response.data);
+        // console.log(response.data);
         setFilteredOrders(response.data);
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -68,7 +68,7 @@ export default function UserInfo() {
   }, []);
 
   useEffect(() => {
-    console.log("useEffect triggered with selectedTab:", selectedTab);
+    // console.log("useEffect triggered with selectedTab:", selectedTab);
     let filtered = [];
     if (filteredOrders && filteredOrders.length > 0) {
       if (selectedTab === 0) {
@@ -82,7 +82,7 @@ export default function UserInfo() {
     setFilteredOrders(filtered);
   }, [selectedTab]);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue) => {
     setSelectedOrderTab(newValue);
   };
 
