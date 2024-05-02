@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import UserInfoSideBar from "../../components/User-Info-SideBar/UserInfoSideBar";
@@ -8,16 +8,12 @@ import toast, { Toaster } from "react-hot-toast";
 import useAxios from "../../services/Hooks/useAxios";
 import { Outlet } from "react-router-dom";
 
-import { MyOrders } from "./MyOrders/MyOrders";
 import axios from "axios";
-
-
-
 
 export default function UserInfo() {
   const [selectedOrderTab, setSelectedOrderTab] = useState(0);
   const [active, setActive] = useState("personalInformation");
-    const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(0);
   const [filteredOrders, setFilteredOrders] = useState([]);
 
   const {
@@ -47,11 +43,8 @@ export default function UserInfo() {
   };
   const handleChanges = (event, newValue) => {
     setSelectedTab(newValue);
-  }
+  };
 
-
-  
-  
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -75,19 +68,19 @@ export default function UserInfo() {
   }, []);
 
   useEffect(() => {
-    console.log('useEffect triggered with selectedTab:', selectedTab);
+    console.log("useEffect triggered with selectedTab:", selectedTab);
     let filtered = [];
     if (filteredOrders && filteredOrders.length > 0) {
       if (selectedTab === 0) {
-        filtered = filteredOrders.filter((order) => order.status === "approved");
-      }  else if (selectedTab === 2) {
+        filtered = filteredOrders.filter(
+          (order) => order.status === "approved"
+        );
+      } else if (selectedTab === 2) {
         filtered = filteredOrders.filter((order) => order.status === "done");
       }
     }
     setFilteredOrders(filtered);
-    
   }, [selectedTab]);
-
 
   const handleChange = (event, newValue) => {
     setSelectedOrderTab(newValue);
