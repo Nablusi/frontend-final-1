@@ -12,7 +12,7 @@ import theme from "./theme/Theme";
 import { ThemeProvider } from "@mui/material";
 import Category from "./pages/Category-page/Category";
 import Product from "./pages/Product-page/Product";
-import NewArrivalsFilter from "./pages/Category-page/NewArrivalsFilter";
+import CategoryProducts from "./pages/Category-page/CategoryProducts";
 import Sign from "./pages/Sign/Sign";
 import { SharedParentProvider } from "./contexts/CategoryPageFilter";
 import SearchForProducts from "./pages/Category-page/SearchForProducts";
@@ -27,10 +27,7 @@ import PersonalInformation from "./pages/User-info/Personal-info/PersonalInforma
 import OrderDetailsState from "./pages/User-info/OrderDetails/OrderDetailsState";
 import NotFound from "./pages/NotFound/NotFound";
 
-import BrandsPage from "./pages/Category-page/BrandsPage";
 import { MyOrders } from "./pages/User-info/MyOrders/MyOrders";
-import HandPickPage from "./pages/Category-page/HnadPickPage";
-import TestTabs from "./pages/TestTabs/TestTabs";
 
 function App() {
   const router = createBrowserRouter(
@@ -39,7 +36,10 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/category/:id" element={<Category />} />
-        <Route path="/newArrivals" element={<NewArrivalsFilter />} />
+        <Route
+          path="/Products/:type/:brandName?"
+          element={<CategoryProducts />}
+        />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/sign/:signtype" element={<Sign />} />
         <Route
@@ -49,14 +49,12 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/userInfo" element={<UserInfo />}>
-          <Route path="personalInformation" element={<PersonalInformation />} />
+          <Route path="" element={<PersonalInformation />} />
           <Route path="myOrders/:id" element={<OrderDetailsState />} />
           <Route path="myOrders" element={<MyOrders />} />
         </Route>
 
         <Route path="/NotFound" element={<NotFound />} />
-        <Route path="/brands/:brandName" element={<BrandsPage />} />
-        <Route path="/handpick" element={<HandPickPage />} />
         <Route path="/*" element={<NotFound />} />
       </Route>
     )

@@ -13,10 +13,7 @@ export default function UserInfoSideBar({ active, handleActive }) {
       display={"flex"}
       flexDirection={"column"}
     >
-      <Link
-        to={"personalInformation"}
-        style={{ textDecoration: "none", color: "inherit" }}
-      >
+      <Link to={""} style={{ textDecoration: "none", color: "inherit" }}>
         <SelectedSideBar
           flag={"personalInformation"}
           data="Personal Information"

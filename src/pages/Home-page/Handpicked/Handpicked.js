@@ -43,17 +43,19 @@ export default function Handpicked() {
         marginInline={"20px"}
         gap={"30px"}
       >
-
         {handpickedData ? (
-          handpickedData.products.map((card) => 
-            <Link key={card.id} style={{textDecoration:'none', color:'inherit'}} to={'/handpick'}>
-              <HandCard  title={card.name} />
+          handpickedData.products.map((card) => (
+            <Link
+              key={card.id}
+              style={{ textDecoration: "none", color: "inherit" }}
+              to={"/Products/handpicked"}
+            >
+              <HandCard title={card.name} />
             </Link>
-          )
+          ))
         ) : (
           <></>
         )}
-
       </Box>
     </Box>
   );

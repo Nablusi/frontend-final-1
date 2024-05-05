@@ -3,25 +3,21 @@ import { Grid, Typography, useTheme } from "@mui/material";
 import * as brandStyles from "./ShopBrandsstyles";
 import { Link } from "react-router-dom";
 import { SharedParentContext } from "../../../contexts/CategoryPageFilter";
-import axios from "axios"; 
+import axios from "axios";
 import { urls } from "../../../config/urls";
 
 export function ShopBrands({ handleBrandClick }) {
-  const { brands, getBrand, setGetBrand } = useContext(SharedParentContext); 
-  
+  const { brands, getBrand, setGetBrand } = useContext(SharedParentContext);
 
-
-  const getBrands = async() =>  { 
+  const getBrands = async () => {
     const response = await axios.get(urls.getBrands);
-    setGetBrand(response.data); 
-    return response.data; 
-  }
+    setGetBrand(response.data);
+    return response.data;
+  };
 
-  useEffect(()=>{
-    getBrands(); 
-  },[]);
-
-
+  useEffect(() => {
+    getBrands();
+  }, []);
 
   const theme = useTheme();
   return (
@@ -44,8 +40,15 @@ export function ShopBrands({ handleBrandClick }) {
             key={index}
             sx={brandStyles.gridItem}
           >
-            <Link style={brandStyles.link(theme)} to={`/brands/${brand.name}`}>
-              <img src={require(`../../../assets/image/${brand.name}.png`)} alt="Brand" style={brandStyles.image} />
+            <Link
+              style={brandStyles.link(theme)}
+              to={`/products/brands/${brand.name}`}
+            >
+              <img
+                src={require(`../../../assets/image/${brand.name}.png`)}
+                alt="Brand"
+                style={brandStyles.image}
+              />
             </Link>
           </Grid>
         ))}

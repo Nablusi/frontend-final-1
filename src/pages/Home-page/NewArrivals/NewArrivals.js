@@ -21,12 +21,16 @@ export default function NewArrivals({ newArrivals }) {
           <Typography
             variant="h4"
             component="h4"
-            sx={{ textTransform: "capitalize", fontWeight: "600",color:theme.palette.primary.sectionTitle }}
+            sx={{
+              textTransform: "capitalize",
+              fontWeight: "600",
+              color: theme.palette.primary.sectionTitle,
+            }}
           >
             new arrivals
           </Typography>
           <Link
-            to={`/newArrivals`}
+            to={`/Products/new`}
             style={{
               display: "flex",
               justifyContent: "space-between",

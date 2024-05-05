@@ -19,9 +19,6 @@ export default function Category() {
   const { popular, limitedEdition, discount } = useContext(SharedParentContext);
   // const searchURL = urls.getProductsBySearch;
 
-
-
-
   const check = () => {
     if (popular) {
       return "&popular=true";
@@ -30,17 +27,15 @@ export default function Category() {
     } else if (limitedEdition) {
       return "&limitedEdition=true";
     } else {
-      return ''
+      return "";
     }
-  }
+  };
 
-
-
-  let url = `${urls.getCategory}/${id}?page=${pageNum}${check()}`;
+  let url = `https://backend-final-1-latest.onrender.com/api/products/category/${id}?page=${pageNum}${check()}`;
 
   // useEffect(()=>{
   //   console.log(url);
-  //   console.log(discount); 
+  //   console.log(discount);
   // },[])
 
   const {
