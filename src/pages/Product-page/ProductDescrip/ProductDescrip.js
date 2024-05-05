@@ -1,5 +1,6 @@
 import { Tabs, Tab, Paper, useTheme, Stack } from "@mui/material";
 import * as tabStyles from './ProductDescripstyles.js'; 
+import GeneratedStars from "../../../services/utils/GeneratedStars.js";
 
 export function ProductDescrip({ selectedTab, handleChange, descrip, reviews }){
   const theme = useTheme();
@@ -53,10 +54,18 @@ export function ProductDescrip({ selectedTab, handleChange, descrip, reviews }){
         </div>
       )}
       {selectedTab === 2 && (
-        <div style={{marginTop:'20px'}}>
-          {/* Ratings and reviews content  */}
-          {reviews}
-        </div>
+         <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'row', gap: '20px', alignItems: 'flex-start' }}>
+         <div style={{ flex: 1 }}>
+           {reviews.map((review, index) => (
+             <div key={index}>
+               <p>{review.description}</p>
+             </div>
+           ))}
+         </div>
+         <div>
+           <GeneratedStars reviews={reviews} />
+         </div>
+       </div>
       )}
     </div>
   );
